@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+ 
+  <link rel="stylesheet" href="assets/css/variables.css">
+  <!--<link rel="stylesheet" href="assets/css/nativize.css"> -->
+  <link rel="stylesheet" href="assets/css/global.css">
+  <link rel="stylesheet" href="assets/css/about.css">
+  <link rel="stylesheet" href="assets/css/nav.css">
+  <link rel="stylesheet" href="assets/css/section.css">
+   <!-- <link rel="stylesheet" href="assets/css/demo.css"> -->
+  <!--<link rel="stylesheet" href="assets/css/github.css"> -->
+  <a id="bootstrap"></a>
+
+
+  <link rel="import" href="sections/about.html">
+  <link rel="import" href="sections/windows/new-loan.html">
+  <link rel="import" href="sections/windows/table.html">
+  <link rel="import" href="sections/windows/end-date-table.html">
+  <!-- <link rel="import" href="sections/windows/interest-date-table.html"> -->
+  <link rel="import" href="sections/windows/start-date-table.html">
+
+</head>
+
+<body>
+
+  <nav class="js-nav" style="width: 150px">
+    <header class="nav-header">
+      <h1 class="nav-title" style="font-size: 20px">云南交通运输有限责任公司</h1>
+    </header>
+
+    <h5 class="nav-category">
+      <svg class="nav-icon">
+        <use xlink:href="assets/img/icons.svg#icon-windows"></use>
+      </svg>
+      新建
+    </h5>
+    <button type="button" id="button-new-loan" data-section="new-loan" class="nav-button">
+      <em>新建借款</em>
+    </button>
+    <h5 class="nav-category">
+      <svg class="nav-icon">
+        <use xlink:href="assets/img/icons.svg#icon-menu"></use>
+      </svg>
+      查询
+    </h5>
+    <button type="button" id="button-table" data-section="table" class="nav-button">
+      <em>总表</em>
+    </button>
+    <button type="button" id="button-end-date-table" data-section="end-date-table" class="nav-button">
+      <em>还款时间表</em>
+    </button>
+    <!-- <button type="button" id="button-interest-date-table" data-section="interest-date-table" class="nav-button">
+      <em>付息时间表</em>
+    </button> -->
+    <button type="button" id="button-start-date-table" data-section="start-date-table" class="nav-button">
+      <em>借款时间表</em>
+    </button>
+    </div>
+  </nav>
+
+  <main class="content js-content"></main>
+
+
+  <script>
+    require('./assets/imports')
+    require('./assets/nav')
+    require('./assets/normalize-shortcuts')
+    
+  </script>
+   <script>window.$ = window.jQuery = require('jquery');</script>
+   
+</body>
+
+</html>

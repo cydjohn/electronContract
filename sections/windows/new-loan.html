@@ -1,0 +1,154 @@
+<template class="task-template">
+  <section id="new-loan-section" class="section js-section u-category-windows">
+    <div class="demo-wrapper">
+      <h1>
+        <center>录入借款信息</center>
+      </h1>
+
+      <form class="form-horizontal" role="form">
+        <div class="form-group">
+          <label for="contract-number" class="col-sm-2 control-label">合同号</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="contract-number" placeholder="请输入合同号">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="姓名" class="col-sm-2 control-label">名字</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="name" placeholder="请输入名字">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="id-number" class="col-sm-2 control-label">身份证号</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="id-number" placeholder="请输入身份证号">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="bank-account" class="col-sm-2 control-label">银行卡号</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="bank-account" placeholder="请输入银行卡号">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="bank-name" class="col-sm-2 control-label">银行名称</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="bank-name" placeholder="请输入银行名称">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="opening-bank" class="col-sm-2 control-label">开户行</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="opening-bank" placeholder="请输入开户行">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="amount" class="col-sm-2 control-label">借款金额</label>
+          <div class="col-sm-10">
+            <input type="number" class="form-control" id="amount" placeholder="请输入借款金额">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="start-time" class="col-sm-2 control-label">借款时间</label>
+          <div class="col-sm-10">
+            <input type="date" class="form-control" id="start-time" placeholder="请输入借款时间">
+          </div>
+          <div>
+            <input id="one-year-duration-button" type="button" class="demo-button" value="一年期" />
+          </div>
+        </div>
+
+
+        <div class="form-group">
+          <label for="end-time" class="col-sm-2 control-label">还款时间</label>
+          <div class="col-sm-10">
+            <input type="date" class="form-control" id="end-time" placeholder="请输入还款时间">
+          </div>
+        </div>
+
+
+
+        <div class="form-group">
+          <label for="company-name" class="col-sm-2 control-label">借款利率（%）</label>
+          <div class="col-sm-10">
+            <input type="float" value="6.1" class="form-control" id="interest-rate">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="company-name" class="col-sm-2 control-label">应得利息</label>
+          <div class="col-sm-10">
+            <input type="float" class="form-control" id="interest" disabled="disabled">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="company-name" class="col-sm-2 control-label">应交税费</label>
+          <div class="col-sm-10">
+            <input type="float" class="form-control" id="tax">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="actual-interest" class="col-sm-2 control-label">实际利息</label>
+          <div class="col-sm-10">
+            <input type="float" class="form-control" id="actual-interest" disabled="disabled">
+          </div>
+        </div>
+
+        <!-- <div class="form-group">
+          <label for="daily-interest" class="col-sm-2 control-label">税后日利息</label>
+          <div class="col-sm-10">
+            <input type="float" class="form-control" id="daily-interest" disabled="disabled">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="cfirst-payment-day" class="col-sm-2 control-label">第一次付息日：</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="first-payment-day" disabled="disabled">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="second-payment-day" class="col-sm-2 control-label">第二次付息日：</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="second-payment-day" disabled="disabled">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="third-payment-day" class="col-sm-2 control-label">第三次付息日：</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="third-payment-day" disabled="disabled">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="fourth-payment-day" class="col-sm-2 control-label">第四次付息日：</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="fourth-payment-day" disabled="disabled">
+          </div>
+        </div> -->
+
+        <div class="alert alert-danger" role="alert" id="alertLabel">
+          
+        </div>
+
+
+        <div>
+          <input type="button" class="demo-button" id="add-new" value="确认录入" />
+        </div>
+
+      </form>
+    </div>
+    <script>
+      require('./renderer-process/js/newLoan.js')
+    </script>
+
+  </section>
+</template>

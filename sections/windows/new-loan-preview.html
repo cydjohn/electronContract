@@ -1,0 +1,120 @@
+<html>
+
+<head>
+    <title>打印预览</title>
+</head>
+
+<body>
+
+    <h1>
+        <center>借款信息确认表</center>
+    </h1>
+    <div>
+        <form class="form-horizontal" role="form" style="font-size: 24px">
+
+            <div class="form-group">
+                <label for="姓名" class="col-md-12 control-label" id="contract-number">合同号</label>
+            </div>
+
+            <div class="form-group">
+                <label for="姓名" class="col-md-12 control-label" id="name">名字</label>
+            </div>
+
+            <div class="form-group">
+                <label for="id-number" class="col-md-12 control-label" id="id-number">身份证号</label>
+            </div>
+
+            <div class="form-group">
+                <label for="bank-account" class="col-md-12 control-label" id="bank-account">银行卡号</label>
+            </div>
+
+            <div class="form-group">
+                <label for="bank-name" class="col-md-12 control-label" id="bank-name">银行名称</label>
+            </div>
+
+            <div class="form-group">
+                <label for="opening-bank" class="col-md-12 control-label" id="opening-bank">开户行</label>
+            </div>
+
+            <div class="form-group">
+                <label for="amount" class="col-md-12 control-label" id="amount">借款金额</label>
+            </div>
+
+            <div class="form-group">
+                <label for="start-time" class="col-md-12 control-label" id="start-time">借款时间</label>
+            </div>
+
+            <div class="form-group">
+                <label for="end-time" class="col-md-12 control-label" id="end-time">还款时间</label>
+            </div>
+
+            <div class="form-group">
+                <label for="company-name" class="col-md-12 control-label" id="interest-rate">借款利率（%）</label>
+            </div>
+
+            <div class="form-group">
+                <label for="company-name" class="col-md-12 control-label" id="interest">应得利息</label>
+            </div>
+
+            <div class="form-group">
+                <label for="company-name" class="col-md-12 control-label" id="tax">应交税费</label>
+            </div>
+
+            <div class="form-group">
+                <label for="actual-interest" class="col-md-12 control-label" id="actual-interest">实际利息</label>
+            </div>
+
+            <!-- <div class="form-group">
+                <label for="daily-interest" class="col-md-12 control-label">税后日利息</label>
+                <div class="col-sm-10">
+                    <input type="float" class="form-control" id="daily-interest" disabled="disabled">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="cfirst-payment-day" class="col-md-12 control-label">第一次付息日：</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="first-payment-day" disabled="disabled">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="second-payment-day" class="col-md-12 control-label">第二次付息日：</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="second-payment-day" disabled="disabled">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="third-payment-day" class="col-md-12 control-label">第三次付息日：</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="third-payment-day" disabled="disabled">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="fourth-payment-day" class="col-md-12 control-label">第四次付息日：</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="fourth-payment-day" disabled="disabled">
+                </div>
+            </div> -->
+
+            <div class="form-group" id="confirm-sign">
+                <br>
+                <br>
+                <br>
+                <label for="confirm" class="col-md-12 control-label">
+                    <em>确认签字：</em>
+                </label>
+            </div>
+        </form>
+    </div>
+
+    <div class="col-sm-10">
+        <button class="btn btn-success" id="print-pdf">打印</button>
+    </div>
+
+    <link rel="stylesheet" href="../../node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <script>
+        require('../../renderer-process/js/new-loan-preview.js')
+    </script>
+</body>
+
+</html>
