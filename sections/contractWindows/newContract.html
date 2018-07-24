@@ -1,0 +1,114 @@
+<template class="task-template">
+    <section id="new-contract-section" class="section js-section u-category-windows">
+        <div class="demo-wrapper">
+            <h1>
+                <center>新建合同</center>
+            </h1>
+
+            <form class="form-horizontal" role="form">
+                <div class="form-group">
+                    <label for="contract-number" class="col-sm-2 control-label">合同编号：</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="contract-number" placeholder="请输入合同号">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="first-party" class="col-sm-2 control-label">甲方（收款方）</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="first-party" placeholder="请输入甲方">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="second-party" class="col-sm-2 control-label">乙方（付款方）</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="second-party" placeholder="请输入乙方">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="start-time" class="col-sm-2 control-label">合同签订时间</label>
+                    <div class="col-sm-10">
+                        <input type="date" class="form-control" id="start-time">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="bank-name" class="col-sm-2 control-label">车型</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="bank-name" placeholder="请输入车型">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="quantity" class="col-sm-2 control-label">数量</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="quantity" placeholder="请输入数量">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="total-price" class="col-sm-2 control-label">合同总金额</label>
+                    <div class="col-sm-10">
+                        <input type="number" class="form-control" id="total-price" placeholder="请输入总金额">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">付款方式</label>
+                </div>
+
+
+                <div class="row col-lg-12 col-md-12 m-1">
+
+                    <div class="input-group col-lg-4 col-md-4">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="stages">期数：</span>
+                        </div>
+                        <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" id='stages-input'>
+                    </div>
+
+                    <div class="input-group col-lg-4 col-md-4">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="time">付款时间：</span>
+                        </div>
+                        <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" id='time-input'>
+                    </div>
+
+
+                    <div class="input-group col-lg-4 col-md-4">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="amount">付款金额：</span>
+                        </div>
+                        <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" id='amount-input'>
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <label for="amount-sum" class="col-sm-2 control-label">总计</label>
+                    <div class="col-sm-10">
+                        <input type="float" class="form-control" id="amount-sum" disabled="disabled">
+                    </div>
+                </div>
+
+
+
+                <div class="alert alert-danger" role="alert" id="alertLabel">
+
+                </div>
+
+
+                <div>
+                    <input type="button" class="demo-button" id="add-new" value="确认录入" />
+                </div>
+
+            </form>
+        </div>
+        <script>
+            require('./renderer-process/js/newLoan.js')
+        </script>
+
+    </section>
+</template>
