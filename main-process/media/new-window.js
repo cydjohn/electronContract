@@ -6,14 +6,14 @@ const { BrowserWindow } = require('electron')
 var Datastore = require('nedb')
 var userData = app.getAppPath('userData');
 
-var dbLocation = ''
-if(process.platform === "win32") {
-    dbLocation = 'D://db/persons.db';
-}
-else {
-    dbLocation = userData+'/dist/persons.db';
-}
-db = new Datastore({ filename: dbLocation , autoload: true });
+// var dbLocation = ''
+// if(process.platform === "win32") {
+//     dbLocation = 'D://db/persons.db';
+// }
+// else {
+//     dbLocation = userData+'/dist/persons.db';
+// }
+// db = new Datastore({ filename: dbLocation , autoload: true });
 
 
 var tableData = []

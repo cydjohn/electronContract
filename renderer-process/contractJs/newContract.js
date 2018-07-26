@@ -74,7 +74,6 @@ addNewContractButton.addEventListener('click', () => {
             stages.pop();
             contract.stages = stages;
             // console.log(contract.stages);
-
             ipcRenderer.send('getMsg', contract)
         }
     }
