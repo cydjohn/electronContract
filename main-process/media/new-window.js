@@ -20,7 +20,7 @@ var tableData = []
 var tempData = {}
 var printDate = ""
 
-ipcMain.on('getMsg', (event, arg) => {
+ipcMain.on('getMsgadsfasdf', (event, arg) => {
     db.insert(arg, function (err, newDoc) {   // Callback is optional
         // newDoc is the newly inserted document, including its _id
         // newDoc has no key called notToBeSaved since its value was undefined
@@ -31,31 +31,29 @@ ipcMain.on('getMsg', (event, arg) => {
             tempData = newDoc
         }
     });
-
-
 })
 
-ipcMain.on('pass-print-value', (event, arg) => {
+ipcMain.on('pass-print-valueadsfasdfa', (event, arg) => {
     tableData = arg[0]
     printDate = arg[1]
 })
 
-ipcMain.on('request-all-data', (event, arg) => {
+ipcMain.on('request-all-dataasdfasdfa', (event, arg) => {
     // Find all documents in the collection
     db.find({}, function (err, docs) {
         event.sender.send('get-all-data', docs)
     });
 })
 
-ipcMain.on('get-print-value', (event, arg) => {
+ipcMain.on('get-print-valuefasdfsa', (event, arg) => {
     event.sender.send('print-data', [tableData,printDate])
 })
 
-ipcMain.on('request-temp-data', (event, arg) => {
+ipcMain.on('request-temp-dataasdfasdf', (event, arg) => {
     event.sender.send('get-temp-data', tempData)
 })
 
-ipcMain.on('request-delete-contract', (event, cid) => {
+ipcMain.on('request-delete-contractadfasdf', (event, cid) => {
     db.remove({ contractNumber: cid }, {}, function (err, numRemoved) {
         // numRemoved = 1
         event.sender.send('delete-info', numRemoved)
