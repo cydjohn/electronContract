@@ -20,10 +20,10 @@ alertLabel.hidden = true
 
 const addNewContractButton = document.getElementById("add-new");
 
-
+clearFrom();
 // 添加新合同
 addNewContractButton.addEventListener('click', () => {
-    if (contactNumber.value.length == 0) {
+    if (contractNumber.value.length == 0) {
         alertLabel.hidden = false;
         alertLabel.innerHTML = "合同号不能为空";
     }
@@ -75,6 +75,7 @@ addNewContractButton.addEventListener('click', () => {
             contract.stages = stages;
             // console.log(contract.stages);
             ipcRenderer.send('getMsg', contract)
+            clearFrom();
         }
     }
 })
@@ -124,7 +125,7 @@ function addStages() {
     var i = 0;
     var sum = 0;
     for (i = 0; i < stages.length; i++) {
-        if(document.getElementById('amount-input-' + i).value>0) {
+        if (document.getElementById('amount-input-' + i).value > 0) {
             stages[i].time = document.getElementById('time-input-' + i).value;
             stages[i].amount = document.getElementById('amount-input-' + i).value;
             stages[i].stageId = i;
@@ -136,4 +137,15 @@ function addStages() {
     amountSum.value = sum
 }
 
-
+function clearFrom() {
+    contractNumber.value = "";
+    firstParty.value = "";
+    secondParty.value = "";
+    startTime.value= "";
+    carType.value = "";
+    carQuantity.value = 0;
+    stageSum.value = 0;
+    amountSum.value = 0;
+    stages = [];
+    document.getElementById('stages').innerHTML = "";
+}
