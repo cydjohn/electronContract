@@ -14,7 +14,11 @@ let tableData = []
 ipcRenderer.send('request-all-data')
 
 ipcRenderer.on('get-all-data', (event, arg) => {
-  allData = arg
+  allData = arg;
+
+  //temp
+  tableData = allData;
+  loadData();
 })
 
 ipcRenderer.on('add-new-contract', (event, arg) => {
@@ -30,24 +34,18 @@ function loadData() {
     document.getElementById('main-table-data').innerHTML = ""
     var d = 0
     for (d in tableData) {
+      console.log(tableData[d]);
       document.getElementById('main-table-data').innerHTML +=
         "<tr>" +
         "<td>" + (parseInt(d) + 1) + "</td>" +
-        "<td>" + tableData[d].contractNumber + "</td>" +
-        "<td>" + tableData[d].name + "</td>" +
-        "<td>'" + tableData[d].idNumber + "</td>" +
-        "<td>'" + tableData[d].bankAccount + "</td>" +
-        "<td>" + tableData[d].bankName + "</td>" +
-        "<td>" + tableData[d].openingBank + "</td>" +
+        "<td>'" + tableData[d].contractNumber + "</td>" +
+        "<td>" + tableData[d].firstParty + "</td>" +
+        "<td>" + tableData[d].secondParty + "</td>" +
         "<td>" + tableData[d].startTime + "</td>" +
-        // "<td>" + getInterestPaymentData(tableData[d]) + "</td>" +
-        "<td>" + tableData[d].endTime + "</td>" +
-        "<td>" + tableData[d].amount + "</td>" +
-        "<td>" + tableData[d].interestRate + "</td>" +
-        "<td>" + parseFloat(tableData[d].interest).toFixed(2) + "</td>" +
-        "<td>" + tableData[d].tax + "</td>" +
-        "<td>" + tableData[d].actualInterest + "</td>" +
+        "<td>" + tableData[d].carType + "</td>" +
+        "<td>" + tableData[d].carQuantity + "</td>" +
+        "<td>" + tableData[d].stageSum + "</td>" +
         "</tr>"
     }
-    calculateSum()
+    // calculateSum()
   }

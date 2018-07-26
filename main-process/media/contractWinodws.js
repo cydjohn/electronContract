@@ -28,3 +28,10 @@ ipcMain.on('getMsg', (event, arg) => {
         }
     });
 })
+
+ipcMain.on('request-all-data', (event, arg) => {
+    // Find all documents in the collection
+    db.find({}, function (err, docs) {
+        event.sender.send('get-all-data', docs);
+    });
+})
