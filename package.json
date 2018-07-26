@@ -22,7 +22,7 @@
     "prepack": "check-for-leaks",
     "prepush": "check-for-leaks"
   },
-  "repository": "https://github.com/cydjohn/electronLoan",
+  "repository": "https://github.com/cydjohn/electronContract",
   "keywords": [
     "Electron",
     "API",
