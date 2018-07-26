@@ -10,16 +10,16 @@ var userData = app.getAppPath('userData');
 
 var dbLocation = ''
 if(process.platform === "win32") {
-    dbLocation = 'D://db/persons.db';
+    dbLocation = 'D://db/contract.db';
 }
 else {
-  dbLocation = userData+'/dist/persons.db';
+  dbLocation = userData+'/dist/contract.db';
 }
 db = new Datastore({ filename: dbLocation });
 
 
 
-if (process.mas) app.setName('借款系统')
+if (process.mas) app.setName('合同管理系统')
 
 let mainWindow = null
 
