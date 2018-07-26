@@ -3,18 +3,27 @@ var moment = require('moment')
 const path = require('path')
 const { BrowserWindow } = require('electron').remote
 
-const addNewContractButton = document.getElementById("add-new")
+const contactNumber = document.getElementById("contract-number");
+const firstParty = document.getElementById("first-party");
+const secondParty = document.getElementById("second-party");
+const startTime = document.getElementById("start-time");
+const carType = document.getElementById("car-type");
+const carQuantity = document.getElementById("car-quantity");
 
-const addNewStageButton = document.getElementById("add-stages")
 
-var stages = []
+const addNewStageButton = document.getElementById("add-stages");
+var stages = [];
+
+
+
+const addNewContractButton = document.getElementById("add-new");
+
+
 
 addNewStageButton.addEventListener('click', () => {
     addNewStage();
 
 })
-
-
 function addNewStage() {
     getStages();
     document.getElementById('stages').innerHTML = "";
@@ -31,7 +40,7 @@ function addNewStage() {
                 '<div class="input-group-prepend">' +
                 '<span class="input-group-text"> 期数：</span>' +
                 '</div >' +
-                '<input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" value = ' + i + ' disabled="disabled" id="stages-input-' + i + '">' +
+                '<input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" value = ' + i+1 + ' disabled="disabled" id="stages-input-' + i + '">' +
                 '</div>' +
 
                 '<div class="input-group col-lg-5 col-md-5">' +
