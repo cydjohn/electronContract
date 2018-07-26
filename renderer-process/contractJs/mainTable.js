@@ -47,5 +47,16 @@ function loadData() {
         "<td>" + tableData[d].stageSum + "</td>" +
         "</tr>"
     }
-    // calculateSum()
+    calculateSum()
   }
+
+function calculateSum() {
+  var quantitySum = 0;
+  var staSum = 0;
+  for (d in tableData) {
+    console.log(tableData[d]);
+    quantitySum += parseInt(tableData[d].carQuantity);
+    staSum += parseFloat(tableData[d].stageSum);
+  }
+  document.getElementById("main-table-sum").innerHTML = staSum.toFixed(2);
+}

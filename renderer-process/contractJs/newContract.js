@@ -3,7 +3,7 @@ var moment = require('moment')
 const path = require('path')
 const { BrowserWindow } = require('electron').remote
 
-const contactNumber = document.getElementById("contract-number");
+const contractNumber = document.getElementById("contract-number");
 const firstParty = document.getElementById("contract-first-party");
 const secondParty = document.getElementById("contract-second-party");
 const startTime = document.getElementById("contract-start-time");
@@ -64,7 +64,7 @@ addNewContractButton.addEventListener('click', () => {
         else {
             alertLabel.hidden = true;
             var contract = {};
-            contract.contactNumber = contactNumber.value;
+            contract.contractNumber = contractNumber.value;
             contract.firstParty = firstParty.value;
             contract.secondParty = secondParty.value;
             contract.startTime = startTime.value;
@@ -128,7 +128,7 @@ function addStages() {
             stages[i].time = document.getElementById('time-input-' + i).value;
             stages[i].amount = document.getElementById('amount-input-' + i).value;
             stages[i].stageId = i;
-            sum += parseInt(stages[i].amount);
+            sum += parseFloat(stages[i].amount);
         }
         // console.log(document.getElementById('time-input-' + i).value);
         // console.log(document.getElementById('amount-input-' + i).value);
