@@ -26,10 +26,11 @@ addNewStageButton.addEventListener('click', () => {
 })
 function addNewStage() {
     getStages();
-    document.getElementById('stages').innerHTML = "";
+    
     
     // 查看上一期有没有填写数据
     if (stages.length == 0 || (stages[stages.length-1].time != "" && stages[stages.length-1].amount != "")) {
+        document.getElementById('stages').innerHTML = "";
         var i = 0;
         // console.log(stages);
         stages.push({ "time": "", "amount": "", "stageId": 0 })
@@ -40,7 +41,7 @@ function addNewStage() {
                 '<div class="input-group-prepend">' +
                 '<span class="input-group-text"> 期数：</span>' +
                 '</div >' +
-                '<input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" value = ' + i+1 + ' disabled="disabled" id="stages-input-' + i + '">' +
+                '<input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" value = ' + (parseInt(i)+1) + ' disabled="disabled" id="stages-input-' + i + '">' +
                 '</div>' +
 
                 '<div class="input-group col-lg-5 col-md-5">' +
