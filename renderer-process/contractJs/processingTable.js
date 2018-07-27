@@ -54,10 +54,10 @@ function loadData() {
         for (s in tableData[d].stages) {
             if (moment(new Date()).isBefore(moment(tableData[d].stages[s].time))) {
                 counter += 1;
-                unpayedMoney += tableData[d].stages[s].amount
+                unpayedMoney += parseFloat(tableData[d].stages[s].amount);
             }
             else {
-                payedMoney += tableData[d].stages[s].amount;
+                payedMoney += parseFloat(tableData[d].stages[s].amount);
             }
         }
         if (counter>0) {
@@ -66,8 +66,8 @@ function loadData() {
                 "<td>" + (parseInt(d) + 1) + "</td>" +
                 "<td>" + tableData[d].contractNumber + "</td>" +
                 "<td>" + tableData[d].secondParty + "</td>" +
-                "<td>" + payedMoney + "</td>" +
-                "<td>" + unpayedMoney + "</td>" +
+                "<td>" + payedMoney.toFixed(2) + "</td>" +
+                "<td>" + unpayedMoney.toFixed(2) + "</td>" +
                 "<td>" + counter + "</td>" +
                 "</tr>"
         }
