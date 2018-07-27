@@ -14,19 +14,19 @@ let tableData = []
 ipcRenderer.send('request-all-data')
 
 ipcRenderer.on('get-all-data', (event, arg) => {
-    allData = arg;
+  allData = arg;
 
-    //temp
-    tableData = allData;
-    // console.log(tableData);
-    loadData();
+  //temp
+  tableData = allData;
+  // console.log(tableData);
+  loadData();
 })
 
 
 // 搜索合同号
 const contraIdSearchBox = document.getElementById("pay-contract-id")
 
-function checkContractNumber(bn,arr) {
+function checkContractNumber(bn, arr) {
   if (contraIdSearchBox.value == "") {
     return false
   }
@@ -58,32 +58,46 @@ startDate.addEventListener("input", (event, arg) => {
 
 
 function loadData() {
-    document.getElementById('pay-time-table-data').innerHTML = ""
-    var d = 0
-    for (d in tableData) {
-        var s = 0;
-        for (s in tableData[d].stages) {
-            document.getElementById('pay-time-table-data').innerHTML +=
-            "<tr>" +
-            "<td>" + (parseInt(s*d) + d+1) + "</td>" +
-            "<td>'" + tableData[d].contractNumber + "</td>" +
-            "<td>" + tableData[d].secondParty + "</td>" +
-            "<td>" + tableData[d].stages[s].amount + "</td>" +
-            "<td>" + tableData[d].stages[s].time + "</td>" +
-            "</tr>"
-        }
+  document.getElementById('pay-time-table-data').innerHTML = ""
+  var d = 0
+  var counter = 1;
+  for (d in tableData) {
+    var s = 0;
+    for (s in tableData[d].stages) {
+      document.getElementById('pay-time-table-data').innerHTML +=
+        "<tr>" +
+        "<td>" + counter++ + "</td>" +
+        "<td>'" + tableData[d].contractNumber + "</td>" +
+        "<td>" + tableData[d].secondParty + "</td>" +
+        "<td>" + tableData[d].stages[s].amount + "</td>" +
+        "<td>" + tableData[d].stages[s].time + "</td>" +
+        "</tr>"
     }
-    calculateSum()
+  }
+  calculateSum()
 }
 
 function calculateSum() {
-    var amountSum = 0;
-    var d = 0;
-    for (d in tableData) {
-        var s = 0;
-        for (s in tableData[d].stages) {
-            amountSum += parseFloat(tableData[d].stages[s].amount);
-        }
+  var amountSum = 0;
+  var d = 0;
+  for (d in tableData) {
+    var s = 0;
+    for (s in tableData[d].stages) {
+      amountSum += parseFloat(tableData[d].stages[s].amount);
     }
-    document.getElementById("pay-time-table-sum").innerHTML = amountSum.toFixed(2);
+  }
+  document.getElementById("pay-time-table-sum").innerHTML = amountSum.toFixed(2);
 }
+
+
+// 打印预览
+const printPreview = document.getElementById('pay-time-table-print-preview')
+printPreview.addEventListener('click', (event) => {
+  ipcRenderer.send('pass-print-value', [tableData, ""])
+  const modalPath = path.join('file://', __dirname, '../../sections/contractWindows/payTimeTablePrintPreview.html')
+  let win = new BrowserWindow({ width: 800, height: 1000 })
+  win.on('close', () => { win = null })
+  win.loadURL(modalPath)
+  // win.webContents.openDevTools();
+  win.show()
+})
