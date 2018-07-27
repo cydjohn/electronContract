@@ -74,9 +74,10 @@ addNewContractButton.addEventListener('click', () => {
             stages.pop();
             contract.stages = stages;
             // console.log(contract.stages);
-            ipcRenderer.send('getMsg', contract)
+            ipcRenderer.send('getMsg', contract);
+            openPrintPreview(contract);
             clearFrom();
-            openPrintPreview();
+            
         }
     }
 })
@@ -142,7 +143,7 @@ function clearFrom() {
     contractNumber.value = "";
     firstParty.value = "";
     secondParty.value = "";
-    startTime.value= "";
+    startTime.value = "";
     carType.value = "";
     carQuantity.value = 0;
     stageSum.value = 0;
@@ -154,14 +155,12 @@ function clearFrom() {
 
 
 // 打印预览
-function openPrintPreview() {
-    printPreview.addEventListener('click', (event) => {
-        ipcRenderer.send('pass-print-value', [tableData, ""])
-        const modalPath = path.join('file://', __dirname, '../../sections/contractWindows/newContractPrintPreview.html')
-        let win = new BrowserWindow({ width: 800, height: 1000 })
-        win.on('close', () => { win = null })
-        win.loadURL(modalPath)
-        win.webContents.openDevTools();
-        win.show()
-      })
+function openPrintPreview(contract) {
+    ipcRenderer.send('pass-print-value', [contract, ""])
+    const modalPath = path.join('file://', __dirname, '../../sections/contractWindows/newContractPrintPreview.html')
+    let win = new BrowserWindow({ width: 800, height: 1000 })
+    win.on('close', () => { win = null })
+    win.loadURL(modalPath)
+    win.webContents.openDevTools();
+    win.show()
 }

@@ -32,6 +32,10 @@ ipcMain.on('getMsg', (event, arg) => {
     });
 })
 
+ipcMain.on('request-temp-data', (event, arg) => {
+    event.sender.send('get-temp-data', tempData)
+})
+
 ipcMain.on('request-all-data', (event, arg) => {
     // Find all documents in the collection
     db.find({}, function (err, docs) {
