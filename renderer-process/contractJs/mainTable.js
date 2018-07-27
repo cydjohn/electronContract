@@ -22,39 +22,37 @@ ipcRenderer.on('get-all-data', (event, arg) => {
 })
 
 ipcRenderer.on('add-new-contract', (event, arg) => {
-    allData.push(arg)
-    tableData = []
-    tableData.push(arg)
-    loadData()
-    document.getElementById('button-table').click()
+  allData.push(arg)
+  tableData = []
+  tableData.push(arg)
+  loadData()
+  document.getElementById('button-table').click()
 })
 
 
 function loadData() {
-    document.getElementById('main-table-data').innerHTML = ""
-    var d = 0
-    for (d in tableData) {
-      console.log(tableData[d]);
-      document.getElementById('main-table-data').innerHTML +=
-        "<tr>" +
-        "<td>" + (parseInt(d) + 1) + "</td>" +
-        "<td>'" + tableData[d].contractNumber + "</td>" +
-        "<td>" + tableData[d].firstParty + "</td>" +
-        "<td>" + tableData[d].secondParty + "</td>" +
-        "<td>" + tableData[d].startTime + "</td>" +
-        "<td>" + tableData[d].carType + "</td>" +
-        "<td>" + tableData[d].carQuantity + "</td>" +
-        "<td>" + tableData[d].stageSum + "</td>" +
-        "</tr>"
-    }
-    calculateSum()
+  document.getElementById('main-table-data').innerHTML = ""
+  var d = 0
+  for (d in tableData) {
+    document.getElementById('main-table-data').innerHTML +=
+      "<tr>" +
+      "<td>" + (parseInt(d) + 1) + "</td>" +
+      "<td>'" + tableData[d].contractNumber + "</td>" +
+      "<td>" + tableData[d].firstParty + "</td>" +
+      "<td>" + tableData[d].secondParty + "</td>" +
+      "<td>" + tableData[d].startTime + "</td>" +
+      "<td>" + tableData[d].carType + "</td>" +
+      "<td>" + tableData[d].carQuantity + "</td>" +
+      "<td>" + tableData[d].stageSum + "</td>" +
+      "</tr>"
   }
+  calculateSum()
+}
 
 function calculateSum() {
   var quantitySum = 0;
   var staSum = 0;
   for (d in tableData) {
-    console.log(tableData[d]);
     quantitySum += parseInt(tableData[d].carQuantity);
     staSum += parseFloat(tableData[d].stageSum);
   }
