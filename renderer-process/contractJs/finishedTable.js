@@ -28,14 +28,17 @@ function loadData() {
     document.getElementById('finished-table-data').innerHTML = ""
     var d = 0
     for (d in tableData) {
-        
-        document.getElementById('finished-table-data').innerHTML +=
-            "<tr>" +
-            "<td>" + (parseInt(d) + 1) + "</td>" +
-            "<td>" + tableData[d].secondParty + "</td>" +
-            "<td>" + tableData[d].stageSum + "</td>" +
-            "<td>" + tableData[d].stages.pop().time + "</td>" +
-            "</tr>"
+        let lastDay = tableData[d].stages.pop().time;
+        if (moment(new Date()).isAfter(moment(lastDay))) {
+            document.getElementById('finished-table-data').innerHTML +=
+                "<tr>" +
+                "<td>" + (parseInt(d) + 1) + "</td>" +
+                "<td>" + tableData[d].contractNumber + "</td>" +
+                "<td>" + tableData[d].secondParty + "</td>" +
+                "<td>" + tableData[d].stageSum + "</td>" +
+                "<td>" + lastDay + "</td>" +
+                "</tr>"
+        }
     }
 }
 
