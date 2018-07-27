@@ -11,9 +11,11 @@ ipcRenderer.on('print-data', (event, data) => {
     tableData = data[0]
     printDate = data[1]
     loadData()
+
 })
 
 function loadData() {
+    console.log(tableData);
     document.getElementById('pay-time-table-data').innerHTML = ""
     var d = 0
     var counter = 1;
