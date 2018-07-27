@@ -87,6 +87,21 @@ contractCarTypeSearchBox.addEventListener("input", () => {
 })
 
 
+// 借款日期筛选
+const startDate = document.getElementById('contract-start-time')
+function checkStartDate(idn) {
+  if (startDate.value == "") {
+    return false
+  }
+  return idn.startTime.search(startDate.value.slice(0, 7)) != -1
+}
+
+startDate.addEventListener("input", (event, arg) => {
+  tableData = allData.filter(checkStartDate);
+  loadData()
+})
+
+
 ipcRenderer.send('request-all-data')
 
 ipcRenderer.on('get-all-data', (event, arg) => {

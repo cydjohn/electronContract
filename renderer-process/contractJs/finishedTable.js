@@ -23,6 +23,25 @@ ipcRenderer.on('get-all-data', (event, arg) => {
 })
 
 
+// 搜索合同号
+const contraIdSearchBox = document.getElementById("contract-id")
+
+function checkContractNumber(bn,arr) {
+  if (contraIdSearchBox.value == "") {
+    return false
+  }
+  else if (contraIdSearchBox.value == "*") {
+    return true
+  }
+  return bn.contractNumber.search(contraIdSearchBox.value) != -1
+}
+
+contraIdSearchBox.addEventListener("input", () => {
+  tableData = allData.filter(checkContractNumber);
+  loadData()
+})
+
+
 
 function loadData() {
     document.getElementById('finished-table-data').innerHTML = ""
