@@ -30,10 +30,37 @@ function loadData(contract) {
     carType.value = contract.carType;
     carQuantity.value = contract.carQuantity;
     stageSum.value = contract.stageSum;
+    loadStages(contract.stages);
+
 }
 
-function loadStages() {
-    
+function loadStages(stages) {
+    for (i in stages) {
+        document.getElementById('new-stages').innerHTML +=
+            '<div class="row col-lg-12 col-md-12 m-1">' +
+            '<div class="input-group col-lg-2 col-md-2">' +
+            '<div class="input-group-prepend">' +
+            '<span class="input-group-text"> 期数：</span>' +
+            '</div >' +
+            '<input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" value = ' + (parseInt(i) + 1) + ' disabled="disabled" id="stages-input-' + i + '">' +
+            '</div>' +
+
+            '<div class="input-group col-lg-5 col-md-5">' +
+            '<div class="input-group-prepend">' +
+            '<span class="input-group-text">付款时间：</span>' +
+            '</div>' +
+            '<input type="date" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" value = "' + stages[i].time + '" id="time-input-' + i + '">' +
+            '</div>' +
+
+
+            '<div class="input-group col-lg-4 col-md-4">' +
+            '<div class="input-group-prepend">' +
+            '<span class="input-group-text">付款金额：</span>' +
+            '</div>' +
+            '<input type="float" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" value = "' + stages[i].amount + '" id="amount-input-' + i + '">' +
+            '</div>' +
+            '</div> ';
+    }
 }
 
 
