@@ -24,7 +24,7 @@ ipcRenderer.on('get-all-data', (event, arg) => {
 
 
 // 搜索合同号
-const contraIdSearchBox = document.getElementById("contract-id")
+const contraIdSearchBox = document.getElementById("pay-contract-id")
 
 function checkContractNumber(bn,arr) {
   if (contraIdSearchBox.value == "") {
@@ -41,6 +41,20 @@ contraIdSearchBox.addEventListener("input", () => {
   loadData()
 })
 
+// 借款日期筛选
+const startDate = document.getElementById('pay-start-time')
+function checkStartDate(idn) {
+  if (startDate.value == "") {
+    return false
+  }
+  return idn.startTime.search(startDate.value.slice(0, 7)) != -1
+}
+
+startDate.addEventListener("input", (event, arg) => {
+  tableData = allData.filter(checkStartDate);
+  loadData()
+})
+
 
 
 function loadData() {
@@ -51,7 +65,7 @@ function loadData() {
         for (s in tableData[d].stages) {
             document.getElementById('pay-time-table-data').innerHTML +=
             "<tr>" +
-            "<td>" + (parseInt(d) + 1) + "</td>" +
+            "<td>" + (parseInt(s*d) + d+1) + "</td>" +
             "<td>'" + tableData[d].contractNumber + "</td>" +
             "<td>" + tableData[d].secondParty + "</td>" +
             "<td>" + tableData[d].stages[s].amount + "</td>" +
