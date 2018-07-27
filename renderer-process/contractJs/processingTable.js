@@ -25,17 +25,31 @@ ipcRenderer.on('get-all-data', (event, arg) => {
 
 
 function loadData() {
-    document.getElementById('finished-table-data').innerHTML = ""
+    document.getElementById('processing-table-data').innerHTML = ""
     var d = 0
     for (d in tableData) {
-        let lastDay = tableData[d].stages.pop().time;
-        if (moment(new Date()).isBefore(moment(lastDay))) {
-            document.getElementById('finished-table-data').innerHTML +=
+        var s = 0;
+        var counter = 0;
+        var payedMoney = 0;
+        var unpayedMoney = 0;
+        for (s in tableData[d].stages) {
+            if (moment(new Date()).isBefore(moment(tableData[d].stages[s].time))) {
+                counter += 1;
+                unpayedMoney += tableData[d].stages[s].amount
+            }
+            else {
+                payedMoney += tableData[d].stages[s].amount;
+            }
+        }
+        if (counter>0) {
+            document.getElementById('processing-table-data').innerHTML +=
                 "<tr>" +
                 "<td>" + (parseInt(d) + 1) + "</td>" +
+                "<td>" + tableData[d].contractNumber + "</td>" +
                 "<td>" + tableData[d].secondParty + "</td>" +
-                "<td>" + tableData[d].stageSum + "</td>" +
-                "<td>" + lastDay + "</td>" +
+                "<td>" + payedMoney + "</td>" +
+                "<td>" + unpayedMoney + "</td>" +
+                "<td>" + counter + "</td>" +
                 "</tr>"
         }
     }

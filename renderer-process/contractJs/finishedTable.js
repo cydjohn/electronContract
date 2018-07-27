@@ -28,7 +28,7 @@ function loadData() {
     document.getElementById('finished-table-data').innerHTML = ""
     var d = 0
     for (d in tableData) {
-        let lastDay = tableData[d].stages.pop().time;
+        let lastDay = tableData[d].stages.pop();
         if (moment(new Date()).isAfter(moment(lastDay))) {
             document.getElementById('finished-table-data').innerHTML +=
                 "<tr>" +
@@ -36,7 +36,7 @@ function loadData() {
                 "<td>" + tableData[d].contractNumber + "</td>" +
                 "<td>" + tableData[d].secondParty + "</td>" +
                 "<td>" + tableData[d].stageSum + "</td>" +
-                "<td>" + lastDay + "</td>" +
+                "<td>" + lastDay.time + "</td>" +
                 "</tr>"
         }
     }
