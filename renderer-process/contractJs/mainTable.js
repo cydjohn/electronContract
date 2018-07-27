@@ -9,7 +9,83 @@ const XLSX = require('xlsx')
 let allData = []
 
 let tableData = []
-// loadData()
+
+
+
+// 搜索合同号
+const contraIdSearchBox = document.getElementById("contract-id")
+
+function checkContractNumber(bn,arr) {
+  if (contraIdSearchBox.value == "") {
+    return false
+  }
+  else if (contraIdSearchBox.value == "*") {
+    return true
+  }
+  return bn.contractNumber.search(contraIdSearchBox.value) != -1
+}
+
+contraIdSearchBox.addEventListener("input", () => {
+  tableData = allData.filter(checkContractNumber);
+  loadData()
+})
+
+// 甲方
+const contractFirstPartySearchBox = document.getElementById("contract-first-party")
+
+function checkContractFirstParty(bn) {
+  if (contractFirstPartySearchBox.value == "") {
+    return false
+  }
+  else if (contractFirstPartySearchBox.value == "*") {
+    return true
+  }
+  return bn.firstParty.search(contractFirstPartySearchBox.value) != -1
+}
+
+contractFirstPartySearchBox.addEventListener("input", () => {
+  tableData = allData.filter(checkContractFirstParty);
+  loadData()
+})
+
+
+// 乙方
+const contractSecondPartySearchBox = document.getElementById("contract-second-party")
+
+function checkContractSecondParty(bn) {
+  if (contractSecondPartySearchBox.value == "") {
+    return false
+  }
+  else if (contractSecondPartySearchBox.value == "*") {
+    return true
+  }
+  return bn.secondParty.search(contractSecondPartySearchBox.value) != -1
+}
+
+contractSecondPartySearchBox.addEventListener("input", () => {
+  tableData = allData.filter(checkContractSecondParty);
+  loadData()
+})
+
+
+// 车型
+const contractCarTypeSearchBox = document.getElementById("contract-car-type")
+
+function checkContractCarType(bn) {
+  if (contractCarTypeSearchBox.value == "") {
+    return false
+  }
+  else if (contractCarTypeSearchBox.value == "*") {
+    return true
+  }
+  return bn.carType.search(contractCarTypeSearchBox.value) != -1
+}
+
+contractCarTypeSearchBox.addEventListener("input", () => {
+  tableData = allData.filter(checkContractCarType);
+  loadData()
+})
+
 
 ipcRenderer.send('request-all-data')
 
