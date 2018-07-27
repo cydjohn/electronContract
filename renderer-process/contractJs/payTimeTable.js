@@ -40,5 +40,17 @@ function loadData() {
             "</tr>"
         }
     }
-    // calculateSum()
+    calculateSum()
+}
+
+function calculateSum() {
+    var amountSum = 0;
+    var d = 0;
+    for (d in tableData) {
+        var s = 0;
+        for (s in tableData[d].stages) {
+            amountSum += parseFloat(tableData[d].stages[s].amount);
+        }
+    }
+    document.getElementById("pay-time-table-sum").innerHTML = amountSum.toFixed(2);
 }
