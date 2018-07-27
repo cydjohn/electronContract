@@ -149,3 +149,17 @@ function clearFrom() {
     stages = [];
     document.getElementById('new-stages').innerHTML = "";
 }
+
+
+
+// // 打印预览
+// const printPreview = document.getElementById('main-table-print-preview')
+// printPreview.addEventListener('click', (event) => {
+//   ipcRenderer.send('pass-print-value', [tableData, ""])
+//   const modalPath = path.join('file://', __dirname, '../../sections/contractWindows/newContractPrintPreview.html')
+//   let win = new BrowserWindow({ width: 800, height: 1000 })
+//   win.on('close', () => { win = null })
+//   win.loadURL(modalPath)
+//   win.webContents.openDevTools();
+//   win.show()
+// })
