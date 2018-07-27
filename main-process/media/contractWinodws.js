@@ -14,6 +14,9 @@ else {
     dbLocation = userData+'/dist/contract.db';
 }
 db = new Datastore({ filename: dbLocation , autoload: true });
+var tableData = []
+var tempData = {}
+var printDate = ""
 
 
 ipcMain.on('getMsg', (event, arg) => {
@@ -34,4 +37,14 @@ ipcMain.on('request-all-data', (event, arg) => {
     db.find({}, function (err, docs) {
         event.sender.send('get-all-data', docs);
     });
+})
+
+ipcMain.on('pass-print-value', (event, arg) => {
+    tableData = arg[0]
+    printDate = arg[1]
+})
+
+
+ipcMain.on('get-print-value', (event, arg) => {
+    event.sender.send('print-data', [tableData,printDate])
 })

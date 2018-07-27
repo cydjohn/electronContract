@@ -102,6 +102,19 @@ startDate.addEventListener("input", (event, arg) => {
 })
 
 
+// 打印预览
+const printPreview = document.getElementById('main-table-print-preview')
+printPreview.addEventListener('click', (event) => {
+  ipcRenderer.send('pass-print-value', [tableData, ""])
+  const modalPath = path.join('file://', __dirname, '../../sections/contractWindows/mainTablePrintPreview.html')
+  let win = new BrowserWindow({ width: 800, height: 1000 })
+  win.on('close', () => { win = null })
+  win.loadURL(modalPath)
+  win.webContents.openDevTools();
+  win.show()
+})
+
+
 ipcRenderer.send('request-all-data')
 
 ipcRenderer.on('get-all-data', (event, arg) => {
