@@ -13,7 +13,7 @@ let tableData = []
 
 
 // 搜索合同号
-const contraIdSearchBox = document.getElementById("contract-id")
+const contraIdSearchBox = document.getElementById("main-contract-id")
 
 function checkContractNumber(bn,arr) {
   if (contraIdSearchBox.value == "") {
@@ -31,7 +31,7 @@ contraIdSearchBox.addEventListener("input", () => {
 })
 
 // 甲方
-const contractFirstPartySearchBox = document.getElementById("contract-first-party")
+const contractFirstPartySearchBox = document.getElementById("main-contract-first-party")
 
 function checkContractFirstParty(bn) {
   if (contractFirstPartySearchBox.value == "") {
@@ -50,7 +50,7 @@ contractFirstPartySearchBox.addEventListener("input", () => {
 
 
 // 乙方
-const contractSecondPartySearchBox = document.getElementById("contract-second-party")
+const contractSecondPartySearchBox = document.getElementById("main-contract-second-party")
 
 function checkContractSecondParty(bn) {
   if (contractSecondPartySearchBox.value == "") {
@@ -69,7 +69,7 @@ contractSecondPartySearchBox.addEventListener("input", () => {
 
 
 // 车型
-const contractCarTypeSearchBox = document.getElementById("contract-car-type")
+const contractCarTypeSearchBox = document.getElementById("main-contract-car-type")
 
 function checkContractCarType(bn) {
   if (contractCarTypeSearchBox.value == "") {
@@ -88,7 +88,7 @@ contractCarTypeSearchBox.addEventListener("input", () => {
 
 
 // 借款日期筛选
-const startDate = document.getElementById('contract-start-time')
+const startDate = document.getElementById('main-contract-start-time')
 function checkStartDate(idn) {
   if (startDate.value == "") {
     return false

@@ -3,14 +3,14 @@ var moment = require('moment')
 const path = require('path')
 const { BrowserWindow } = require('electron').remote
 
-const contractNumber = document.getElementById("contract-number");
-const firstParty = document.getElementById("contract-first-party");
-const secondParty = document.getElementById("contract-second-party");
-const startTime = document.getElementById("contract-start-time");
-const carType = document.getElementById("contract-car-type");
-const carQuantity = document.getElementById("contract-car-quantity");
-const stageSum = document.getElementById("contract-stage-sum");
-const amountSum = document.getElementById("amount-sum");
+const contractNumber = document.getElementById("new-contract-number");
+const firstParty = document.getElementById("new-contract-first-party");
+const secondParty = document.getElementById("new-contract-second-party");
+const startTime = document.getElementById("new-contract-start-time");
+const carType = document.getElementById("new-contract-car-type");
+const carQuantity = document.getElementById("new-contract-car-quantity");
+const stageSum = document.getElementById("new-contract-stage-sum");
+const amountSum = document.getElementById("new-amount-sum");
 
 
 const addNewStageButton = document.getElementById("add-stages");
@@ -88,12 +88,12 @@ function addNewStage() {
     addStages();
     // 查看上一期有没有填写数据
     if (stages.length == 0 || (stages[stages.length - 1].time != "" && stages[stages.length - 1].amount != "")) {
-        document.getElementById('stages').innerHTML = "";
+        document.getElementById('new-stages').innerHTML = "";
         var i = 0;
         // console.log(stages);
         stages.push({ "time": "", "amount": "", "stageId": 0 });
         for (i in stages) {
-            document.getElementById('stages').innerHTML +=
+            document.getElementById('new-stages').innerHTML +=
                 '<div class="row col-lg-12 col-md-12 m-1">' +
                 '<div class="input-group col-lg-2 col-md-2">' +
                 '<div class="input-group-prepend">' +
@@ -147,5 +147,5 @@ function clearFrom() {
     stageSum.value = 0;
     amountSum.value = 0;
     stages = [];
-    document.getElementById('stages').innerHTML = "";
+    document.getElementById('new-stages').innerHTML = "";
 }
