@@ -6,25 +6,25 @@ var moment = require('moment');
 
 const XLSX = require('xlsx')
 
-let allData = []
+let finishedAllData = []
 
-let tableData = []
+let finishedTableData = []
 // loadData()
 
 ipcRenderer.send('request-all-data')
 
 ipcRenderer.on('get-all-data', (event, arg) => {
-    allData = arg;
+    finishedAllData = arg;
 
     //temp
-    tableData = allData;
-    // console.log(tableData);
+    finishedTableData = finishedAllData;
+    // console.log(finishedTableData);
     loadData();
 })
 
 
 // 搜索合同号
-const contraIdSearchBox = document.getElementById("contract-id")
+const contraIdSearchBox = document.getElementById("finished-contract-id")
 
 function checkContractNumber(bn,arr) {
   if (contraIdSearchBox.value == "") {
@@ -37,7 +37,7 @@ function checkContractNumber(bn,arr) {
 }
 
 contraIdSearchBox.addEventListener("input", () => {
-  tableData = allData.filter(checkContractNumber);
+  finishedTableData = finishedAllData.filter(checkContractNumber);
   loadData()
 })
 
@@ -46,15 +46,15 @@ contraIdSearchBox.addEventListener("input", () => {
 function loadData() {
     document.getElementById('finished-table-data').innerHTML = ""
     var d = 0
-    for (d in tableData) {
-        let lastDay = tableData[d].stages.pop();
+    for (d in finishedTableData) {
+        let lastDay = finishedTableData[d].stages.pop();
         if (moment(new Date()).isAfter(moment(lastDay))) {
             document.getElementById('finished-table-data').innerHTML +=
                 "<tr>" +
                 "<td>" + (parseInt(d) + 1) + "</td>" +
-                "<td>" + tableData[d].contractNumber + "</td>" +
-                "<td>" + tableData[d].secondParty + "</td>" +
-                "<td>" + tableData[d].stageSum + "</td>" +
+                "<td>" + finishedTableData[d].contractNumber + "</td>" +
+                "<td>" + finishedTableData[d].secondParty + "</td>" +
+                "<td>" + finishedTableData[d].stageSum + "</td>" +
                 "<td>" + lastDay.time + "</td>" +
                 "</tr>"
         }
