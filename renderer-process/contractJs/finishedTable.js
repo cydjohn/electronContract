@@ -14,19 +14,19 @@ let finishedTableData = []
 ipcRenderer.send('request-all-data')
 
 ipcRenderer.on('get-all-data', (event, arg) => {
-    finishedAllData = arg;
+  finishedAllData = arg;
 
-    //temp
-    finishedTableData = finishedAllData;
-    // console.log(finishedTableData);
-    loadData();
+  //temp
+  finishedTableData = finishedAllData;
+  // console.log(finishedTableData);
+  loadData();
 })
 
 
 // 搜索合同号
 const contraIdSearchBox = document.getElementById("finished-contract-id")
 
-function checkContractNumber(bn,arr) {
+function checkContractNumber(bn, arr) {
   if (contraIdSearchBox.value == "") {
     return false
   }
@@ -44,20 +44,21 @@ contraIdSearchBox.addEventListener("input", () => {
 
 
 function loadData() {
-    document.getElementById('finished-table-data').innerHTML = ""
-    var d = 0
-    for (d in finishedTableData) {
-        let lastDay = finishedTableData[d].stages.pop();
-        if (moment(new Date()).isAfter(moment(lastDay))) {
-            document.getElementById('finished-table-data').innerHTML +=
-                "<tr>" +
-                "<td>" + (parseInt(d) + 1) + "</td>" +
-                "<td>" + finishedTableData[d].contractNumber + "</td>" +
-                "<td>" + finishedTableData[d].secondParty + "</td>" +
-                "<td>" + finishedTableData[d].stageSum + "</td>" +
-                "<td>" + lastDay.time + "</td>" +
-                "</tr>"
-        }
+  document.getElementById('finished-table-data').innerHTML = ""
+  var d = 0
+  for (d in finishedTableData) {
+    let s = finishedTableData[d].stages;
+    let lastDay = s[s.length - 1];
+    if (moment(new Date()).isAfter(moment(lastDay))) {
+      document.getElementById('finished-table-data').innerHTML +=
+        "<tr>" +
+        "<td>" + (parseInt(d) + 1) + "</td>" +
+        "<td>" + finishedTableData[d].contractNumber + "</td>" +
+        "<td>" + finishedTableData[d].secondParty + "</td>" +
+        "<td>" + finishedTableData[d].stageSum + "</td>" +
+        "<td>" + lastDay.time + "</td>" +
+        "</tr>"
     }
+  }
 }
 
