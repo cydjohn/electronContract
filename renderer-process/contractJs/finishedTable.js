@@ -48,8 +48,10 @@ function loadData() {
   var d = 0
   for (d in finishedTableData) {
     let s = finishedTableData[d].stages;
+    s.sort();
     let lastDay = s[s.length - 1];
-    if (moment(new Date()).isAfter(moment(lastDay))) {
+    console.log(s);
+    if (moment(new Date()).isBefore(moment(lastDay))) {
       document.getElementById('finished-table-data').innerHTML +=
         "<tr>" +
         "<td>" + (parseInt(d) + 1) + "</td>" +

@@ -36,7 +36,6 @@ function processingCheckContractNumber(bn) {
 
 processingContraIdSearchBox.addEventListener("input", () => {
   processingTableData = processingAllData.filter(processingCheckContractNumber);
-  console.log(processingTableData);
   processingTableLoadData()
 })
 
@@ -51,10 +50,7 @@ function processingTableLoadData() {
         var counter = 0;
         var payedMoney = 0;
         var unpayedMoney = 0;
-        console.log("processingTableData");
         for (s in processingTableData[d].stages) {
-            console.log("processingTableData stages");
-            console.log(processingTableData[d].stages[s].time);
             if (moment(new Date()).isBefore(moment(processingTableData[d].stages[s].time))) {
                 counter += 1;
                 unpayedMoney += parseFloat(processingTableData[d].stages[s].amount);
@@ -63,10 +59,8 @@ function processingTableLoadData() {
                 payedMoney += parseFloat(processingTableData[d].stages[s].amount);
             }
         }
-        console.log('counter:' + counter);
 
         if (counter>0) {
-            console.log("processingTableData stages table");
             document.getElementById('processing-table-data').innerHTML +=
                 "<tr>" +
                 "<td>" + (parseInt(d) + 1) + "</td>" +
