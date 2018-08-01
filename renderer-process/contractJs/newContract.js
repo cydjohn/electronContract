@@ -14,11 +14,13 @@ const amountSum = document.getElementById("new-amount-sum");
 
 
 const addNewStageButton = document.getElementById("add-stages");
+const deleteLastStageButton = document.getElementById("delete-stage");
 var stages = [];
 const alertLabel = document.getElementById('alertLabel')
 alertLabel.hidden = true
 
 const addNewContractButton = document.getElementById("add-new");
+
 
 clearFrom();
 // 添加新合同
@@ -77,7 +79,7 @@ addNewContractButton.addEventListener('click', () => {
             ipcRenderer.send('getMsg', contract);
             openPrintPreview(contract);
             clearFrom();
-            
+
         }
     }
 })
@@ -90,37 +92,53 @@ function addNewStage() {
     addStages();
     // 查看上一期有没有填写数据
     if (stages.length == 0 || (stages[stages.length - 1].time != "" && stages[stages.length - 1].amount != "")) {
-        document.getElementById('new-stages').innerHTML = "";
-        var i = 0;
-        // console.log(stages);
+
         stages.push({ "time": "", "amount": "", "stageId": 0 });
-        for (i in stages) {
-            document.getElementById('new-stages').innerHTML +=
-                '<div class="row col-lg-12 col-md-12 m-1">' +
-                '<div class="input-group col-lg-2 col-md-2">' +
-                '<div class="input-group-prepend">' +
-                '<span class="input-group-text"> 期数：</span>' +
-                '</div >' +
-                '<input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" value = ' + (parseInt(i) + 1) + ' disabled="disabled" id="stages-input-' + i + '">' +
-                '</div>' +
 
-                '<div class="input-group col-lg-5 col-md-5">' +
-                '<div class="input-group-prepend">' +
-                '<span class="input-group-text">付款时间：</span>' +
-                '</div>' +
-                '<input type="date" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" value = "' + stages[i].time + '" id="time-input-' + i + '">' +
-                '</div>' +
-
-
-                '<div class="input-group col-lg-4 col-md-4">' +
-                '<div class="input-group-prepend">' +
-                '<span class="input-group-text">付款金额：</span>' +
-                '</div>' +
-                '<input type="float" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" value = "' + stages[i].amount + '" id="amount-input-' + i + '">' +
-                '</div>' +
-                '</div> ';
-        }
+        loadStages();
     }
+}
+
+// 删除一个stage
+deleteLastStageButton.addEventListener('click', () => {
+    deleteLastStage();
+})
+function deleteLastStage() {
+    stages.pop();
+    loadStages();
+
+}
+
+function loadStages() {
+    var i = 0;
+    document.getElementById('new-stages').innerHTML = "";
+    for (i in stages) {
+        document.getElementById('new-stages').innerHTML +=
+            '<div class="row col-lg-12 col-md-12 m-1">' +
+            '<div class="input-group col-lg-2 col-md-2">' +
+            '<div class="input-group-prepend">' +
+            '<span class="input-group-text"> 期数：</span>' +
+            '</div >' +
+            '<input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" value = ' + (parseInt(i) + 1) + ' disabled="disabled" id="stages-input-' + i + '">' +
+            '</div>' +
+
+            '<div class="input-group col-lg-5 col-md-5">' +
+            '<div class="input-group-prepend">' +
+            '<span class="input-group-text">付款时间：</span>' +
+            '</div>' +
+            '<input type="date" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" value = "' + stages[i].time + '" id="time-input-' + i + '">' +
+            '</div>' +
+
+
+            '<div class="input-group col-lg-4 col-md-4">' +
+            '<div class="input-group-prepend">' +
+            '<span class="input-group-text">付款金额：</span>' +
+            '</div>' +
+            '<input type="float" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" value = "' + stages[i].amount + '" id="amount-input-' + i + '">' +
+            '</div>' +
+            '</div> ';
+    }
+
 }
 
 function addStages() {
@@ -138,6 +156,7 @@ function addStages() {
     }
     amountSum.value = sum
 }
+
 
 function clearFrom() {
     contractNumber.value = "";
@@ -161,6 +180,6 @@ function openPrintPreview(contract) {
     let win = new BrowserWindow({ width: 800, height: 1000 })
     win.on('close', () => { win = null })
     win.loadURL(modalPath)
-    win.webContents.openDevTools();
+    // win.webContents.openDevTools();
     win.show()
 }
