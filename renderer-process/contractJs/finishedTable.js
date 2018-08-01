@@ -50,7 +50,6 @@ function loadData() {
     let s = finishedTableData[d].stages;
     s.sort();
     let lastDay = s[s.length - 1];
-    console.log(s);
     if (moment(new Date()).isBefore(moment(lastDay))) {
       document.getElementById('finished-table-data').innerHTML +=
         "<tr>" +
