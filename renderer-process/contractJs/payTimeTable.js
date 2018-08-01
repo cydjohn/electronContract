@@ -67,7 +67,7 @@ function loadData() {
       document.getElementById('pay-time-table-data').innerHTML +=
         "<tr>" +
         "<td>" + counter++ + "</td>" +
-        "<td>'" + tableData[d].contractNumber + "</td>" +
+        "<td>" + tableData[d].contractNumber + "</td>" +
         "<td>" + tableData[d].secondParty + "</td>" +
         "<td>" + tableData[d].stages[s].amount + "</td>" +
         "<td>" + tableData[d].stages[s].time + "</td>" +

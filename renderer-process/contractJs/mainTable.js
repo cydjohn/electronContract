@@ -141,7 +141,7 @@ function loadData() {
     document.getElementById('main-table-data').innerHTML +=
       "<tr>" +
       "<td>" + (parseInt(d) + 1) + "</td>" +
-      "<td>'" + tableData[d].contractNumber + "</td>" +
+      "<td>" + tableData[d].contractNumber + "</td>" +
       "<td>" + tableData[d].firstParty + "</td>" +
       "<td>" + tableData[d].secondParty + "</td>" +
       "<td>" + tableData[d].startTime + "</td>" +
