@@ -45,7 +45,8 @@ contraIdSearchBox.addEventListener("input", () => {
 
 function loadData() {
   document.getElementById('finished-table-data').innerHTML = ""
-  var d = 0
+  var d = 0;
+  var counter = 1;
   for (d in finishedTableData) {
     var s = 0;
     var isFinished = false;
@@ -63,9 +64,10 @@ function loadData() {
     }
     
     if (isFinished) {
+
       document.getElementById('finished-table-data').innerHTML +=
         "<tr>" +
-        "<td>" + (parseInt(d) + 1) + "</td>" +
+        "<td>" + counter++ + "</td>" +
         "<td>" + finishedTableData[d].contractNumber + "</td>" +
         "<td>" + finishedTableData[d].secondParty + "</td>" +
         "<td>" + finishedTableData[d].stageSum + "</td>" +
@@ -75,3 +77,15 @@ function loadData() {
   }
 }
 
+
+// 打印预览
+const printPreview = document.getElementById('finished-table-print-preview')
+printPreview.addEventListener('click', (event) => {
+  ipcRenderer.send('pass-print-value', [finishedTableData, ""])
+  const modalPath = path.join('file://', __dirname, '../../sections/contractWindows/finishedTablePrintPreview.html')
+  let win = new BrowserWindow({ width: 800, height: 1000 })
+  win.on('close', () => { win = null })
+  win.loadURL(modalPath)
+  // win.webContents.openDevTools();
+  win.show()
+})
