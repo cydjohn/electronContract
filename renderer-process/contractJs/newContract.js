@@ -63,7 +63,7 @@ addNewContractButton.addEventListener('click', () => {
             alertLabel.hidden = false;
             alertLabel.innerHTML = "总金额不一致，请检查输入";
         }
-        else {
+        else if (stages[stages.length -1].stageId == -1) {
             alertLabel.hidden = true;
             var contract = {};
             contract.contractNumber = contractNumber.value;
@@ -79,6 +79,10 @@ addNewContractButton.addEventListener('click', () => {
             ipcRenderer.send('getMsg', contract);
             openPrintPreview(contract);
             clearFrom();
+        }
+        else {
+            alertLabel.hidden = false;
+            alertLabel.innerHTML = "请检查付款时间输入";
 
         }
     }
@@ -92,9 +96,7 @@ function addNewStage() {
     addStages();
     // 查看上一期有没有填写数据
     if (stages.length == 0 || (stages[stages.length - 1].time != "" && stages[stages.length - 1].amount != "")) {
-
-        stages.push({ "time": "", "amount": "", "stageId": 0 });
-
+        stages.push({ "time": "", "amount": "", "stageId": -1 });
         loadStages();
     }
 }
