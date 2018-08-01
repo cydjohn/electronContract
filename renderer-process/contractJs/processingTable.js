@@ -74,3 +74,14 @@ function processingTableLoadData() {
     }
 }
 
+// 打印预览
+const printPreview = document.getElementById('processing-table-print-preview')
+printPreview.addEventListener('click', (event) => {
+  ipcRenderer.send('pass-print-value', [processingTableData, ""])
+  const modalPath = path.join('file://', __dirname, '../../sections/contractWindows/processingTablePrintPreview.html')
+  let win = new BrowserWindow({ width: 800, height: 1000 })
+  win.on('close', () => { win = null })
+  win.loadURL(modalPath)
+  // win.webContents.openDevTools();
+  win.show()
+})
