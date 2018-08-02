@@ -45,7 +45,6 @@ function convertTableData(allData) {
       tableData.push({ "contractNumber": allData[a].contractNumber, "secondParty": allData[a].secondParty, "stageSum": allData[a].stageSum, "time": lastDay})
     }
   }
-  console.log(tableData);
   return tableData;
 }
 
@@ -87,7 +86,30 @@ function loadData() {
 }
 
 // 按照乙方排序
-const sortBySecondPartyButton = document.getElementById("")
+const sortBySecondPartyButton = document.getElementById("finished-table-sort-by-second-party");
+
+sortBySecondPartyButton.addEventListener('click', (event) => {
+   finishedTableData = finishedTableData.sort(compare("secondParty"));
+   loadData();
+})
+var flag = false;
+function compare(property){
+  return function(obj1,obj2){
+      var value1 = obj1[property];
+      var value2 = obj2[property];
+      if(flag) {
+        flag = false;
+        return value1.localeCompare(value2)
+        // return moment(value1).isAfter(moment(value2));
+      }
+      else {
+        flag = true;
+        return value2.localeCompare(value1)
+        // return moment(value1).isBefore(moment(value2));
+      }
+      
+  }
+}
 
 
 // 打印预览
