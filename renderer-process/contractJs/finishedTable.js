@@ -17,12 +17,12 @@ ipcRenderer.on('get-all-data', (event, arg) => {
   finishedAllData = arg;
 
   //temp
-  finishedTableData = convertTableData(finishedAllData);
+  finishedTableData = convertFinishedTableData(finishedAllData);
   // console.log(finishedTableData);
   loadData();
 })
 
-function convertTableData(allData) {
+function convertFinishedTableData(allData) {
   var tableData = [];
   var a = 0;
   for (a in allData) {
@@ -63,7 +63,7 @@ function checkContractNumber(bn, arr) {
 }
 
 contraIdSearchBox.addEventListener("input", () => {
-  finishedTableData = convertTableData(finishedAllData.filter(checkContractNumber));
+  finishedTableData = convertFinishedTableData(finishedAllData.filter(checkContractNumber));
   loadData()
 })
 
