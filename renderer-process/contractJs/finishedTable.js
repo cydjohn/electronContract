@@ -17,10 +17,37 @@ ipcRenderer.on('get-all-data', (event, arg) => {
   finishedAllData = arg;
 
   //temp
-  finishedTableData = finishedAllData;
+  finishedTableData = convertTableData(finishedAllData);
   // console.log(finishedTableData);
   loadData();
 })
+
+function convertTableData(allData) {
+  var tableData = [];
+  var a = 0;
+  for (a in allData) {
+    var s = 0;
+    for (s in allData[a].stages) {
+      var isFinished = false;
+      var lastDay = allData[a].stages[s].time;
+      if (moment(new Date()).isBefore(moment(allData[a].stages[s].time))) {
+        isFinished = false;
+        break;
+      }
+      else {
+        isFinished = true;
+      }
+      if (moment(lastDay).isBefore(moment(allData[a].stages[s].time))) {
+        lastDay = allData[a].stages[s].time;
+      }
+    }
+    if (isFinished) {
+      tableData.push({ "contractNumber": allData[a].contractNumber, "secondParty": allData[a].secondParty, "stageSum": allData[a].stageSum, "time": lastDay})
+    }
+  }
+  console.log(tableData);
+  return tableData;
+}
 
 
 // 搜索合同号
@@ -37,7 +64,7 @@ function checkContractNumber(bn, arr) {
 }
 
 contraIdSearchBox.addEventListener("input", () => {
-  finishedTableData = finishedAllData.filter(checkContractNumber);
+  finishedTableData = convertTableData(finishedAllData.filter(checkContractNumber));
   loadData()
 })
 
@@ -48,34 +75,19 @@ function loadData() {
   var d = 0;
   var counter = 1;
   for (d in finishedTableData) {
-    var s = 0;
-    var isFinished = false;
-    var lastDay = finishedTableData[d].stages[0].time;
-    for(s in finishedTableData[d].stages) {
-      if (moment(new Date()).isBefore(moment(finishedTableData[d].stages[s].time))) {
-        isFinished = false;
-      }
-      else {
-        isFinished = true;
-      }
-      if (moment(lastDay).isBefore(moment(finishedTableData[d].stages[s].time))) {
-        lastDay = finishedTableData[d].stages[s].time;
-      }
-    }
-    
-    if (isFinished) {
-
-      document.getElementById('finished-table-data').innerHTML +=
-        "<tr>" +
-        "<td>" + counter++ + "</td>" +
-        "<td>" + finishedTableData[d].contractNumber + "</td>" +
-        "<td>" + finishedTableData[d].secondParty + "</td>" +
-        "<td>" + finishedTableData[d].stageSum + "</td>" +
-        "<td>" + lastDay + "</td>" +
-        "</tr>"
-    }
+    document.getElementById('finished-table-data').innerHTML +=
+      "<tr>" +
+      "<td>" + counter++ + "</td>" +
+      "<td>" + finishedTableData[d].contractNumber + "</td>" +
+      "<td>" + finishedTableData[d].secondParty + "</td>" +
+      "<td>" + finishedTableData[d].stageSum + "</td>" +
+      "<td>" + finishedTableData[d].time + "</td>" +
+      "</tr>"
   }
 }
+
+// 按照乙方排序
+const sortBySecondPartyButton = document.getElementById("")
 
 
 // 打印预览
