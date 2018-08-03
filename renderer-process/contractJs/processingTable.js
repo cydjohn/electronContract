@@ -42,29 +42,20 @@ processingContraIdSearchBox.addEventListener("input", () => {
 // 按照乙方排序
 const sortBySecondPartyButton = document.getElementById("processing-table-sort-by-second-party");
 
+
 sortBySecondPartyButton.addEventListener('click', (event) => {
     processingTableData = processingTableData.sort(compare("secondParty"));
-    console.log(processingTableData);
     processingTableLoadData();
 })
 
-var flag = false;
-function compare(property){
-  return function(obj1,obj2){
-      var value1 = obj1[property];
-      var value2 = obj2[property];
-      if(flag) {
-        flag = false;
+
+function compare(property) {
+    return function (obj1, obj2) {
+        var value1 = obj1[property];
+        var value2 = obj2[property];
         return value1.localeCompare(value2)
         // return moment(value1).isAfter(moment(value2));
-      }
-      else {
-        flag = true;
-        return value2.localeCompare(value1)
-        // return moment(value1).isBefore(moment(value2));
-      }
-
-  }
+    }
 }
 
 function convertProcessingTableData(allData) {

@@ -17,7 +17,7 @@ ipcRenderer.on('get-all-data', (event, arg) => {
   allData = arg;
 
   //temp
-  tableData = allData;
+  tableData = payTimeTableConvert(allData);
   // console.log(tableData);
   loadData();
 })
@@ -37,7 +37,7 @@ function checkContractNumber(bn, arr) {
 }
 
 contraIdSearchBox.addEventListener("input", () => {
-  tableData = allData.filter(checkContractNumber);
+  tableData = payTimeTableConvert(allData.filter(checkContractNumber));
   loadData()
 })
 
@@ -55,24 +55,42 @@ startDate.addEventListener("input", (event, arg) => {
   loadData()
 })
 
+//根据时间排序
+const sortTimeButton = document.getElementById("paytime-table-sort-by-time");
+sortTimeButton.addEventListener('click', (event) => {
+  tableData = tableData.sort(compareSecondParty("time"));
+  loadData();
+})
 
+
+//根据乙方排序
+const sortSecondParty = document.getElementById("paytime-table-sort-by-second-party");
+sortSecondParty.addEventListener('click', (event) => {
+  tableData.sort(compareSecondParty("secondParty"));
+  loadData();
+})
+
+function compareSecondParty(property) {
+  return function (obj1, obj2) {
+    var value1 = obj1[property];
+    var value2 = obj2[property];
+    return value1.localeCompare(value2)
+  }
+}
 
 function loadData() {
   document.getElementById('pay-time-table-data').innerHTML = ""
   var d = 0
   var counter = 1;
   for (d in tableData) {
-    var s = 0;
-    for (s in tableData[d].stages) {
-      document.getElementById('pay-time-table-data').innerHTML +=
-        "<tr>" +
-        "<td>" + counter++ + "</td>" +
-        "<td>" + tableData[d].contractNumber + "</td>" +
-        "<td>" + tableData[d].secondParty + "</td>" +
-        "<td>" + tableData[d].stages[s].amount + "</td>" +
-        "<td>" + tableData[d].stages[s].time + "</td>" +
-        "</tr>"
-    }
+    document.getElementById('pay-time-table-data').innerHTML +=
+      "<tr>" +
+      "<td>" + counter++ + "</td>" +
+      "<td>" + tableData[d].contractNumber + "</td>" +
+      "<td>" + tableData[d].secondParty + "</td>" +
+      "<td>" + tableData[d].amount + "</td>" +
+      "<td>" + tableData[d].time + "</td>" +
+      "</tr>"
   }
   calculateSum()
 }
@@ -81,10 +99,7 @@ function calculateSum() {
   var amountSum = 0;
   var d = 0;
   for (d in tableData) {
-    var s = 0;
-    for (s in tableData[d].stages) {
-      amountSum += parseFloat(tableData[d].stages[s].amount);
-    }
+    amountSum += parseFloat(tableData[d].amount);
   }
   document.getElementById("pay-time-table-sum").innerHTML = amountSum.toFixed(2);
 }
@@ -101,3 +116,17 @@ printPreview.addEventListener('click', (event) => {
   // win.webContents.openDevTools();
   win.show()
 })
+
+
+
+function payTimeTableConvert(allData) {
+  var tableData = [];
+  var d = 0
+  for (d in allData) {
+    var s = 0;
+    for (s in allData[d].stages) {
+      tableData.push({ "contractNumber": allData[d].contractNumber, "secondParty": allData[d].secondParty, "amount": allData[d].stages[s].amount, "time": allData[d].stages[s].time })
+    }
+  }
+  return tableData;
+}
