@@ -15,37 +15,31 @@ ipcRenderer.on('print-data', (event, data) => {
 })
 
 function loadData() {
-    console.log(tableData);
     document.getElementById('pay-time-table-data').innerHTML = ""
     var d = 0
     var counter = 1;
     for (d in tableData) {
-        var s = 0;
-        for (s in tableData[d].stages) {
-            document.getElementById('pay-time-table-data').innerHTML +=
-                "<tr>" +
-                "<td>" + counter++ + "</td>" +
-                "<td>'" + tableData[d].contractNumber + "</td>" +
-                "<td>" + tableData[d].secondParty + "</td>" +
-                "<td>" + tableData[d].stages[s].amount + "</td>" +
-                "<td>" + tableData[d].stages[s].time + "</td>" +
-                "</tr>"
-        }
+      document.getElementById('pay-time-table-data').innerHTML +=
+        "<tr>" +
+        "<td>" + counter++ + "</td>" +
+        "<td>" + tableData[d].contractNumber + "</td>" +
+        "<td>" + tableData[d].secondParty + "</td>" +
+        "<td>" + tableData[d].amount + "</td>" +
+        "<td>" + tableData[d].time + "</td>" +
+        "</tr>"
     }
     calculateSum()
-}
-
-function calculateSum() {
+  }
+  
+  function calculateSum() {
     var amountSum = 0;
     var d = 0;
     for (d in tableData) {
-        var s = 0;
-        for (s in tableData[d].stages) {
-            amountSum += parseFloat(tableData[d].stages[s].amount);
-        }
+      amountSum += parseFloat(tableData[d].amount);
     }
     document.getElementById("pay-time-table-sum").innerHTML = amountSum.toFixed(2);
-}
+  }
+  
 
 
 const printPDFBtn = document.getElementById('print-pdf')
