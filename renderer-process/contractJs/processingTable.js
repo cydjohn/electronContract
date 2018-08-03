@@ -40,30 +40,32 @@ processingContraIdSearchBox.addEventListener("input", () => {
 })
 
 // 按照乙方排序
-const sortBySecondPartyButton = document.getElementById("finished-table-sort-by-second-party");
+const sortBySecondPartyButton = document.getElementById("processing-table-sort-by-second-party");
 
 sortBySecondPartyButton.addEventListener('click', (event) => {
     processingTableData = processingTableData.sort(compare("secondParty"));
-    loadData();
+    console.log(processingTableData);
+    processingTableLoadData();
 })
-// var flag = false;
-// function compare(property){
-//   return function(obj1,obj2){
-//       var value1 = obj1[property];
-//       var value2 = obj2[property];
-//       if(flag) {
-//         flag = false;
-//         return value1.localeCompare(value2)
-//         // return moment(value1).isAfter(moment(value2));
-//       }
-//       else {
-//         flag = true;
-//         return value2.localeCompare(value1)
-//         // return moment(value1).isBefore(moment(value2));
-//       }
 
-//   }
-// }
+var flag = false;
+function compare(property){
+  return function(obj1,obj2){
+      var value1 = obj1[property];
+      var value2 = obj2[property];
+      if(flag) {
+        flag = false;
+        return value1.localeCompare(value2)
+        // return moment(value1).isAfter(moment(value2));
+      }
+      else {
+        flag = true;
+        return value2.localeCompare(value1)
+        // return moment(value1).isBefore(moment(value2));
+      }
+
+  }
+}
 
 function convertProcessingTableData(allData) {
     var tableData = [];
@@ -74,14 +76,12 @@ function convertProcessingTableData(allData) {
         var payedMoney = 0;
         var unpayedMoney = 0;
         for (s in allData[a].stages) {
-            var isFinished = false;
-            var lastDay = allData[a].stages[s].time;
             if (moment(new Date()).isBefore(moment(allData[a].stages[s].time))) {
                 counter += 1;
-                unpayedMoney += parseFloat(allData[d].stages[s].amount);
+                unpayedMoney += parseFloat(allData[a].stages[s].amount);
             }
             else {
-                payedMoney += parseFloat(allData[d].stages[s].amount);
+                payedMoney += parseFloat(allData[a].stages[s].amount);
             }
 
         }

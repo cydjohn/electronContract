@@ -99,11 +99,13 @@ function compare(property){
       var value2 = obj2[property];
       if(flag) {
         flag = false;
+        console.log("false");
         return value1.localeCompare(value2)
         // return moment(value1).isAfter(moment(value2));
       }
       else {
         flag = true;
+        console.log("true");
         return value2.localeCompare(value1)
         // return moment(value1).isBefore(moment(value2));
       }

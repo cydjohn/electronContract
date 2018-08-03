@@ -13,39 +13,22 @@ ipcRenderer.on('print-data', (event, data) => {
     loadData()
 })
 
+
 function loadData() {
-    document.getElementById('finished-table-data').innerHTML = ""
-    var d = 0;
-    var counter = 1;
-    for (d in finishedTableData) {
-      var s = 0;
-      var isFinished = false;
-      var lastDay = finishedTableData[d].stages[0].time;
-      for(s in finishedTableData[d].stages) {
-        if (moment(new Date()).isBefore(moment(finishedTableData[d].stages[s].time))) {
-          isFinished = false;
-        }
-        else {
-          isFinished = true;
-        }
-        if (moment(lastDay).isBefore(moment(finishedTableData[d].stages[s].time))) {
-          lastDay = finishedTableData[d].stages[s].time;
-        }
-      }
-      
-      if (isFinished) {
-  
-        document.getElementById('finished-table-data').innerHTML +=
-          "<tr>" +
-          "<td>" + counter++ + "</td>" +
-          "<td>" + finishedTableData[d].contractNumber + "</td>" +
-          "<td>" + finishedTableData[d].secondParty + "</td>" +
-          "<td>" + finishedTableData[d].stageSum + "</td>" +
-          "<td>" + lastDay + "</td>" +
-          "</tr>"
-      }
-    }
+  document.getElementById('finished-table-data').innerHTML = ""
+  var d = 0;
+  var counter = 1;
+  for (d in finishedTableData) {
+    document.getElementById('finished-table-data').innerHTML +=
+      "<tr>" +
+      "<td>" + counter++ + "</td>" +
+      "<td>" + finishedTableData[d].contractNumber + "</td>" +
+      "<td>" + finishedTableData[d].secondParty + "</td>" +
+      "<td>" + finishedTableData[d].stageSum + "</td>" +
+      "<td>" + finishedTableData[d].time + "</td>" +
+      "</tr>"
   }
+}
   
 
 

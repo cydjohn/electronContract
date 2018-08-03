@@ -17,34 +17,20 @@ function processingTableLoadData() {
     document.getElementById('processing-table-data').innerHTML = ""
     var d = 0
     for (d in processingTableData) {
-        var s = 0;
-        var counter = 0;
-        var payedMoney = 0;
-        var unpayedMoney = 0;
-        for (s in processingTableData[d].stages) {
-            if (moment(new Date()).isBefore(moment(processingTableData[d].stages[s].time))) {
-                counter += 1;
-                unpayedMoney += parseFloat(processingTableData[d].stages[s].amount);
-            }
-            else {
-                payedMoney += parseFloat(processingTableData[d].stages[s].amount);
-            }
-        }
 
-        if (counter>0) {
-            document.getElementById('processing-table-data').innerHTML +=
-                "<tr>" +
-                "<td>" + (parseInt(d) + 1) + "</td>" +
-                "<td>" + processingTableData[d].contractNumber + "</td>" +
-                "<td>" + processingTableData[d].secondParty + "</td>" +
-                "<td>" + payedMoney.toFixed(2) + "</td>" +
-                "<td>" + unpayedMoney.toFixed(2) + "</td>" +
-                "<td>" + counter + "</td>" +
-                "</tr>"
-        }
+        document.getElementById('processing-table-data').innerHTML +=
+            "<tr>" +
+            "<td>" + (parseInt(d) + 1) + "</td>" +
+            "<td>" + processingTableData[d].contractNumber + "</td>" +
+            "<td>" + processingTableData[d].secondParty + "</td>" +
+            "<td>" + processingTableData[d].payedMoney.toFixed(2) + "</td>" +
+            "<td>" + processingTableData[d].unpayedMoney.toFixed(2) + "</td>" +
+            "<td>" + processingTableData[d].counter + "</td>" +
+            "</tr>"
+
     }
 }
-  
+
 
 
 
