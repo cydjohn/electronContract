@@ -73,12 +73,12 @@ const printPDFBtn = document.getElementById('print-pdf')
 
 printPDFBtn.addEventListener('click', (event) => {
     console.log('asdfafasdfadsf')
-    confirmSign.hidden = false
+
     printPDFBtn.hidden = true
     ipcRenderer.send('print-to-pdf')
 })
 
 ipcRenderer.on('wrote-pdf', (event, path) => {
-    confirmSign.hidden = true
+
     printPDFBtn.hidden = false
 })
