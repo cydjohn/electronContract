@@ -37,6 +37,7 @@ function checkContractNumber(bn, arr) {
 }
 
 contraIdSearchBox.addEventListener("input", () => {
+
   tableData = payTimeTableConvert(allData.filter(checkContractNumber));
   loadData()
 })
@@ -47,11 +48,12 @@ function checkStartDate(idn) {
   if (startDate.value == "") {
     return false
   }
-  return idn.startTime.search(startDate.value.slice(0, 7)) != -1
+  return idn.time.search(startDate.value.slice(0, 7)) != -1
 }
 
 startDate.addEventListener("input", (event, arg) => {
-  tableData = allData.filter(checkStartDate);
+  tableData = payTimeTableConvert(allData);
+  tableData = tableData.filter(checkStartDate);
   loadData()
 })
 
@@ -88,7 +90,7 @@ function loadData() {
       "<td>" + counter++ + "</td>" +
       "<td>" + tableData[d].contractNumber + "</td>" +
       "<td>" + tableData[d].secondParty + "</td>" +
-      "<td>" + toAccountingBookkeepingFormat(tableData[d].amount) + "</td>" +
+      "<td>" + ((tableData[d].amount)) + "</td>" +
       "<td>" + tableData[d].time + "</td>" +
       "</tr>"
   }
