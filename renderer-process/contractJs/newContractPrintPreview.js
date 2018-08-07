@@ -20,7 +20,7 @@ function loadData(contract) {
     const carType = document.getElementById("new-contract-car-type");
     const carQuantity = document.getElementById("new-contract-car-quantity");
     const stageSum = document.getElementById("new-contract-stage-sum");
-    const amountSum = document.getElementById("new-amount-sum");
+    // const amountSum = document.getElementById("new-contract-stage-sum");
     var stages = [];
 
     contractNumber.value = contract.contractNumber;
@@ -29,7 +29,8 @@ function loadData(contract) {
     startTime.value = contract.startTime;
     carType.value = contract.carType;
     carQuantity.value = contract.carQuantity;
-    amountSum.value = toAccountingBookkeepingFormat(contract.stageSum);
+    // stageSum.value = toAccountingBookkeepingFormat(contract.stageSum);
+    stageSum.value = contract.stageSum;
     loadStages(contract.stages);
 
 }
@@ -72,8 +73,6 @@ function loadStages(stages) {
 const printPDFBtn = document.getElementById('print-pdf')
 
 printPDFBtn.addEventListener('click', (event) => {
-    console.log('asdfafasdfadsf')
-
     printPDFBtn.hidden = true
     ipcRenderer.send('print-to-pdf')
 })
