@@ -29,7 +29,7 @@ function loadData(contract) {
     startTime.value = contract.startTime;
     carType.value = contract.carType;
     carQuantity.value = contract.carQuantity;
-    stageSum.value = contract.stageSum;
+    amountSum.value = toAccountingBookkeepingFormat(contract.stageSum);
     loadStages(contract.stages);
 
 }
@@ -57,7 +57,7 @@ function loadStages(stages) {
             '<div class="input-group-prepend">' +
             '<span class="input-group-text">付款金额：</span>' +
             '</div>' +
-            '<input type="float" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" value = "' + stages[i].amount + '" id="amount-input-' + i + '">' +
+            '<input type="float" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" value = "' + toAccountingBookkeepingFormat(stages[i].amount) + '" id="amount-input-' + i + '">' +
             '</div>' +
             '</div> ';
     }
@@ -82,3 +82,34 @@ ipcRenderer.on('wrote-pdf', (event, path) => {
 
     printPDFBtn.hidden = false
 })
+
+
+function toAccountingBookkeepingFormat(str) {
+    var newStr = "";
+    var count = 0;
+  
+    if (str.indexOf(".") == -1) {
+      for (var i = str.length - 1; i >= 0; i--) {
+        if (count % 3 == 0 && count != 0) {
+          newStr = str.charAt(i) + "," + newStr;
+        } else {
+          newStr = str.charAt(i) + newStr;
+        }
+        count++;
+      }
+      str = newStr + ".00"; //自动补小数点后两位
+      return str;
+    }
+    else {
+      for (var i = str.indexOf(".") - 1; i >= 0; i--) {
+        if (count % 3 == 0 && count != 0) {
+          newStr = str.charAt(i) + "," + newStr; //碰到3的倍数则加上“,”号
+        } else {
+          newStr = str.charAt(i) + newStr; //逐个字符相接起来
+        }
+        count++;
+      }
+      str = newStr + (str + "00").substr((str + "00").indexOf("."), 3);
+      return str;
+    }
+  }

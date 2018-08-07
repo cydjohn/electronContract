@@ -2,6 +2,7 @@ const { BrowserWindow, dialog } = require('electron').remote
 const path = require('path')
 const { ipcRenderer } = require('electron')
 var moment = require('moment');
+
 // const newWindowBtn = document.getElementById('new')
 
 const XLSX = require('xlsx')
@@ -15,7 +16,7 @@ let tableData = []
 // 搜索合同号
 const contraIdSearchBox = document.getElementById("main-contract-id")
 
-function checkContractNumber(bn,arr) {
+function checkContractNumber(bn, arr) {
   if (contraIdSearchBox.value == "") {
     return false
   }
@@ -147,7 +148,7 @@ function loadData() {
       "<td>" + tableData[d].startTime + "</td>" +
       "<td>" + tableData[d].carType + "</td>" +
       "<td>" + tableData[d].carQuantity + "</td>" +
-      "<td>" + tableData[d].stageSum + "</td>" +
+      "<td>" + toAccountingBookkeepingFormat(tableData[d].stageSum) + "</td>" +
       "</tr>"
   }
   calculateSum()
@@ -160,5 +161,36 @@ function calculateSum() {
     quantitySum += parseInt(tableData[d].carQuantity);
     staSum += parseFloat(tableData[d].stageSum);
   }
-  document.getElementById("main-table-sum").innerHTML = staSum.toFixed(2);
+  document.getElementById("main-table-sum").innerHTML = toAccountingBookkeepingFormat(staSum.toFixed(2));
+}
+
+
+function toAccountingBookkeepingFormat(str) {
+  var newStr = "";
+  var count = 0;
+
+  if (str.indexOf(".") == -1) {
+    for (var i = str.length - 1; i >= 0; i--) {
+      if (count % 3 == 0 && count != 0) {
+        newStr = str.charAt(i) + "," + newStr;
+      } else {
+        newStr = str.charAt(i) + newStr;
+      }
+      count++;
+    }
+    str = newStr + ".00"; //自动补小数点后两位
+    return str;
+  }
+  else {
+    for (var i = str.indexOf(".") - 1; i >= 0; i--) {
+      if (count % 3 == 0 && count != 0) {
+        newStr = str.charAt(i) + "," + newStr; //碰到3的倍数则加上“,”号
+      } else {
+        newStr = str.charAt(i) + newStr; //逐个字符相接起来
+      }
+      count++;
+    }
+    str = newStr + (str + "00").substr((str + "00").indexOf("."), 3);
+    return str;
+  }
 }

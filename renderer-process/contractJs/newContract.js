@@ -59,11 +59,11 @@ addNewContractButton.addEventListener('click', () => {
     }
     else {
         addNewStage();
-        if (stageSum.value != amountSum.value) {
+        if (parseFloat(stageSum.value) != parseFloat(amountSum.value)) {
             alertLabel.hidden = false;
             alertLabel.innerHTML = "总金额不一致，请检查输入";
         }
-        else if (stages[stages.length -1].stageId == -1) {
+        else if (stages[stages.length - 1].stageId == -1) {
             alertLabel.hidden = true;
             var contract = {};
             contract.contractNumber = contractNumber.value;
@@ -182,6 +182,7 @@ function openPrintPreview(contract) {
     let win = new BrowserWindow({ width: 800, height: 1000 })
     win.on('close', () => { win = null })
     win.loadURL(modalPath)
-    // win.webContents.openDevTools();
+    win.webContents.openDevTools();
     win.show()
 }
+
