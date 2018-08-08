@@ -69,7 +69,7 @@
     }
   },
   "build": {
-    "appId": "com.cyd.orz",
+    "appId": "com.cyd.contract",
     "dmg": {
       "contents": [
         {
