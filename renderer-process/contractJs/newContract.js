@@ -88,6 +88,13 @@ addNewContractButton.addEventListener('click', () => {
     }
 })
 
+stageSum.addEventListener('input', (event, arg) => {
+    var tempSum = getStageSumValue();
+    console.log(tempSum);
+    console.log(toAccountingBookkeepingFormat(tempSum));
+    stageSum.value = toAccountingBookkeepingFormat(tempSum);
+})
+
 //添加一个stage
 addNewStageButton.addEventListener('click', () => {
     addNewStage();
@@ -182,7 +189,42 @@ function openPrintPreview(contract) {
     let win = new BrowserWindow({ width: 800, height: 1000 })
     win.on('close', () => { win = null })
     win.loadURL(modalPath)
-    win.webContents.openDevTools();
+    // win.webContents.openDevTools();
     win.show()
 }
 
+function getStageSumValue() {
+    var items = stageSum.value.split(",");
+    return items.join("");
+}
+
+function toAccountingBookkeepingFormat(str) {
+    var newStr = "";
+    var count = 0;
+
+    if (str.indexOf(".") == -1) {
+        for (var i = str.length - 1; i >= 0; i--) {
+            if (count % 3 == 0 && count != 0) {
+                newStr = str.charAt(i) + "," + newStr;
+            } else {
+                newStr = str.charAt(i) + newStr;
+            }
+            count++;
+        }
+        str = newStr;// + ".00"; //自动补小数点后两位
+        return str;
+    }
+    else {
+        for (var i = str.indexOf(".") - 1; i >= 0; i--) {
+            if (count % 3 == 0 && count != 0) {
+                newStr = str.charAt(i) + "," + newStr; //碰到3的倍数则加上“,”号
+            } else {
+                newStr = str.charAt(i) + newStr; //逐个字符相接起来
+            }
+            count++;
+        }
+        // str = newStr + (str + "00").substr((str + "00").indexOf("."), 3);
+        str = newStr + (str + "").substr((str + "").indexOf("."), 3);
+        return str;
+    }
+}
