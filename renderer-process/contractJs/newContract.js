@@ -49,7 +49,7 @@ addNewContractButton.addEventListener('click', () => {
         alertLabel.hidden = false;
         alertLabel.innerHTML = "车辆数量不能为空";
     }
-    else if (stageSum.value.length == 0) {
+    else if (getNumberValue(stageSum.value).length == 0) {
         alertLabel.hidden = false;
         alertLabel.innerHTML = "合同总金额不能为空";
     }
@@ -59,7 +59,7 @@ addNewContractButton.addEventListener('click', () => {
     }
     else {
         addNewStage();
-        if (parseFloat(stageSum.value) != parseFloat(amountSum.value)) {
+        if (parseFloat(getNumberValue(stageSum.value)) != parseFloat(getNumberValue(amountSum.value))) {
             alertLabel.hidden = false;
             alertLabel.innerHTML = "总金额不一致，请检查输入";
         }
@@ -86,6 +86,11 @@ addNewContractButton.addEventListener('click', () => {
 
         }
     }
+})
+
+stageSum.addEventListener('input', (event, arg) => {
+    var tempSum = getNumberValue(stageSum.value);
+    stageSum.value = toAccountingBookkeepingFormat(tempSum);
 })
 
 //添加一个stage
@@ -156,7 +161,7 @@ function addStages() {
         // console.log(document.getElementById('time-input-' + i).value);
         // console.log(document.getElementById('amount-input-' + i).value);
     }
-    amountSum.value = sum
+    amountSum.value = toAccountingBookkeepingFormat(sum.toString());
 }
 
 
@@ -166,8 +171,8 @@ function clearFrom() {
     secondParty.value = "";
     startTime.value = "";
     carType.value = "";
-    carQuantity.value = 0;
-    stageSum.value = 0;
+    carQuantity.value = "";
+    stageSum.value = "";
     amountSum.value = 0;
     stages = [];
     document.getElementById('new-stages').innerHTML = "";
@@ -182,7 +187,42 @@ function openPrintPreview(contract) {
     let win = new BrowserWindow({ width: 800, height: 1000 })
     win.on('close', () => { win = null })
     win.loadURL(modalPath)
-    win.webContents.openDevTools();
+    // win.webContents.openDevTools();
     win.show()
 }
 
+function getNumberValue(s) {
+    var items = s.split(",");
+    return items.join("");
+}
+
+function toAccountingBookkeepingFormat(str) {
+    var newStr = "";
+    var count = 0;
+
+    if (str.indexOf(".") == -1) {
+        for (var i = str.length - 1; i >= 0; i--) {
+            if (count % 3 == 0 && count != 0) {
+                newStr = str.charAt(i) + "," + newStr;
+            } else {
+                newStr = str.charAt(i) + newStr;
+            }
+            count++;
+        }
+        str = newStr;// + ".00"; //自动补小数点后两位
+        return str;
+    }
+    else {
+        for (var i = str.indexOf(".") - 1; i >= 0; i--) {
+            if (count % 3 == 0 && count != 0) {
+                newStr = str.charAt(i) + "," + newStr; //碰到3的倍数则加上“,”号
+            } else {
+                newStr = str.charAt(i) + newStr; //逐个字符相接起来
+            }
+            count++;
+        }
+        // str = newStr + (str + "00").substr((str + "00").indexOf("."), 3);
+        str = newStr + (str + "").substr((str + "").indexOf("."), 3);
+        return str;
+    }
+}
