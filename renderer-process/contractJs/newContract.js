@@ -72,7 +72,7 @@ addNewContractButton.addEventListener('click', () => {
             contract.startTime = startTime.value;
             contract.carType = carType.value;
             contract.carQuantity = carQuantity.value;
-            contract.stageSum = stageSum.value;
+            contract.stageSum = getNumberValue(stageSum.value);
             stages.pop();
             contract.stages = stages;
             // console.log(contract.stages);

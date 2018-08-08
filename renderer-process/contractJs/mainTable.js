@@ -155,10 +155,10 @@ function loadData() {
 }
 
 function calculateSum() {
-  var quantitySum = 0;
+  // var quantitySum = 0;
   var staSum = 0;
   for (d in tableData) {
-    quantitySum += parseInt(tableData[d].carQuantity);
+    // quantitySum += parseInt(tableData[d].carQuantity);
     staSum += parseFloat(tableData[d].stageSum);
   }
   document.getElementById("main-table-sum").innerHTML = toAccountingBookkeepingFormat(staSum.toFixed(2));
