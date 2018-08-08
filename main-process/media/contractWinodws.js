@@ -52,3 +52,19 @@ ipcMain.on('pass-print-value', (event, arg) => {
 ipcMain.on('get-print-value', (event, arg) => {
     event.sender.send('print-data', [tableData,printDate])
 })
+
+
+ipcMain.on('request-delete-contract', (event, cid) => {
+    db.remove({ contractNumber: cid }, {}, function (err, numRemoved) {
+        // numRemoved = 1
+        event.sender.send('delete-info', numRemoved)
+        if (numRemoved == 1) {
+            var arr = BrowserWindow.getAllWindows();
+            for (var i = 0; i < arr.length; i++) {
+                const toWindow = arr[i];
+                toWindow.webContents.send('delete-contract-number', cid);
+            }
+        }
+    });
+})
+
