@@ -49,7 +49,7 @@ addNewContractButton.addEventListener('click', () => {
         alertLabel.hidden = false;
         alertLabel.innerHTML = "车辆数量不能为空";
     }
-    else if (stageSum.value.length == 0) {
+    else if (getNumberValue(stageSum.value).length == 0) {
         alertLabel.hidden = false;
         alertLabel.innerHTML = "合同总金额不能为空";
     }
@@ -59,7 +59,7 @@ addNewContractButton.addEventListener('click', () => {
     }
     else {
         addNewStage();
-        if (parseFloat(stageSum.value) != parseFloat(amountSum.value)) {
+        if (parseFloat(getNumberValue(stageSum.value)) != parseFloat(getNumberValue(amountSum.value))) {
             alertLabel.hidden = false;
             alertLabel.innerHTML = "总金额不一致，请检查输入";
         }
@@ -72,7 +72,7 @@ addNewContractButton.addEventListener('click', () => {
             contract.startTime = startTime.value;
             contract.carType = carType.value;
             contract.carQuantity = carQuantity.value;
-            contract.stageSum = stageSum.value;
+            contract.stageSum = getNumberValue(stageSum.value);
             stages.pop();
             contract.stages = stages;
             // console.log(contract.stages);
@@ -89,9 +89,7 @@ addNewContractButton.addEventListener('click', () => {
 })
 
 stageSum.addEventListener('input', (event, arg) => {
-    var tempSum = getStageSumValue();
-    console.log(tempSum);
-    console.log(toAccountingBookkeepingFormat(tempSum));
+    var tempSum = getNumberValue(stageSum.value);
     stageSum.value = toAccountingBookkeepingFormat(tempSum);
 })
 
@@ -163,7 +161,7 @@ function addStages() {
         // console.log(document.getElementById('time-input-' + i).value);
         // console.log(document.getElementById('amount-input-' + i).value);
     }
-    amountSum.value = sum
+    amountSum.value = toAccountingBookkeepingFormat(sum.toString());
 }
 
 
@@ -173,8 +171,8 @@ function clearFrom() {
     secondParty.value = "";
     startTime.value = "";
     carType.value = "";
-    carQuantity.value = 0;
-    stageSum.value = 0;
+    carQuantity.value = "";
+    stageSum.value = "";
     amountSum.value = 0;
     stages = [];
     document.getElementById('new-stages').innerHTML = "";
@@ -193,8 +191,8 @@ function openPrintPreview(contract) {
     win.show()
 }
 
-function getStageSumValue() {
-    var items = stageSum.value.split(",");
+function getNumberValue(s) {
+    var items = s.split(",");
     return items.join("");
 }
 
