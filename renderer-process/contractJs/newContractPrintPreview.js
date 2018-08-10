@@ -30,7 +30,7 @@ function loadData(contract) {
     carType.value = contract.carType;
     carQuantity.value = contract.carQuantity;
     // stageSum.value = toAccountingBookkeepingFormat(contract.stageSum);
-    stageSum.value = contract.stageSum;
+    stageSum.value = toAccountingBookkeepingFormat(contract.stageSum);
     loadStages(contract.stages);
 
 }
