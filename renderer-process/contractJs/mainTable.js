@@ -112,6 +112,17 @@ deleteRecorde.addEventListener('click', (event) => {
   win.show()
 })
 
+// 删除成功更新表内容
+ipcRenderer.on('delete-contract-number', (event, arg) => {
+  allData = allData.filter(function (item) {
+    return item.contractNumber !== arg
+  })
+  tableData = tableData.filter(function (item) {
+    return item.contractNumber !== arg
+  })
+  loadData()
+})
+
 
 // 打印预览
 const printPreview = document.getElementById('main-table-print-preview')
