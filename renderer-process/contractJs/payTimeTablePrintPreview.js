@@ -8,49 +8,49 @@ var printDate = ""
 ipcRenderer.send('get-print-value')
 
 ipcRenderer.on('print-data', (event, data) => {
-    tableData = data[0]
-    printDate = data[1]
-    loadData()
+  tableData = data[0]
+  printDate = data[1]
+  loadData()
 
 })
 
 function loadData() {
-    document.getElementById('pay-time-table-data').innerHTML = ""
-    var d = 0
-    var counter = 1;
-    for (d in tableData) {
-      document.getElementById('pay-time-table-data').innerHTML +=
-        "<tr>" +
-        "<td>" + counter++ + "</td>" +
-        "<td>" + tableData[d].contractNumber + "</td>" +
-        "<td>" + tableData[d].secondParty + "</td>" +
-        "<td>" + toAccountingBookkeepingFormat(tableData[d].amount) + "</td>" +
-        "<td>" + tableData[d].time + "</td>" +
-        "</tr>"
-    }
-    calculateSum()
+  document.getElementById('pay-time-table-data').innerHTML = ""
+  var d = 0
+  var counter = 1;
+  for (d in tableData) {
+    document.getElementById('pay-time-table-data').innerHTML +=
+      "<tr>" +
+      "<td>" + counter++ + "</td>" +
+      "<td>" + tableData[d].contractNumber + "</td>" +
+      "<td>" + tableData[d].secondParty + "</td>" +
+      "<td>" + toAccountingBookkeepingFormat(tableData[d].amount) + "</td>" +
+      "<td>" + tableData[d].time + "</td>" +
+      "</tr>"
   }
-  
-  function calculateSum() {
-    var amountSum = 0;
-    var d = 0;
-    for (d in tableData) {
-      amountSum += parseFloat(tableData[d].amount);
-    }
-    document.getElementById("pay-time-table-sum").innerHTML = toAccountingBookkeepingFormat(amountSum.toFixed(2));
+  calculateSum()
+}
+
+function calculateSum() {
+  var amountSum = 0;
+  var d = 0;
+  for (d in tableData) {
+    amountSum += parseFloat(tableData[d].amount);
   }
-  
+  document.getElementById("pay-time-table-sum").innerHTML = toAccountingBookkeepingFormat(amountSum.toFixed(2));
+}
+
 
 
 const printPDFBtn = document.getElementById('print-pdf')
 
 printPDFBtn.addEventListener('click', (event) => {
-    printPDFBtn.hidden = true
-    ipcRenderer.send('print-to-pdf')
+  printPDFBtn.hidden = true
+  ipcRenderer.send('print-to-pdf')
 })
 
 ipcRenderer.on('wrote-pdf', (event, path) => {
-    printPDFBtn.hidden = false
+  printPDFBtn.hidden = false
 })
 
 function toAccountingBookkeepingFormat(str) {
