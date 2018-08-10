@@ -12,14 +12,24 @@ let finishedTableData = []
 // loadData()
 
 ipcRenderer.send('request-all-data')
-
 ipcRenderer.on('get-all-data', (event, arg) => {
   finishedAllData = arg;
-
   //temp
   finishedTableData = convertFinishedTableData(finishedAllData);
   // console.log(finishedTableData);
   loadData();
+})
+
+
+// 删除成功更新表内容
+ipcRenderer.on('delete-contract-number', (event, arg) => {
+  finishedAllData = finishedAllData.filter(function (item) {
+    return item.contractNumber !== arg
+  })
+  finishedTableData = finishedTableData.filter(function (item) {
+    return item.contractNumber !== arg
+  })
+  loadData()
 })
 
 function convertFinishedTableData(allData) {

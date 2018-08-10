@@ -15,11 +15,21 @@ ipcRenderer.send('request-all-data')
 
 ipcRenderer.on('get-all-data', (event, arg) => {
     processingAllData = arg;
-
     //temp
     processingTableData = convertProcessingTableData(processingAllData);
     // console.log(processingTableData);
     processingTableLoadData();
+})
+
+// 删除成功更新表内容
+ipcRenderer.on('delete-contract-number', (event, arg) => {
+    processingAllData = processingAllData.filter(function (item) {
+        return item.contractNumber !== arg
+    })
+    processingTableData = processingTableData.filter(function (item) {
+        return item.contractNumber !== arg
+    })
+    processingTableLoadData()
 })
 
 // 搜索合同号
@@ -119,29 +129,29 @@ printPreview.addEventListener('click', (event) => {
 function toAccountingBookkeepingFormat(str) {
     var newStr = "";
     var count = 0;
-  
+
     if (str.indexOf(".") == -1) {
-      for (var i = str.length - 1; i >= 0; i--) {
-        if (count % 3 == 0 && count != 0) {
-          newStr = str.charAt(i) + "," + newStr;
-        } else {
-          newStr = str.charAt(i) + newStr;
+        for (var i = str.length - 1; i >= 0; i--) {
+            if (count % 3 == 0 && count != 0) {
+                newStr = str.charAt(i) + "," + newStr;
+            } else {
+                newStr = str.charAt(i) + newStr;
+            }
+            count++;
         }
-        count++;
-      }
-      str = newStr + ".00"; //自动补小数点后两位
-      return str;
+        str = newStr + ".00"; //自动补小数点后两位
+        return str;
     }
     else {
-      for (var i = str.indexOf(".") - 1; i >= 0; i--) {
-        if (count % 3 == 0 && count != 0) {
-          newStr = str.charAt(i) + "," + newStr; //碰到3的倍数则加上“,”号
-        } else {
-          newStr = str.charAt(i) + newStr; //逐个字符相接起来
+        for (var i = str.indexOf(".") - 1; i >= 0; i--) {
+            if (count % 3 == 0 && count != 0) {
+                newStr = str.charAt(i) + "," + newStr; //碰到3的倍数则加上“,”号
+            } else {
+                newStr = str.charAt(i) + newStr; //逐个字符相接起来
+            }
+            count++;
         }
-        count++;
-      }
-      str = newStr + (str + "00").substr((str + "00").indexOf("."), 3);
-      return str;
+        str = newStr + (str + "00").substr((str + "00").indexOf("."), 3);
+        return str;
     }
-  }
+}

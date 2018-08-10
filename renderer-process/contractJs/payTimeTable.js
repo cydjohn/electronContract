@@ -15,11 +15,21 @@ ipcRenderer.send('request-all-data')
 
 ipcRenderer.on('get-all-data', (event, arg) => {
   allData = arg;
-
   //temp
   tableData = payTimeTableConvert(allData);
   // console.log(tableData);
   loadData();
+})
+
+// 删除成功更新表内容
+ipcRenderer.on('delete-contract-number', (event, arg) => {
+  allData = allData.filter(function (item) {
+    return item.contractNumber !== arg
+  })
+  tableData = tableData.filter(function (item) {
+    return item.contractNumber !== arg
+  })
+  loadData()
 })
 
 
