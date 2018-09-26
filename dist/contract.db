@@ -1,4 +1,0 @@
-{"carQuantity":"11","carType":"asdf","contractNumber":"qwer","firstParty":"qefsadf","secondParty":"qwerfq","stageSum":"1000","stages":[{"amount":"500","stageId":0,"time":"2018-08-24"},{"amount":"500","stageId":1,"time":"2018-08-31"}],"startTime":"2018-08-11","_id":"09WTWdUXRSARQyUC"}
-{"carQuantity":"12","carType":"adsf","contractNumber":"asdf","firstParty":"adsf","secondParty":"asdf","stageSum":"100","stages":[{"amount":"100","stageId":0,"time":"2018-08-01"}],"startTime":"2018-08-03","_id":"z7NtwG220KMNHukN"}
-{"$$deleted":true,"_id":"09WTWdUXRSARQyUC"}
-{"$$deleted":true,"_id":"z7NtwG220KMNHukN"}
