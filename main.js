@@ -3,10 +3,18 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var electron_1 = require("electron");
 var path = require("path");
 var url = require("url");
+var glob = require("glob");
 var win, serve;
 var args = process.argv.slice(1);
 serve = args.some(function (val) { return val === '--serve'; });
+// Require each JS file in the main-process dir
+function loadDemos() {
+    var files = glob.sync(path.join(__dirname, 'main-process/*.js'));
+    files.forEach(function (file) { require(file); });
+    // autoUpdater.updateMenu()
+}
 function createWindow() {
+    loadDemos();
     var electronScreen = electron_1.screen;
     var size = electronScreen.getPrimaryDisplay().workAreaSize;
     // Create the browser window.

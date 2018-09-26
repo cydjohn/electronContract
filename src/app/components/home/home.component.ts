@@ -3,6 +3,10 @@ import { Component, OnInit } from '@angular/core';
 import { ElectronService } from '../../providers/electron.service';
 import { TranslateService } from '@ngx-translate/core';
 import { Location } from '@angular/common'
+
+
+
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -17,16 +21,27 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
+    
   }
 
+  
+
+
   openNewWindow() {
-    this.electronService.ipcRenderer.send('pass-print-value', ["interestDateTableData, interestDate.value"])
-    // const modalPath = this.location.normalize('file://' + __dirname + '../../sections/windows/interest-date-table-print-preview.html')
-    const modalPath = this.location.normalize('../tables/tables.component.html')
-    let win = new this.electronService.remote.BrowserWindow({ width: 1000, height: 1000 })
-    win.webContents.openDevTools()
-    win.on('close', () => { win = null })
-    win.loadURL(modalPath)
-    win.show()
+    // this.electronService.ipcRenderer.send('pass-print-value', ["interestDateTableData, interestDate.value"])
+    // // const modalPath = this.location.normalize('file://' + __dirname + '../../sections/windows/interest-date-table-print-preview.html')
+    // const modalPath = this.location.normalize('../tables/tables.component.html')
+    // let win = new this.electronService.remote.BrowserWindow({ width: 1000, height: 1000 })
+    // win.webContents.openDevTools()
+    // win.on('close', () => { win = null })
+    // win.loadURL(modalPath)
+    // win.show()
+    this.electronService.ipcRenderer.send('talking-test-pass');
+    this.electronService.ipcRenderer.on('talking-test-recive',(event, numRemoved) => {
+      console.log(numRemoved);
+    });
   }
+
+
 }
+

@@ -1,13 +1,23 @@
 import { app, BrowserWindow, screen } from 'electron';
 import * as path from 'path';
 import * as url from 'url';
+import * as glob from 'glob';
+
+
 
 let win, serve;
 const args = process.argv.slice(1);
 serve = args.some(val => val === '--serve');
 
-function createWindow() {
+// Require each JS file in the main-process dir
+function loadDemos () {
+  const files = glob.sync(path.join(__dirname, 'main-process/*.js'))
+  files.forEach((file) => { require(file) })
+  // autoUpdater.updateMenu()
+}
 
+function createWindow() {
+  loadDemos();
   const electronScreen = screen;
   const size = electronScreen.getPrimaryDisplay().workAreaSize;
 
