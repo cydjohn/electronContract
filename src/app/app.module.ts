@@ -20,7 +20,7 @@ import { WebviewDirective } from './directives/webview.directive';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
-import { TablesComponent } from './components/tables/tables.component';
+import { TableExpandableRowsExample } from './components/tables/tables.component';
 import { MainTableComponent } from './components/main-table/main-table.component';
 
 // AoT requires an exported function for factories
@@ -34,7 +34,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     AppComponent,
     HomeComponent,
     WebviewDirective,
-    TablesComponent,
+    TableExpandableRowsExample,
     MainTableComponent
   ],
   imports: [
