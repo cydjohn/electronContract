@@ -30,6 +30,10 @@ export interface PeriodicElement {
   description: string;
 }
 
+function clickTest(ele) {
+  console.log(ele);
+}
+
 const ELEMENT_DATA: PeriodicElement[] = [
   {
     position: 1,

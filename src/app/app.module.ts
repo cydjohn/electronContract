@@ -19,14 +19,19 @@ import { WebviewDirective } from './directives/webview.directive';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { TableExpandableRowsExample } from './components/tables/tables.component';
 import { MainTableComponent } from './components/main-table/main-table.component';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+
+import { DataSource } from '@angular/cdk/table';
+import { MatButtonModule, MatCheckboxModule, MatTableModule } from '@angular/material';
+import { FinishedTableComponent } from './finished-table/finished-table.component';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
-  
+
 }
 
 @NgModule({
@@ -35,7 +40,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     HomeComponent,
     WebviewDirective,
     TableExpandableRowsExample,
-    MainTableComponent
+    MainTableComponent,
+    FinishedTableComponent
   ],
   imports: [
     NgbModule,
@@ -43,6 +49,10 @@ export function HttpLoaderFactory(http: HttpClient) {
     FormsModule,
     HttpClientModule,
     AppRoutingModule,
+    MatButtonModule,
+    MatCheckboxModule,
+    MatTableModule,
+    BrowserAnimationsModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
