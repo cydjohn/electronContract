@@ -26,10 +26,10 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 import { DataSource } from '@angular/cdk/table';
 import { MatButtonModule, MatCheckboxModule, MatTableModule } from '@angular/material';
-import { FinishedTableComponent } from './finished-table/finished-table.component';
-import { NewContractComponent } from './new-contract/new-contract.component';
-import { PayTimeTableComponent } from './pay-time-table/pay-time-table.component';
-import { ProcessingTableComponent } from './processing-table/processing-table.component';
+import { FinishedTableComponent } from './components/finished-table/finished-table.component';
+import { NewContractComponent } from './components/new-contract/new-contract.component';
+import { PayTimeTableComponent } from './components/pay-time-table/pay-time-table.component';
+import { ProcessingTableComponent } from './components/processing-table/processing-table.component';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {

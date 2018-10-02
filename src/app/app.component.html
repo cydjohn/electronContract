@@ -1,8 +1,14 @@
 <div class="sidenav">
-    <a routerLink="/app-main-table">总表</a>
     <a routerLink="/home">Services</a>
-    <!-- <a href="#clients">Clients</a> -->
     <a routerLink="/table">Contact</a>
+    <a class = "divider">新建</a>
+    <a routerLink="/new-contract">新建合同</a>
+    <a class = "divider">查询</a>
+    <a routerLink="/app-main-table">总表</a>
+    <a routerLink="/pay-time-table">付款时间表</a>
+    <a class = "divider">合同状态</a>
+    <a routerLink="/processing-table">进行中</a>
+    <a routerLink="/finished-table">已完成</a>
 </div>
 <div class="main-content">
     <router-outlet></router-outlet>
