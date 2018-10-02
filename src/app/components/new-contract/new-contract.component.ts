@@ -21,7 +21,8 @@ export class NewContractComponent implements OnInit {
     carType: "",
     quantity: 0,
     stageSum: 0,
-    amountSum: 0
+    amountSum: 0,
+    stages:[]
   }
 
 
