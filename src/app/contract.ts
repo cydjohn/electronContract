@@ -1,3 +1,4 @@
+import {Stage} from './stage'
 export class Contract {
     contractNumber : string;
     firstParty : string;
@@ -7,5 +8,5 @@ export class Contract {
     quantity : number;
     stageSum : number;
     amountSum : number;
-    stages : {stage:Array<number>,time:string};
+    stages : Array<Stage>
 }
