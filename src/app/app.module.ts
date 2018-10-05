@@ -30,6 +30,7 @@ import { FinishedTableComponent } from './components/finished-table/finished-tab
 import { NewContractComponent } from './components/new-contract/new-contract.component';
 import { PayTimeTableComponent } from './components/pay-time-table/pay-time-table.component';
 import { ProcessingTableComponent } from './components/processing-table/processing-table.component';
+import { DeleteContractComponent } from './components/delete-contract/delete-contract.component';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
@@ -47,7 +48,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     FinishedTableComponent,
     NewContractComponent,
     PayTimeTableComponent,
-    ProcessingTableComponent
+    ProcessingTableComponent,
+    DeleteContractComponent
   ],
   imports: [
     NgbModule,
@@ -68,6 +70,9 @@ export function HttpLoaderFactory(http: HttpClient) {
     })
   ],
   providers: [ElectronService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [
+    DeleteContractComponent
+  ]
 })
 export class AppModule { }
