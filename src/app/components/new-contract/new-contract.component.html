@@ -75,12 +75,11 @@
               {{contract.stages.length+1}}
             </td>
             <td class="">
-              <input type="input" class="form-control" [(ngModel)]="newStageData.amount" name="amount">
+              <input type="input" class="form-control" [(ngModel)]="newStageData.amount" name="amount" required>
             </td>
             <td class="">
-              <!-- <input ngbDatepicker #d="ngbDatepicker" class="form-control" [(ngModel)]="newStageData.time" name="time"> -->
               <div class="input-group">
-                <input class="form-control" placeholder="yyyy-mm-dd" name="dp" [(ngModel)]="newStageData.time" ngbDatepicker #d="ngbDatepicker">
+                <input class="form-control" placeholder="yyyy-mm-dd" name="dp" [(ngModel)]="newStageData.time" ngbDatepicker #d="ngbDatepicker" required>
                 <div class="input-group-append">
                   <button class="btn btn-default btn-sm" (click)="d.toggle()" type="button"><span class="glyphicon glyphicon-calendar"></span></button>
                 </div>

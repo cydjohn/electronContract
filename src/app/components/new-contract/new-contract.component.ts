@@ -16,9 +16,9 @@ export class NewContractComponent implements OnInit {
   }
 
   contract: Contract = {
-    contractNumber: "asdf",
-    firstParty: "adf",
-    secondParty: "adf",
+    contractNumber: "",
+    firstParty: "",
+    secondParty: "",
     startTime: "",
     carType: "",
     quantity: 0,
@@ -28,18 +28,26 @@ export class NewContractComponent implements OnInit {
   }
 
 
-  newStageData:Stage = {
-    amount: 0, 
-    time: "" 
+  newStageData: Stage = {
+    amount: 0,
+    time: ""
   }
 
   addNewStage(newStageData, doDelete) {
-    console.log(newStageData);
-    this.contract.stages.push(newStageData);
+    doDelete = doDelete === undefined ? false : doDelete;
+    if (doDelete == true) {
+
+    }
+    if (newStageData.time.year) {
+      this.contract.stages.push({ amount: newStageData.amount, time: newStageData.time.year + '-' + newStageData.time.month + '-' + newStageData.time.day });
+    }
+    else {
+      this.contract.stages.push(...newStageData);
+    }
   }
 
   addNewContract() {
-    console.log("adfaskdfhakshdfkl");
+
     console.log(this.contract.contractNumber);
   }
 
