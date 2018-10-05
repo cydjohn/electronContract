@@ -76,6 +76,16 @@
 
                 </tbody>
                 <tfoot>
+                    <tr *ngFor="let rowData of tableData; let row_n = index" (click)="showDetail(rowData)">
+                        <th>{{row_n + 1}}</th>
+                        <th>{{rowData.contractNumber}}</th>
+                        <th>{{rowData.firstParty}}</th>
+                        <th>{{rowData.secondParty}}</th>
+                        <th>{{rowData.startTime}}</th>
+                        <th>{{rowData.carType}}</th>
+                        <th>{{rowData.quantity}}</th>
+                        <th>{{rowData.stageSum | currency:"¥"}}</th>
+                    </tr>
                     <tr>
                         <th>总计</th>
                         <th></th>
@@ -84,13 +94,13 @@
                         <th></th>
                         <th></th>
                         <th></th>
-                        <th id="main-table-sum">0</th>
+                        <th>0</th>
                     </tr>
                 </tfoot>
             </table>
             <div class="row col-lg-7">
                 <div class="input-group col-lg-3">
-                    <button id="main-table-print-preview" class="btn btn-dark">打印预览</button>
+                    <button id="main-table-print-preview" class="btn btn-dark">导出Excel</button>
                 </div>
                 <div class="input-group col-lg-3">
                     <button id="delete" class="btn btn-danger">删除</button>

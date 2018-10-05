@@ -13,8 +13,9 @@ export class NewContractComponent implements OnInit {
 
   ngOnInit() {
     console.log(this.contract.stages);
+    
   }
-
+  alertText = ""
   contract: Contract = {
     contractNumber: "",
     firstParty: "",

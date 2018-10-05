@@ -117,8 +117,8 @@
 
 
 
-    <div class="alert alert-danger col-lg-2" role="alert" id="alertLabel">
-
+    <div *ngIf="alertText != ''" class="alert alert-danger col-lg-10" role="alert" id="alertLabel">
+      {{alertText}}
     </div>
 
 
@@ -128,3 +128,4 @@
 
   </form>
 </div>
+
