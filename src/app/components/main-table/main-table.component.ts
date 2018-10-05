@@ -5,6 +5,7 @@ import { ElectronService } from '../../providers/electron.service';
 import { TranslateService } from '@ngx-translate/core';
 import { Location } from '@angular/common'
 import { DeleteContractComponent } from '../delete-contract/delete-contract.component'
+import { NewContractComponent } from '../new-contract/new-contract.component'
 
 @Component({
   selector: 'app-main-table',
@@ -25,8 +26,11 @@ export class MainTableComponent implements OnInit {
   }
 
   showDetail(rowData) {
-    console.log(rowData);
-
+    this.modalService.open(NewContractComponent, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
+      // this.closeResult = `Closed with: ${result}`;
+    }, (reason) => {
+      // this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });
   }
 
   calculateSum() {
@@ -40,15 +44,6 @@ export class MainTableComponent implements OnInit {
   }
 
   delete() {
-    // this.electronService.ipcRenderer.send('pass-print-value', ["interestDateTableData, interestDate.value"])
-    // const modalPath = this.location.normalize('file://' + __dirname + '../../sections/windows/interest-date-table-print-preview.html')
-    // const modalPath = this.location.normalize('./delete.html')
-    // let win = new this.electronService.remote.BrowserWindow({ width: 1000, height: 1000 })
-    // win.webContents.openDevTools()
-    // win.on('close', () => { win = null })
-    // win.loadURL(modalPath)
-    // win.show()
-
     this.modalService.open(DeleteContractComponent, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
       // this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
