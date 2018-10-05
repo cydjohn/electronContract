@@ -18,9 +18,7 @@ import { ElectronService } from './providers/electron.service';
 import { WebviewDirective } from './directives/webview.directive';
 
 import { AppComponent } from './app.component';
-import { HomeComponent } from './components/home/home.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { TableExpandableRowsExample } from './components/tables/tables.component';
 import { MainTableComponent } from './components/main-table/main-table.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
@@ -41,9 +39,7 @@ export function HttpLoaderFactory(http: HttpClient) {
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent,
     WebviewDirective,
-    TableExpandableRowsExample,
     MainTableComponent,
     FinishedTableComponent,
     NewContractComponent,
