@@ -55,28 +55,21 @@
     <!-- <button onclick="addRow()" class="btn btn-primary pull-left btn-sm">新增</button> -->
     <div>
         <div class="mb-0">
-            <table class="table table-striped table-hover" id="main-table">
+            <table matSort (matSortChange)="sortData($event)"  class="table table-striped table-hover" >
                 <thead>
                     <tr>
                         <th>序号</th>
-                        <th>合同编号</th>
-                        <th>甲方</th>
-                        <th>乙方</th>
-                        <th>签订时间</th>
-                        <th>车型</th>
-                        <th>数量</th>
-                        <th>合同总金额</th>
+                        <th mat-sort-header="contractNumber">合同编号</th>
+                        <th mat-sort-header="firstParty">甲方</th>
+                        <th mat-sort-header="secondParty">乙方</th>
+                        <th mat-sort-header="startTime">签订时间</th>
+                        <th mat-sort-header="carType">车型</th>
+                        <th mat-sort-header="quantity">数量</th>
+                        <th mat-sort-header="stageSum">合同总金额</th>
                     </tr>
                 </thead>
-                <!-- </table>
-            </div>
-            <div class="container mt-0" style="height:600px">
-                <table class="table table-striped table-hover" id="main-table"> -->
-                <tbody id="main-table-data" style="overflow-y:auto; ">
-
-                </tbody>
-                <tfoot>
-                    <tr *ngFor="let rowData of tableData; let row_n = index" (click)="showDetail(rowData)">
+                <tbody>
+                    <tr *ngFor="let rowData of sortedData; let row_n = index" (click)="showDetail(rowData)">
                         <th>{{row_n + 1}}</th>
                         <th>{{rowData.contractNumber}}</th>
                         <th>{{rowData.firstParty}}</th>
@@ -96,7 +89,7 @@
                         <th></th>
                         <th>{{amountSum | currency:"¥"}}</th>
                     </tr>
-                </tfoot>
+                </tbody>
             </table>
             <div class="row col-lg-7">
                 <div class="input-group col-lg-3">

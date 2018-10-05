@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { Contract } from '../../contract';
-import { ElectronService } from '../../providers/electron.service';
-import { TranslateService } from '@ngx-translate/core';
-import { Location } from '@angular/common'
 import { DeleteContractComponent } from '../delete-contract/delete-contract.component'
+import { Sort } from '@angular/material';
 
 @Component({
   selector: 'app-main-table',
@@ -13,20 +11,21 @@ import { DeleteContractComponent } from '../delete-contract/delete-contract.comp
 })
 export class MainTableComponent implements OnInit {
 
-  constructor(public electronService: ElectronService,
-    private translate: TranslateService,
-    private location: Location,
-    private modalService: NgbModal) {
-
+  constructor(private modalService: NgbModal) {
+    this.sortedData = this.tableData.slice();
   }
 
   ngOnInit() {
     this.calculateSum();
   }
 
-  showDetail(rowData) {
-    console.log(rowData);
 
+  showDetail(rowData) {
+    this.modalService.open(DeleteContractComponent, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
+      // this.closeResult = `Closed with: ${result}`;
+    }, (reason) => {
+      // this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });
   }
 
   calculateSum() {
@@ -39,16 +38,31 @@ export class MainTableComponent implements OnInit {
 
   }
 
-  delete() {
-    // this.electronService.ipcRenderer.send('pass-print-value', ["interestDateTableData, interestDate.value"])
-    // const modalPath = this.location.normalize('file://' + __dirname + '../../sections/windows/interest-date-table-print-preview.html')
-    // const modalPath = this.location.normalize('./delete.html')
-    // let win = new this.electronService.remote.BrowserWindow({ width: 1000, height: 1000 })
-    // win.webContents.openDevTools()
-    // win.on('close', () => { win = null })
-    // win.loadURL(modalPath)
-    // win.show()
 
+
+  sortData(sort: Sort) {
+    const data = this.tableData.slice();
+    if (!sort.active || sort.direction === '') {
+      this.sortedData = data;
+      return;
+    }
+
+    this.sortedData = data.sort((a, b) => {
+      const isAsc = sort.direction === 'asc';
+      switch (sort.active) {
+        case 'contractNumber': return compare(a.contractNumber, b.contractNumber, isAsc);
+        case 'firstParty': return compare(a.firstParty, b.firstParty, isAsc);
+        case 'secondParty': return compare(a.secondParty, b.secondParty, isAsc);
+        case 'startTime': return compare(a.startTime, b.startTime, isAsc);
+        case 'carType': return compare(a.carType, b.carType, isAsc);
+        case 'quantity': return compare(a.quantity, b.quantity, isAsc);
+        case 'stageSum': return compare(a.stageSum, b.stageSum, isAsc);
+        default: return 0;
+      }
+    });
+  }
+
+  delete() {
     this.modalService.open(DeleteContractComponent, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
       // this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
@@ -58,9 +72,10 @@ export class MainTableComponent implements OnInit {
 
   amountSum = 0
 
+  sortedData: Contract[] = []
   tableData: Contract[] = [
     {
-      contractNumber: "fasfasdf",
+      contractNumber: "2018(2)",
       firstParty: "adsf",
       secondParty: "fasdf",
       startTime: "fdsa",
@@ -71,7 +86,7 @@ export class MainTableComponent implements OnInit {
       stages: []
     },
     {
-      contractNumber: "fasfasdf",
+      contractNumber: "2018(1)",
       firstParty: "adsf",
       secondParty: "fasdf",
       startTime: "fdsa",
@@ -83,4 +98,8 @@ export class MainTableComponent implements OnInit {
     }
   ]
 
+}
+
+function compare(a, b, isAsc) {
+  return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
 }
