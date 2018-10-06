@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { Contract } from '../../contract';
 import { DeleteContractComponent } from '../delete-contract/delete-contract.component'
-import { Sort } from '@angular/material';
+import { Sort, MatSort } from '@angular/material';
+import { MatTableDataSource } from '@angular/material';
 
 @Component({
   selector: 'app-main-table',
@@ -12,11 +13,12 @@ import { Sort } from '@angular/material';
 export class MainTableComponent implements OnInit {
 
   constructor(private modalService: NgbModal) {
-    this.sortedData = this.tableData.slice();
+    // this.sortedData = this.tableData.slice();
   }
 
   ngOnInit() {
     this.calculateSum();
+    this.dataSource.sort = this.sort;
   }
 
 
@@ -29,38 +31,40 @@ export class MainTableComponent implements OnInit {
   }
 
   calculateSum() {
-    for (let d in this.tableData) {
-      this.amountSum += this.tableData[d].stageSum;
-    }
+    // for (let d in this.tableData) {
+    //   this.amountSum += this.tableData[d].stageSum;
+    // }
+  }
+
+  applyFilter(filterValue: string) {
+    this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
   exportExcel() {
 
   }
 
+  // sortData(sort: Sort) {
+  //   const data = this.tableData.slice();
+  //   if (!sort.active || sort.direction === '') {
+  //     this.sortedData = data;
+  //     return;
+  //   }
 
-
-  sortData(sort: Sort) {
-    const data = this.tableData.slice();
-    if (!sort.active || sort.direction === '') {
-      this.sortedData = data;
-      return;
-    }
-
-    this.sortedData = data.sort((a, b) => {
-      const isAsc = sort.direction === 'asc';
-      switch (sort.active) {
-        case 'contractNumber': return compare(a.contractNumber, b.contractNumber, isAsc);
-        case 'firstParty': return compare(a.firstParty, b.firstParty, isAsc);
-        case 'secondParty': return compare(a.secondParty, b.secondParty, isAsc);
-        case 'startTime': return compare(a.startTime, b.startTime, isAsc);
-        case 'carType': return compare(a.carType, b.carType, isAsc);
-        case 'quantity': return compare(a.quantity, b.quantity, isAsc);
-        case 'stageSum': return compare(a.stageSum, b.stageSum, isAsc);
-        default: return 0;
-      }
-    });
-  }
+  //   this.sortedData = data.sort((a, b) => {
+  //     const isAsc = sort.direction === 'asc';
+  //     switch (sort.active) {
+  //       case 'contractNumber': return compare(a.contractNumber, b.contractNumber, isAsc);
+  //       case 'firstParty': return compare(a.firstParty, b.firstParty, isAsc);
+  //       case 'secondParty': return compare(a.secondParty, b.secondParty, isAsc);
+  //       case 'startTime': return compare(a.startTime, b.startTime, isAsc);
+  //       case 'carType': return compare(a.carType, b.carType, isAsc);
+  //       case 'quantity': return compare(a.quantity, b.quantity, isAsc);
+  //       case 'stageSum': return compare(a.stageSum, b.stageSum, isAsc);
+  //       default: return 0;
+  //     }
+  //   });
+  // }
 
   delete() {
     this.modalService.open(DeleteContractComponent, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
@@ -73,7 +77,7 @@ export class MainTableComponent implements OnInit {
   amountSum = 0
 
   sortedData: Contract[] = []
-  tableData: Contract[] = [
+  t: Contract[] = [
     {
       contractNumber: "2018(2)",
       firstParty: "adsf",
@@ -97,6 +101,10 @@ export class MainTableComponent implements OnInit {
       stages: []
     }
   ]
+
+  displayedColumns: string[] = ['contractNumber', 'firstParty', 'secondParty', 'startTime', 'carType', 'quantity', 'stageSum'];
+  dataSource = new MatTableDataSource(this.t);
+  @ViewChild(MatSort) sort: MatSort;
 
 }
 
