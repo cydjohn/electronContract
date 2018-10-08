@@ -14,7 +14,7 @@
                 <table mat-table [dataSource]="dataSource" matSort class="table table-striped table-hover">
                     <ng-container matColumnDef="index">
                         <th mat-header-cell *matHeaderCellDef mat-sort-header> 序号 </th>
-                        <td mat-cell *matCellDef="let element; let i = index;">{{i}}</td>
+                        <td mat-cell *matCellDef="let element; let i = index;">{{i+1}}</td>
                     </ng-container>
 
                     <ng-container matColumnDef="contractNumber">
