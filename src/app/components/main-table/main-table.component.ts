@@ -102,7 +102,7 @@ export class MainTableComponent implements OnInit {
     }
   ]
 
-  displayedColumns: string[] = ['contractNumber', 'firstParty', 'secondParty', 'startTime', 'carType', 'quantity', 'stageSum'];
+  displayedColumns: string[] = ['index','contractNumber', 'firstParty', 'secondParty', 'startTime', 'carType', 'quantity', 'stageSum'];
   dataSource = new MatTableDataSource(this.t);
   @ViewChild(MatSort) sort: MatSort;
 
