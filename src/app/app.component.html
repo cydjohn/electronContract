@@ -1,15 +1,18 @@
 <div class="sidenav">
-    <a routerLink="/home">Services</a>
-    <a routerLink="/table">Contact</a>
-    <a class = "divider">新建</a>
-    <a routerLink="/new-contract">新建合同</a>
-    <a class = "divider">查询</a>
-    <a routerLink="/app-main-table">总表</a>
-    <a routerLink="/pay-time-table">付款时间表</a>
-    <a class = "divider">合同状态</a>
-    <a routerLink="/processing-table">进行中</a>
-    <a routerLink="/finished-table">已完成</a>
+    <a class = "navtitle font-weight-bold col-10">购车合同信息确认表</a>
+    <h5 class="page-header"></h5>
+    <a class = "navtitle"><strong>新建</strong></a>
+    <a class = "navlink" routerLink="/new-contract">新建合同</a>
+    <a class = "divider navtitle"><strong>查询</strong></a>
+    <a class = "navlink" routerLink="/app-main-table">总表</a>
+    <a class = "navlink" routerLink="/pay-time-table">付款时间表</a>
+    <a class = "divider navtitle"><strong>合同状态</strong></a>
+    <a class = "navlink" routerLink="/processing-table">进行中</a>
+    <a class = "navlink" routerLink="/finished-table">已完成</a>
+
 </div>
 <div class="main-content">
     <router-outlet></router-outlet>
 </div>
+
+

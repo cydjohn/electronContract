@@ -1,11 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { Contract } from '../../contract';
-import { ElectronService } from '../../providers/electron.service';
-import { TranslateService } from '@ngx-translate/core';
-import { Location } from '@angular/common'
 import { DeleteContractComponent } from '../delete-contract/delete-contract.component'
+<<<<<<< HEAD
 import { NewContractComponent } from '../new-contract/new-contract.component'
+=======
+import { Sort, MatSort } from '@angular/material';
+import { MatTableDataSource } from '@angular/material';
+import * as XLSX from 'xlsx';
+>>>>>>> 8dbf57ff433286cd614d5c90db6d872787f344b2
 
 @Component({
   selector: 'app-main-table',
@@ -14,19 +17,23 @@ import { NewContractComponent } from '../new-contract/new-contract.component'
 })
 export class MainTableComponent implements OnInit {
 
-  constructor(public electronService: ElectronService,
-    private translate: TranslateService,
-    private location: Location,
-    private modalService: NgbModal) {
-
+  constructor(private modalService: NgbModal) {
+    // this.sortedData = this.tableData.slice();
   }
 
   ngOnInit() {
     this.calculateSum();
+    this.dataSource.sort = this.sort;
   }
 
+<<<<<<< HEAD
   showDetail(rowData) {
     this.modalService.open(NewContractComponent, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
+=======
+
+  showDetail(rowData) {
+    this.modalService.open(DeleteContractComponent, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
+>>>>>>> 8dbf57ff433286cd614d5c90db6d872787f344b2
       // this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
       // this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
@@ -34,15 +41,52 @@ export class MainTableComponent implements OnInit {
   }
 
   calculateSum() {
-    for (let d in this.tableData) {
-      this.amountSum += this.tableData[d].stageSum;
-    }
+    // for (let d in this.tableData) {
+    //   this.amountSum += this.tableData[d].stageSum;
+    // }
+  }
+
+  applyFilter(filterValue: string) {
+    this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
   exportExcel() {
+    /* generate worksheet */
+    const ws: XLSX.WorkSheet = XLSX.utils.table_to_sheet(document.getElementById('main-table'));
 
+    /* generate workbook and add the worksheet */
+    const wb: XLSX.WorkBook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+
+    /* save to file */
+    XLSX.writeFile(wb, './SheetJS.xlsx');
   }
 
+<<<<<<< HEAD
+=======
+  // sortData(sort: Sort) {
+  //   const data = this.tableData.slice();
+  //   if (!sort.active || sort.direction === '') {
+  //     this.sortedData = data;
+  //     return;
+  //   }
+
+  //   this.sortedData = data.sort((a, b) => {
+  //     const isAsc = sort.direction === 'asc';
+  //     switch (sort.active) {
+  //       case 'contractNumber': return compare(a.contractNumber, b.contractNumber, isAsc);
+  //       case 'firstParty': return compare(a.firstParty, b.firstParty, isAsc);
+  //       case 'secondParty': return compare(a.secondParty, b.secondParty, isAsc);
+  //       case 'startTime': return compare(a.startTime, b.startTime, isAsc);
+  //       case 'carType': return compare(a.carType, b.carType, isAsc);
+  //       case 'quantity': return compare(a.quantity, b.quantity, isAsc);
+  //       case 'stageSum': return compare(a.stageSum, b.stageSum, isAsc);
+  //       default: return 0;
+  //     }
+  //   });
+  // }
+
+>>>>>>> 8dbf57ff433286cd614d5c90db6d872787f344b2
   delete() {
     this.modalService.open(DeleteContractComponent, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
       // this.closeResult = `Closed with: ${result}`;
@@ -53,9 +97,10 @@ export class MainTableComponent implements OnInit {
 
   amountSum = 0
 
-  tableData: Contract[] = [
+  sortedData: Contract[] = []
+  t: Contract[] = [
     {
-      contractNumber: "fasfasdf",
+      contractNumber: "2018(2)",
       firstParty: "adsf",
       secondParty: "fasdf",
       startTime: "fdsa",
@@ -66,7 +111,7 @@ export class MainTableComponent implements OnInit {
       stages: []
     },
     {
-      contractNumber: "fasfasdf",
+      contractNumber: "2018(1)",
       firstParty: "adsf",
       secondParty: "fasdf",
       startTime: "fdsa",
@@ -77,5 +122,9 @@ export class MainTableComponent implements OnInit {
       stages: []
     }
   ]
+
+  displayedColumns: string[] = ['index', 'contractNumber', 'firstParty', 'secondParty', 'startTime', 'carType', 'quantity', 'stageSum'];
+  dataSource = new MatTableDataSource(this.t);
+  @ViewChild(MatSort) sort: MatSort;
 
 }

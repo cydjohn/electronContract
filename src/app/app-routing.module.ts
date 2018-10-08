@@ -1,6 +1,5 @@
-import { HomeComponent } from './components/home/home.component';
+
 import { MainTableComponent } from './components/main-table/main-table.component';
-import { TableExpandableRowsExample } from './components/tables/tables.component';
 import { NewContractComponent } from './components/new-contract/new-contract.component';
 import { ProcessingTableComponent } from './components/processing-table/processing-table.component';
 import { PayTimeTableComponent } from './components/pay-time-table/pay-time-table.component';
@@ -12,7 +11,6 @@ import { Routes, RouterModule } from '@angular/router';
 const routes: Routes = [
     { path: '', redirectTo: '/app-main-table', pathMatch: 'full' },
     { path: 'app-main-table', component: MainTableComponent },
-    { path: 'home', component: HomeComponent },
     { path: 'new-contract', component: NewContractComponent },
     { path: 'processing-table', component: ProcessingTableComponent },
     { path: 'pay-time-table', component: PayTimeTableComponent },

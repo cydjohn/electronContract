@@ -10,15 +10,23 @@
     padding-top: 20px;
   }
   
-  .sidenav a {
+  .sidenav .navlink {
     padding: 6px 8px 6px 16px;
-    text-decoration: none;
-    /* font-size: 25px; */
+    // text-decoration: none;
+    font-size: 16px; 
     color: #818181;
     display: block;
   }
   
-  .sidenav a:hover {
+  .sidenav .navtitle {
+    padding: 6px 8px 6px 16px;
+    // text-decoration: none;
+    font-size: 20px; 
+    color: #000000;
+    display: block;
+  }
+  
+  .sidenav .navlink:hover {
     color: #f1f1f1;
   }
   .main-content {
