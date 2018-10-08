@@ -2,9 +2,15 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { Contract } from '../../contract';
 import { DeleteContractComponent } from '../delete-contract/delete-contract.component'
+
 import { MatTableDataSource, MatSort } from '@angular/material';
 import { ElectronService } from '../../providers/electron.service';
+
+import { NewContractComponent } from '../new-contract/new-contract.component';
+
+
 import * as XLSX from 'xlsx';
+
 
 @Component({
   selector: 'app-main-table',
@@ -23,9 +29,8 @@ export class MainTableComponent implements OnInit {
     this.dataSource.sort = this.sort;
   }
 
-
   showDetail(rowData) {
-    this.modalService.open(DeleteContractComponent, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
+    this.modalService.open(NewContractComponent, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
       // this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
       // this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
