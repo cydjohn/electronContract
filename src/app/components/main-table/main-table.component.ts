@@ -6,7 +6,7 @@ import { DeleteContractComponent } from '../delete-contract/delete-contract.comp
 import { MatTableDataSource, MatSort } from '@angular/material';
 import { ElectronService } from '../../providers/electron.service';
 
-import { NewContractComponent } from '../new-contract/new-contract.component';
+import { ContractDetailComponent } from '../contract-detail/contract-detail.component';
 
 
 import * as XLSX from 'xlsx';
@@ -21,7 +21,6 @@ export class MainTableComponent implements OnInit {
 
   constructor(private modalService: NgbModal,
     private electronService: ElectronService) {
-    // this.sortedData = this.tableData.slice();
   }
 
   ngOnInit() {
@@ -30,7 +29,7 @@ export class MainTableComponent implements OnInit {
   }
 
   showDetail(rowData) {
-    this.modalService.open(NewContractComponent, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
+    this.modalService.open(ContractDetailComponent, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
       // this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
       // this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;

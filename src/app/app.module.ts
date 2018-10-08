@@ -30,6 +30,7 @@ import { PayTimeTableComponent } from './components/pay-time-table/pay-time-tabl
 import { ProcessingTableComponent } from './components/processing-table/processing-table.component';
 import { DeleteContractComponent } from './components/delete-contract/delete-contract.component';
 import { MatSidenavModule } from '@angular/material/sidenav';
+import { ContractDetailComponent } from './components/contract-detail/contract-detail.component';
 
 
 // AoT requires an exported function for factories
@@ -47,7 +48,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     NewContractComponent,
     PayTimeTableComponent,
     ProcessingTableComponent,
-    DeleteContractComponent
+    DeleteContractComponent,
+    ContractDetailComponent
   ],
   imports: [
     NgbModule,
@@ -73,7 +75,8 @@ export function HttpLoaderFactory(http: HttpClient) {
   providers: [ElectronService],
   bootstrap: [AppComponent],
   entryComponents: [
-    DeleteContractComponent
+    DeleteContractComponent,
+    ContractDetailComponent
   ]
 })
 export class AppModule { }

@@ -1,22 +1,20 @@
 import { Component, OnInit } from '@angular/core';
 import { Contract } from '../../contract';
 import { Stage } from '../../stage';
-import { ElectronService } from '../../providers/electron.service'
-
+import { ElectronService } from '../../providers/electron.service';
 
 @Component({
-  selector: 'app-new-contract',
-  templateUrl: './new-contract.component.html',
-  styleUrls: ['./new-contract.component.scss']
+  selector: 'app-contract-detail',
+  templateUrl: './contract-detail.component.html',
+  styleUrls: ['./contract-detail.component.scss']
 })
-export class NewContractComponent implements OnInit {
+export class ContractDetailComponent implements OnInit {
 
-  constructor(private electronService:ElectronService) { }
+  constructor(private electronService: ElectronService) { }
 
   ngOnInit() {
-    console.log(this.contract.stages);
-
   }
+
   alertText = ""
   contract: Contract = {
     contractNumber: "",
@@ -24,9 +22,9 @@ export class NewContractComponent implements OnInit {
     secondParty: "",
     startTime: "",
     carType: "",
-    quantity: null,
-    stageSum: null,
-    amountSum: null,
+    quantity: 0,
+    stageSum: 0,
+    amountSum: 0,
     stages: []
   }
 
@@ -60,8 +58,7 @@ export class NewContractComponent implements OnInit {
   }
 
   addNewContract() {
-    this.electronService.ipcRenderer.send('getMsg', this.contract)
-    console.log(this.contract.contractNumber);
+    this.electronService.ipcRenderer.send('print-to-pdf');
   }
 
 }

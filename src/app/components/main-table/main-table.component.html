@@ -58,6 +58,7 @@
                     <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
                     <tr mat-row *matRowDef="let row; columns: displayedColumns;let i = index;" (click)="showDetail(row)"></tr>
                 </table>
+                
                 <div class="row col-lg-7">
                     <div class="input-group col-lg-3">
                         <button (click)="exportExcel()" class="btn btn-dark">导出Excel</button>

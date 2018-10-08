@@ -11,10 +11,9 @@ ipcMain.on('print-to-pdf', (event,arg) => {
     landscape: true,
     marginsType: 0,
     printBackground: false,
-    printSelectionOnly: false,
+    printSelectionOnly: true,
     pageSize: 'A4',
   }, (error, data) => {
-    // win.webContents.print({landscape: true}, (error, data) => {
     if (error) throw error
     fs.writeFile(pdfPath, data, (error) => {
       if (error) throw error
