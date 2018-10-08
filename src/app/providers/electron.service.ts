@@ -14,6 +14,7 @@ export class ElectronService {
   webFrame: typeof webFrame;
   remote: typeof remote;
   childProcess: typeof childProcess;
+
   fs: typeof fs;
 
   constructor() {
@@ -24,6 +25,7 @@ export class ElectronService {
       this.remote = window.require('electron').remote;
 
       this.childProcess = window.require('child_process');
+
       this.fs = window.require('fs');
     }
   }
