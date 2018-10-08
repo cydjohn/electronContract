@@ -91,20 +91,11 @@
             <td class="">{{row_n + 1}}</td>
             <td class="">{{st.amount}}</td>
             <td class="">{{st.time}}</td>
-            <td class=""><button type="button" class="btn btn-danger" (click)="addNewStage(st,true)">删除</button></td>
+            <td class=""><button type="button" class="btn btn-danger" (click)="addNewStage(st,true,row_n)">删除</button></td>
           </tr>
         </tbody>
       </table>
 
-    </div>
-
-    <div class="row col-lg-7">
-      <div class="col-lg-2">
-        <input type="button" class="btn btn-dark" (click)="addNewContract()" value="添加" />
-      </div>
-      <div class="col-lg-2">
-        <input type="button" class="btn btn-danger" id="delete-stage" value="删除" />
-      </div>
     </div>
 
 

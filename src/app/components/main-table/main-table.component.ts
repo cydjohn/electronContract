@@ -2,13 +2,9 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { Contract } from '../../contract';
 import { DeleteContractComponent } from '../delete-contract/delete-contract.component'
-<<<<<<< HEAD
-import { NewContractComponent } from '../new-contract/new-contract.component'
-=======
 import { Sort, MatSort } from '@angular/material';
 import { MatTableDataSource } from '@angular/material';
 import * as XLSX from 'xlsx';
->>>>>>> 8dbf57ff433286cd614d5c90db6d872787f344b2
 
 @Component({
   selector: 'app-main-table',
@@ -26,14 +22,9 @@ export class MainTableComponent implements OnInit {
     this.dataSource.sort = this.sort;
   }
 
-<<<<<<< HEAD
-  showDetail(rowData) {
-    this.modalService.open(NewContractComponent, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
-=======
 
   showDetail(rowData) {
     this.modalService.open(DeleteContractComponent, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
->>>>>>> 8dbf57ff433286cd614d5c90db6d872787f344b2
       // this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
       // this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
@@ -62,8 +53,6 @@ export class MainTableComponent implements OnInit {
     XLSX.writeFile(wb, './SheetJS.xlsx');
   }
 
-<<<<<<< HEAD
-=======
   // sortData(sort: Sort) {
   //   const data = this.tableData.slice();
   //   if (!sort.active || sort.direction === '') {
@@ -86,7 +75,6 @@ export class MainTableComponent implements OnInit {
   //   });
   // }
 
->>>>>>> 8dbf57ff433286cd614d5c90db6d872787f344b2
   delete() {
     this.modalService.open(DeleteContractComponent, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
       // this.closeResult = `Closed with: ${result}`;

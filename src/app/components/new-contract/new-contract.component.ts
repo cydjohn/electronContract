@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Contract } from '../../contract';
 import { Stage } from '../../stage';
+import { ElectronService } from '../../providers/electron.service'
+
 
 @Component({
   selector: 'app-new-contract',
@@ -9,11 +11,11 @@ import { Stage } from '../../stage';
 })
 export class NewContractComponent implements OnInit {
 
-  constructor() { }
+  constructor(private electronService:ElectronService) { }
 
   ngOnInit() {
     console.log(this.contract.stages);
-    
+
   }
   alertText = ""
   contract: Contract = {
@@ -34,21 +36,31 @@ export class NewContractComponent implements OnInit {
     time: ""
   }
 
-  addNewStage(newStageData, doDelete) {
+  addNewStage(newStageData, doDelete, row_n) {
     doDelete = doDelete === undefined ? false : doDelete;
     if (doDelete == true) {
-
-    }
-    if (newStageData.time.year) {
-      this.contract.stages.push({ amount: newStageData.amount, time: newStageData.time.year + '-' + newStageData.time.month + '-' + newStageData.time.day });
+      this.contract.stages.splice(row_n, 1);
     }
     else {
-      this.contract.stages.push(...newStageData);
+      if (newStageData.time.year) {
+        this.contract.stages.push({ amount: newStageData.amount, time: newStageData.time.year + '-' + newStageData.time.month + '-' + newStageData.time.day });
+      }
+      else {
+        this.contract.stages.push(...newStageData);
+      }
+    }
+    this.calculateStageSum();
+  }
+
+  calculateStageSum() {
+    this.contract.stageSum = 0.0;
+    for (let i in this.contract.stages) {
+      this.contract.stageSum += Number(this.contract.stages[i].amount);
     }
   }
 
   addNewContract() {
-
+    this.electronService.ipcRenderer.send('getMsg', this.contract)
     console.log(this.contract.contractNumber);
   }
 
