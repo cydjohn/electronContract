@@ -4,6 +4,7 @@ import { Contract } from '../../contract';
 import { DeleteContractComponent } from '../delete-contract/delete-contract.component'
 import { Sort, MatSort } from '@angular/material';
 import { MatTableDataSource } from '@angular/material';
+import * as XLSX from 'xlsx';
 
 @Component({
   selector: 'app-main-table',
@@ -41,7 +42,15 @@ export class MainTableComponent implements OnInit {
   }
 
   exportExcel() {
+    /* generate worksheet */
+    const ws: XLSX.WorkSheet = XLSX.utils.table_to_sheet(document.getElementById('main-table'));
 
+    /* generate workbook and add the worksheet */
+    const wb: XLSX.WorkBook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+
+    /* save to file */
+    XLSX.writeFile(wb, './SheetJS.xlsx');
   }
 
   // sortData(sort: Sort) {
@@ -102,12 +111,8 @@ export class MainTableComponent implements OnInit {
     }
   ]
 
-  displayedColumns: string[] = ['index','contractNumber', 'firstParty', 'secondParty', 'startTime', 'carType', 'quantity', 'stageSum'];
+  displayedColumns: string[] = ['index', 'contractNumber', 'firstParty', 'secondParty', 'startTime', 'carType', 'quantity', 'stageSum'];
   dataSource = new MatTableDataSource(this.t);
   @ViewChild(MatSort) sort: MatSort;
 
-}
-
-function compare(a, b, isAsc) {
-  return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
 }
