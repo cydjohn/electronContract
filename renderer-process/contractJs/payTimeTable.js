@@ -100,6 +100,7 @@ function loadData() {
       "<td>" + counter++ + "</td>" +
       "<td>" + tableData[d].contractNumber + "</td>" +
       "<td>" + tableData[d].secondParty + "</td>" +
+      "<td>" + tableData[d].firstParty + "</td>" +
       "<td>" + ((tableData[d].amount)) + "</td>" +
       "<td>" + tableData[d].time + "</td>" +
       "</tr>"
