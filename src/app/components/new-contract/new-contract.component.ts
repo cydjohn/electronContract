@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Contract } from '../../contract';
 import { Stage } from '../../stage';
 import { ElectronService } from '../../providers/electron.service'
-
+import * as path from 'path';
 
 @Component({
   selector: 'app-new-contract',
@@ -11,7 +11,7 @@ import { ElectronService } from '../../providers/electron.service'
 })
 export class NewContractComponent implements OnInit {
 
-  constructor(private electronService:ElectronService) { }
+  constructor(private electronService: ElectronService) { }
 
   ngOnInit() {
     console.log(this.contract.stages);
@@ -60,8 +60,19 @@ export class NewContractComponent implements OnInit {
   }
 
   addNewContract() {
-    this.electronService.ipcRenderer.send('getMsg', this.contract)
+    this.electronService.ipcRenderer.send('getMsg', this.contract);
+    this.printPreView();
     console.log(this.contract.contractNumber);
+  }
+
+  printPreView() {
+    this.electronService.ipcRenderer.send('pass-print-value', [this.contract, ""])
+    const modalPath = path.join('file://', __dirname, '../../window/newContractPrintPreview.html')
+    let win = new this.electronService.remote.BrowserWindow({ width: 800, height: 1000 })
+    win.on('close', () => { win = null })
+    win.loadURL(modalPath)
+    win.webContents.openDevTools();
+    win.show()
   }
 
 }

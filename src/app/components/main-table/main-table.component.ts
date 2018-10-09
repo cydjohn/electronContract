@@ -2,15 +2,10 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { Contract } from '../../contract';
 import { DeleteContractComponent } from '../delete-contract/delete-contract.component'
-
 import { MatTableDataSource, MatSort } from '@angular/material';
 import { ElectronService } from '../../providers/electron.service';
-
 import { ContractDetailComponent } from '../contract-detail/contract-detail.component';
-
-
 import * as XLSX from 'xlsx';
-
 
 @Component({
   selector: 'app-main-table',
@@ -98,5 +93,4 @@ export class MainTableComponent implements OnInit {
   displayedColumns: string[] = ['index', 'contractNumber', 'firstParty', 'secondParty', 'startTime', 'carType', 'quantity', 'stageSum'];
   dataSource = new MatTableDataSource(this.tableData);
   @ViewChild(MatSort) sort: MatSort;
-
 }
