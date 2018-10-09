@@ -14,17 +14,41 @@ import * as XLSX from 'xlsx';
 })
 export class MainTableComponent implements OnInit {
 
+  amountSum = 0
+
+  tableData: Contract[] = []
+
+  displayedColumns: string[] = ['index', 'contractNumber', 'firstParty', 'secondParty', 'startTime', 'carType', 'quantity', 'stageSum'];
+  dataSource = new MatTableDataSource(this.tableData);
+  @ViewChild(MatSort) sort: MatSort;
+
   constructor(private modalService: NgbModal,
     private electronService: ElectronService) {
   }
 
+
   ngOnInit() {
     this.calculateSum();
     this.dataSource.sort = this.sort;
+    this.electronService.ipcRenderer.send('request-all-data');
+    this.electronService.ipcRenderer.on('get-all-data', (event, arg) => {
+      this.tableData = arg;
+      //temp
+      this.dataSource = new MatTableDataSource(this.tableData);
+    })
+
+    this.electronService.ipcRenderer.on('add-new-contract', (event, arg) => {
+      this.tableData.push(arg);
+      this.dataSource = new MatTableDataSource(this.tableData);
+    })
+
   }
 
   showDetail(rowData) {
-    this.modalService.open(ContractDetailComponent, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
+
+    let model = this.modalService.open(ContractDetailComponent, { ariaLabelledBy: 'modal-basic-title', size: 'lg' });
+    model.componentInstance.contract = rowData;
+    model.result.then((result) => {
       // this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
       // this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
@@ -63,34 +87,4 @@ export class MainTableComponent implements OnInit {
     });
   }
 
-  amountSum = 0
-
-  tableData: Contract[] = [
-    {
-      contractNumber: "2018(2)",
-      firstParty: "adsf",
-      secondParty: "fasdf",
-      startTime: "fdsa",
-      carType: "fasd",
-      quantity: 10,
-      stageSum: 10,
-      amountSum: 10,
-      stages: []
-    },
-    {
-      contractNumber: "2018(1)",
-      firstParty: "adsf",
-      secondParty: "fasdf",
-      startTime: "fdsa",
-      carType: "fasd",
-      quantity: 10,
-      stageSum: 10,
-      amountSum: 10,
-      stages: []
-    }
-  ]
-
-  displayedColumns: string[] = ['index', 'contractNumber', 'firstParty', 'secondParty', 'startTime', 'carType', 'quantity', 'stageSum'];
-  dataSource = new MatTableDataSource(this.tableData);
-  @ViewChild(MatSort) sort: MatSort;
 }

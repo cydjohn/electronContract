@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Contract } from '../../contract';
 import { Stage } from '../../stage';
 import { ElectronService } from '../../providers/electron.service';
@@ -10,23 +10,14 @@ import { ElectronService } from '../../providers/electron.service';
 })
 export class ContractDetailComponent implements OnInit {
 
+  @Input() contract: Contract;
   constructor(private electronService: ElectronService) { }
 
   ngOnInit() {
+    console.log(this.contract);
   }
 
   alertText = ""
-  contract: Contract = {
-    contractNumber: "",
-    firstParty: "",
-    secondParty: "",
-    startTime: "",
-    carType: "",
-    quantity: 0,
-    stageSum: 0,
-    amountSum: 0,
-    stages: []
-  }
 
 
   newStageData: Stage = {
