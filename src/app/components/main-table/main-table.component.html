@@ -10,8 +10,8 @@
             </div>
         </div>
         <div>
-            <div class="mb-0">
-                <table mat-table [dataSource]="dataSource" matSort class="table table-striped table-hover" id="main-table" maxHeight="200">
+            <div class="mb-0 main-table-container">
+                <table mat-table [dataSource]="dataSource" matSort class="table table-striped table-hover" id="main-table">
                     <ng-container matColumnDef="index">
                         <th mat-header-cell *matHeaderCellDef mat-sort-header> 序号 </th>
                         <td mat-cell *matCellDef="let element; let i = index;">{{i+1}}</td>
@@ -55,18 +55,18 @@
                         <td mat-cell *matCellDef="let element"> {{element.stageSum}} </td>
                     </ng-container>
 
-                    <tr mat-header-row *matHeaderRowDef="displayedColumns;"></tr>
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns;  sticky: true"></tr>
                     <tr mat-row *matRowDef="let row; columns: displayedColumns;let i = index;" (click)="showDetail(row)"></tr>
                 </table>
-                
-                <div class="row col-lg-7">
-                    <div class="input-group col-lg-3">
-                        <button (click)="exportExcel()" class="btn btn-dark">导出Excel</button>
-                    </div>
-                    <div class="input-group col-lg-3">
-                        <button (click)="delete()" class="btn btn-danger">删除</button>
-                    </div>
+            </div>
+            <div class="row col-lg-7">
+                <div class="input-group col-lg-3">
+                    <button (click)="exportExcel()" class="btn btn-dark">导出Excel</button>
+                </div>
+                <div class="input-group col-lg-3">
+                    <button (click)="delete()" class="btn btn-danger">删除</button>
                 </div>
             </div>
+
         </div>
     </div>
