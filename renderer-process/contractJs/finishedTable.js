@@ -119,13 +119,23 @@ function compare(property) {
 // 打印预览
 const printPreview = document.getElementById('finished-table-print-preview')
 printPreview.addEventListener('click', (event) => {
-  ipcRenderer.send('pass-print-value', [finishedTableData, ""])
-  const modalPath = path.join('file://', __dirname, '../../sections/contractWindows/finishedTablePrintPreview.html')
-  let win = new BrowserWindow({ width: 800, height: 1000 })
-  win.on('close', () => { win = null })
-  win.loadURL(modalPath)
-  // win.webContents.openDevTools();
-  win.show()
+  // ipcRenderer.send('pass-print-value', [finishedTableData, ""])
+  // const modalPath = path.join('file://', __dirname, '../../sections/contractWindows/finishedTablePrintPreview.html')
+  // let win = new BrowserWindow({ width: 800, height: 1000 })
+  // win.on('close', () => { win = null })
+  // win.loadURL(modalPath)
+  // // win.webContents.openDevTools();
+  // win.show()
+  dialog.showSaveDialog({
+    title: '导出已完成表',
+    defaultPath: '~/已完成表.xlsx'
+  }, function (result) {
+    console.log(result);
+    /* html表格转excel */
+    var wb = XLSX.utils.table_to_book(document.getElementById('finished-table'));
+    /* 生成文件，导出D盘 */
+    XLSX.writeFile(wb, result);
+  });
 })
 
 function toAccountingBookkeepingFormat(str) {

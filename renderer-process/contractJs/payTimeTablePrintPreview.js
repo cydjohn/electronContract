@@ -46,12 +46,12 @@ function calculateSum() {
 const printPDFBtn = document.getElementById('print-pdf')
 
 printPDFBtn.addEventListener('click', (event) => {
-  printPDFBtn.hidden = true
-  ipcRenderer.send('print-to-pdf')
+  printPDFBtn.hidden = true;
+  ipcRenderer.send('print-to-pdf');
 })
 
 ipcRenderer.on('wrote-pdf', (event, path) => {
-  printPDFBtn.hidden = false
+  printPDFBtn.hidden = false;
 })
 
 function toAccountingBookkeepingFormat(str) {
