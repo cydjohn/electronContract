@@ -59,4 +59,7 @@ export class PayTimeTableComponent implements OnInit {
       XLSX.writeFile(wb, result);
     });
   }
+  applyFilter(filterValue: string) {
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
 }
