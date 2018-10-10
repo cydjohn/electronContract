@@ -1,18 +1,48 @@
-<div class="sidenav">
-    <a class = "navtitle font-weight-bold col-10">购车合同信息确认表</a>
-    <h5 class="page-header"></h5>
-    <a class = "navtitle"><strong>新建</strong></a>
-    <a class = "navlink" routerLink="/new-contract">新建合同</a>
-    <a class = "divider navtitle"><strong>查询</strong></a>
-    <a class = "navlink" routerLink="/app-main-table">总表</a>
-    <a class = "navlink" routerLink="/pay-time-table">付款时间表</a>
-    <a class = "divider navtitle"><strong>合同状态</strong></a>
-    <a class = "navlink" routerLink="/processing-table">进行中</a>
-    <a class = "navlink" routerLink="/finished-table">已完成</a>
+<div *ngIf="!haslogin" class="container">
+    <div class="col-md-6 col-lg-6 login-form">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <!-- Start form -->
+            <form>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">用户名</label>
+                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                        value="购车合同信息确认表" disabled="disabled">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputPassword1">密码</label>
+                    <input type="password" class="form-control" [(ngModel)]="password" name="password" id="password" placeholder="Password">
+                </div>
+                <div class="form-group">
+                    <div *ngIf="alertText != ''" class="alert alert-danger col-lg-12" role="alert" id="alertLabel">
+                        {{alertText}}
+                    </div>
+                </div>
+                <div class="form-check">
+                    <button type="submit" class="btn btn-success" (click)="login()">登陆</button>
+                </div>
 
+            </form>
+
+
+            <!-- End form -->
+        </div>
+    </div>
 </div>
-<div class="main-content">
-    <router-outlet></router-outlet>
+<div *ngIf="haslogin">
+    <div class="sidenav">
+        <a class="navtitle font-weight-bold col-10">购车合同信息确认表</a>
+        <h5 class="page-header"></h5>
+        <a class="navtitle"><strong>新建</strong></a>
+        <a class="navlink" routerLink="/new-contract">新建合同</a>
+        <a class="divider navtitle"><strong>查询</strong></a>
+        <a class="navlink" routerLink="/app-main-table">总表</a>
+        <a class="navlink" routerLink="/pay-time-table">付款时间表</a>
+        <a class="divider navtitle"><strong>合同状态</strong></a>
+        <a class="navlink" routerLink="/processing-table">进行中</a>
+        <a class="navlink" routerLink="/finished-table">已完成</a>
+
+    </div>
+    <div class="main-content">
+        <router-outlet></router-outlet>
+    </div>
 </div>
-
-
