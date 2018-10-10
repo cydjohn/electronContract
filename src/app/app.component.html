@@ -1,16 +1,15 @@
 <div *ngIf="!haslogin" class="container">
-    <div class="col-md-6 col-lg-6 login-form">
+    <div class="container" style="text-align: center; margin-top: 20%;">
+        <h2 style="margin-left: 1px;"><strong> 购车合同信息确认表</strong></h2>
+    </div>
+    <div class="col-md-7 col-lg-7 login-form">
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
             <!-- Start form -->
             <form>
                 <div class="form-group">
-                    <!-- <label for="exampleInputEmail1">用户名</label> -->
-                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-                        value="购车合同信息确认表" disabled="disabled">
-                </div>
-                <div class="form-group">
-                    <label for="exampleInputPassword1">密码</label>
-                    <input type="password" class="form-control" [(ngModel)]="password" name="password" id="password" placeholder="Password">
+                    <!-- <label for="exampleInputPassword1">密码</label> -->
+                    <input type="password" class="form-control" [(ngModel)]="password" name="password" id="password"
+                        placeholder="密码">
                 </div>
                 <div class="form-group">
                     <div *ngIf="alertText != ''" class="alert alert-danger col-lg-12" role="alert" id="alertLabel">
@@ -22,8 +21,6 @@
                 </div>
 
             </form>
-
-
             <!-- End form -->
         </div>
     </div>
