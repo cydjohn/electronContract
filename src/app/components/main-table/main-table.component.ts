@@ -15,10 +15,9 @@ import * as XLSX from 'xlsx';
 export class MainTableComponent implements OnInit {
 
   amountSum = 0
-
   tableData: Contract[] = []
   displayedColumns: string[] = ['index', 'contractNumber', 'firstParty', 'secondParty', 'startTime', 'carType', 'quantity', 'stageSum'];
-  dataSource = new MatTableDataSource(this.tableData);
+  dataSource = new MatTableDataSource();
   @ViewChild(MatSort) sort: MatSort;
 
   constructor(private modalService: NgbModal,
@@ -27,19 +26,19 @@ export class MainTableComponent implements OnInit {
 
 
   ngOnInit() {
-    this.calculateSum();
     this.electronService.ipcRenderer.send('request-all-data');
     this.electronService.ipcRenderer.on('get-all-data', (event, arg) => {
       this.tableData = arg;
       //temp
       this.dataSource = new MatTableDataSource(this.tableData);
+      this.dataSource.sort = this.sort;
     });
 
     this.electronService.ipcRenderer.on('add-new-contract', (event, arg) => {
       this.tableData.push(arg);
       this.dataSource = new MatTableDataSource(this.tableData);
+      this.dataSource.sort = this.sort;
     });
-    this.dataSource.sort = this.sort;
   }
 
   showDetail(rowData) {
