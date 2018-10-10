@@ -20,25 +20,7 @@
 
   <!-- <button onclick="addRow()" class="btn btn-primary pull-left btn-sm">新增</button> -->
   <div>
-    <div style="height:600px">
-      <!-- <table class="table table-striped table-hover" id="processing-table">
-        <thead>
-          <tr>
-            <th>序号</th>
-            <th>合同编号</th>
-            <th>收款单位（乙方）</th>
-            <th>已付金额</th>
-            <th>未付金额</th>
-            <th>剩余期数</th>
-          </tr>
-        </thead>
-        <tbody id="processing-table-data" style="overflow-y:auto; ">
-
-        </tbody>
-        <tfoot>
-
-        </tfoot> -->
-      <!-- </table> -->
+    <div class="mb-0 pay-time-table-container">
 
       <table mat-table [dataSource]="dataSource" matSort class="table table-striped table-hover">
         <ng-container matColumnDef="index">
@@ -53,39 +35,36 @@
         </ng-container>
 
 
+        <ng-container matColumnDef="firstParty">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> 付款单位（甲方） </th>
+          <td mat-cell *matCellDef="let element"> {{element.firstParty}} </td>
+        </ng-container>
+
+
         <ng-container matColumnDef="secondParty">
           <th mat-header-cell *matHeaderCellDef mat-sort-header> 收款单位（乙方） </th>
           <td mat-cell *matCellDef="let element"> {{element.secondParty}} </td>
         </ng-container>
 
 
-        <ng-container matColumnDef="startTime">
+        <ng-container matColumnDef="amount">
           <th mat-header-cell *matHeaderCellDef mat-sort-header> 付款金额 </th>
-          <td mat-cell *matCellDef="let element"> {{element.startTime}} </td>
+          <td mat-cell *matCellDef="let element"> {{element.amount}} </td>
         </ng-container>
 
-        <ng-container matColumnDef="carType">
+        <ng-container matColumnDef="time">
           <th mat-header-cell *matHeaderCellDef mat-sort-header> 付款时间 </th>
-          <td mat-cell *matCellDef="let element"> {{element.carType}} </td>
-        </ng-container>
-
-        <ng-container matColumnDef="quantity">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> 付款单位 </th>
-          <td mat-cell *matCellDef="let element"> {{element.quantity}} </td>
+          <td mat-cell *matCellDef="let element"> {{element.time}} </td>
         </ng-container>
 
         <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;let i = index;"></tr>
       </table>
-
-
-
-      <div class="row col-lg-7">
-        <div class="input-group col-lg-3">
-          <button (click)="exportExcel()" class="btn btn-dark">导出Excel</button>
-        </div>
+    </div>
+    <div class="row col-lg-7">
+      <div class="input-group col-lg-3">
+        <button (click)="exportExcel()" class="btn btn-dark">导出Excel</button>
       </div>
-
     </div>
   </div>
 </div>

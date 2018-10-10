@@ -11,9 +11,40 @@ import * as XLSX from 'xlsx';
 })
 export class PayTimeTableComponent implements OnInit {
 
+  amountSum = 0
+  tableData: Contract[] = []
+  displayedColumns: string[] = ['index', 'contractNumber', 'firstParty', "secondParty", 'amount', 'time'];
+  dataSource = new MatTableDataSource(this.tableData);
+  @ViewChild(MatSort) sort: MatSort;
+
   constructor(private electronService: ElectronService) { }
 
   ngOnInit() {
+    this.dataSource.sort = this.sort;
+
+    this.electronService.ipcRenderer.send('request-all-data');
+    this.electronService.ipcRenderer.on('get-all-data', (event, arg) => {
+      this.tableData = arg;
+      //temp
+      this.dataSource = new MatTableDataSource(this.payTimeTableConvert(this.tableData));
+    });
+
+    this.electronService.ipcRenderer.on('add-new-contract', (event, arg) => {
+      this.tableData.push(arg);
+      this.dataSource = new MatTableDataSource(this.payTimeTableConvert(this.tableData));
+    });
+  }
+
+  payTimeTableConvert(allData) {
+    var tableData = [];
+    var d = 0
+    for (let d in allData) {
+      var s = 0;
+      for (let s in allData[d].stages) {
+        tableData.push({ "contractNumber": allData[d].contractNumber, "firstParty": allData[d].firstParty, "secondParty": allData[d].secondParty, "amount": allData[d].stages[s].amount, "time": allData[d].stages[s].time })
+      }
+    }
+    return tableData;
   }
 
   exportExcel() {
@@ -28,37 +59,4 @@ export class PayTimeTableComponent implements OnInit {
       XLSX.writeFile(wb, result);
     });
   }
-
-
-
-  amountSum = 0
-
-  tableData: Contract[] = [
-    {
-      contractNumber: "2018(2)",
-      firstParty: "adsf",
-      secondParty: "fasdf",
-      startTime: "fdsa",
-      carType: "fasd",
-      quantity: 10,
-      stageSum: 10,
-      amountSum: 10,
-      stages: []
-    },
-    {
-      contractNumber: "2018(1)",
-      firstParty: "adsf",
-      secondParty: "fasdf",
-      startTime: "fdsa",
-      carType: "fasd",
-      quantity: 10,
-      stageSum: 10,
-      amountSum: 10,
-      stages: []
-    }
-  ]
-
-  displayedColumns: string[] = ['index', 'contractNumber', 'firstParty', 'secondParty', 'startTime', 'carType', 'quantity'];
-  dataSource = new MatTableDataSource(this.tableData);
-  @ViewChild(MatSort) sort: MatSort;
 }
