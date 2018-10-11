@@ -35,12 +35,12 @@
 
         <ng-container matColumnDef="payedMoney">
           <th mat-header-cell *matHeaderCellDef mat-sort-header> 已付金额 </th>
-          <td mat-cell *matCellDef="let element"> {{element.payedMoney}} </td>
+          <td mat-cell *matCellDef="let element"> {{element.payedMoney | currency:"¥"}} </td>
         </ng-container>
 
         <ng-container matColumnDef="unpayedMoney">
           <th mat-header-cell *matHeaderCellDef mat-sort-header> 未付金额 </th>
-          <td mat-cell *matCellDef="let element"> {{element.unpayedMoney}} </td>
+          <td mat-cell *matCellDef="let element"> {{element.unpayedMoney | currency:"¥"}} </td>
         </ng-container>
 
         <ng-container matColumnDef="counter">
