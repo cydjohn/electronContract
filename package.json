@@ -1,7 +1,8 @@
 {
   "name": "angular-electron",
-  "version": "4.2.2",
-  "description": "Angular 6 with Electron (Typescript + SASS + Hot Reload)",
+  "productName": "合同管理系统",
+  "version": "0.5.0",
+  "description": "运输公司合同管理",
   "homepage": "http://caoyudong.com",
   "author": {
     "name": "Yudong Cao",
