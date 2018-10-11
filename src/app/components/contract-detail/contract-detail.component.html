@@ -70,28 +70,11 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td class="">
-              {{contract.stages.length+1}}
-            </td>
-            <td class="">
-              <input type="input" class="form-control" [(ngModel)]="newStageData.amount" name="amount" required>
-            </td>
-            <td class="">
-              <div class="input-group">
-                <input class="form-control" placeholder="yyyy-mm-dd" name="dp" [(ngModel)]="newStageData.time" ngbDatepicker #d="ngbDatepicker" required>
-                <div class="input-group-append">
-                  <button class="btn btn-default btn-sm" (click)="d.toggle()" type="button"><span class="glyphicon glyphicon-calendar"></span></button>
-                </div>
-              </div>
-            </td>
-            <td class=""><button type="button" class="btn btn-success" (click)="addNewStage(newStageData)">添加</button></td>
-          </tr>
           <tr *ngFor="let st of contract.stages; let row_n = index">
             <td class="">{{row_n + 1}}</td>
             <td class="">{{st.amount}}</td>
             <td class="">{{st.time}}</td>
-            <td class=""><button type="button" class="btn btn-danger" (click)="addNewStage(st,true,row_n)">删除</button></td>
+            <!-- <td class=""><button type="button" class="btn btn-danger" (click)="addNewStage(st,true,row_n)">删除</button></td> -->
           </tr>
         </tbody>
       </table>
@@ -109,9 +92,9 @@
 
 
 
-    <div>
+    <!-- <div>
       <input type="button" class="btn btn-success" (click)="addNewContract();" value="确认录入" />
-    </div>
+    </div> -->
 
   </form>
 </div>
