@@ -10,7 +10,7 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  haslogin = true;
+  haslogin = false;
   alertText = "";
   password = "";
   constructor(public electronService: ElectronService,

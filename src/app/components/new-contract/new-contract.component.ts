@@ -103,7 +103,7 @@ export class NewContractComponent implements OnInit {
     let win = new this.electronService.remote.BrowserWindow({ width: 800, height: 1000 });
     win.on('close', () => { win = null });
     win.loadURL(modalPath);
-    win.webContents.openDevTools();
+    //win.webContents.openDevTools();
     win.show()
   }
 
