@@ -63,8 +63,8 @@ export class ProcessingTableComponent implements OnInit {
 
   exportExcel() {
     this.electronService.remote.dialog.showSaveDialog({
-      title: '导出总表',
-      defaultPath: '~/总表.xlsx'
+      title: '导出进行中表',
+      defaultPath: '~/进行中表.xlsx'
     }, function (result) {
       console.log(result)
       /* html表格转excel */
@@ -72,6 +72,10 @@ export class ProcessingTableComponent implements OnInit {
       /* 生成文件，导出D盘 */
       XLSX.writeFile(wb, result);
     });
+  }
+
+  applyFilter(filterValue: string) {
+    this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
 }
