@@ -49,12 +49,12 @@ export class PayTimeTableComponent implements OnInit {
 
   exportExcel() {
     this.electronService.remote.dialog.showSaveDialog({
-      title: '导出总表',
-      defaultPath: '~/总表.xlsx'
+      title: '导出付款时间表',
+      defaultPath: '~/付款时间表.xlsx'
     }, function (result) {
       console.log(result)
       /* html表格转excel */
-      var wb = XLSX.utils.table_to_book(document.getElementById('main-table'));
+      var wb = XLSX.utils.table_to_book(document.getElementById('pay-time-table'));
       /* 生成文件，导出D盘 */
       XLSX.writeFile(wb, result);
     });

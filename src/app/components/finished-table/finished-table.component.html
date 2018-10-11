@@ -14,7 +14,7 @@
   <div>
     <div style="height:600px">
 
-      <table mat-table [dataSource]="dataSource" matSort class="table table-striped table-hover">
+      <table mat-table [dataSource]="dataSource" matSort class="table table-striped table-hover" id="finished-table">
         <ng-container matColumnDef="index">
           <th mat-header-cell *matHeaderCellDef mat-sort-header> 序号 </th>
           <td mat-cell *matCellDef="let element; let i = index;">{{i+1}}</td>

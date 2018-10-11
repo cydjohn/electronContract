@@ -73,7 +73,7 @@ export class FinishedTableComponent implements OnInit {
     }, function (result) {
       console.log(result)
       /* html表格转excel */
-      var wb = XLSX.utils.table_to_book(document.getElementById('main-table'));
+      var wb = XLSX.utils.table_to_book(document.getElementById('finished-table'));
       /* 生成文件，导出D盘 */
       XLSX.writeFile(wb, result);
     });
