@@ -62,4 +62,8 @@ export class PayTimeTableComponent implements OnInit {
   applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
+
+  getSum() {
+    return this.payTimeTableConvert(this.tableData).map(t => t.amount).reduce((acc, value) => parseFloat(acc) + parseFloat(value), 0);
+  }
 }
