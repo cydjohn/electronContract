@@ -14,8 +14,7 @@ export class NewContractComponent implements OnInit {
   constructor(private electronService: ElectronService) { }
 
   ngOnInit() {
-    console.log(this.contract.stages);
-
+    // console.log(this.contract.stages);
   }
   alertText = ""
   contract: Contract = {
