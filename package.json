@@ -1,91 +1,95 @@
 {
-  "name": "electroncontract",
-  "productName": "contract",
-  "version": "0.0.8",
-  "description": "contract",
-  "private": true,
-  "main": "main.js",
-  "scripts": {
-    "start": "electron .",
-    "dev": "electron . --debug",
-    "test": "mocha && standard",
-    "package": "npm-run-all package:*",
-    "package:mac": "electron-packager . --overwrite --platform=darwin --arch=x64 --out=out --icon=assets/app-icon/mac/app.icns --osx-sign.identity='Developer ID Application: GitHub' --extend-info=assets/mac/info.plist",
-    "package:win": "electron-packager . --overwrite --platform=win32 --arch=ia32 --out=out --icon=assets/app-icon/win/app.ico",
-    "package:linux": "electron-packager . --overwrite --platform=linux --arch=x64 --out=out",
-    "package:sign-exe": "signcode './out/Electron API Demos-win32-ia32/Electron API Demos.exe' --cert ~/electron-api-demos.p12 --prompt --name 'Electron API Demos' --url 'http://electron.atom.io'",
-    "package:installer": "node ./script/installer.js",
-    "package:sign-installer": "signcode './out/windows-installer/ElectronAPIDemosSetup.exe' --cert ~/electron-api-demos.p12 --prompt --name 'Electron API Demos' --url 'http://electron.atom.io'",
-    "package:mas": "./script/mas.sh",
-    "windows-store": "node ./script/windows-store.js",
-    "release": "node ./script/release.js",
-    "prepack": "check-for-leaks",
-    "prepush": "check-for-leaks"
+  "name": "angular-electron",
+  "productName": "合同管理系统",
+  "version": "0.5.0",
+  "description": "运输公司合同管理",
+  "homepage": "http://caoyudong.com",
+  "author": {
+    "name": "Yudong Cao",
+    "email": "cydjohn@gmail.com"
   },
-  "repository": "https://github.com/cydjohn/electronContract",
   "keywords": [
-    "Electron",
-    "API",
-    "demo"
+    "angular",
+    "angular 6",
+    "electron",
+    "typescript",
+    "sass"
   ],
-  "author": "cyd",
-  "license": "MIT",
-  "devDependencies": {
-    "chai": "^3.4.1",
-    "chai-as-promised": "^6.0.0",
-    "check-for-leaks": "^1.2.0",
-    "devtron": "^1.4.0",
-    "electron": "^1.8.7",
-    "electron-builder": "^20.27.1",
-    "electron-packager": "^8.6.0",
-    "electron-winstaller": "^2.6.4",
-    "husky": "^0.14.3",
-    "mocha": "^5.2.0",
-    "npm-run-all": "^4.1.2",
-    "request": "^2.87.0",
-    "rimraf": "^2.5.2",
-    "signcode": "^0.5.0",
-    "spectron": "^3.8.0",
-    "standard": "^8.2.0"
+  "main": "main.js",
+  "private": true,
+  "scripts": {
+    "postinstall": "npm run postinstall:electron && npx electron-builder install-app-deps",
+    "postinstall:web": "node postinstall-web",
+    "postinstall:electron": "node postinstall",
+    "ng": "ng",
+    "start": "npm run postinstall:electron && npm-run-all -p ng:serve electron:serve",
+    "build": "npm run postinstall:electron && npm run electron:serve-tsc && ng build",
+    "build:dev": "npm run build -- -c dev",
+    "build:prod": "npm run build -- -c production",
+    "ng:serve": "ng serve",
+    "ng:serve:web": "npm run postinstall:web && ng serve -o",
+    "electron:serve-tsc": "tsc -p tsconfig-serve.json",
+    "package:win": "electron-packager . --overwrite --platform=win32 --arch=ia32 --out=out --icon=assets/app-icon/win/app.ico",
+    "electron:serve": "wait-on http-get://localhost:4200/ && npm run electron:serve-tsc && electron . --serve",
+    "electron:local": "npm run build:prod && electron .",
+    "electron:linux": "npm run build:prod && npx electron-builder build --linux",
+    "electron:windows": "npm run build:prod && npx electron-builder build --windows",
+    "electron:mac": "npm run build:prod && npx electron-builder build --mac",
+    "test": "npm run postinstall:web && ng test",
+    "e2e": "npm run postinstall:web && ng e2e"
   },
   "dependencies": {
+    "@angular/animations": "^6.1.9",
+    "@angular/cdk": "^6.4.7",
+    "@angular/material": "^6.4.7",
+    "@ng-bootstrap/ng-bootstrap": "^3.2.2",
     "bootstrap": "^4.1.3",
-    "bootstrap-datepicker": "^1.8.0",
-    "electron-settings": "^3.2.0",
-    "electron-shortcut-normalizer": "^1.0.0",
-    "glob": "^7.1.0",
-    "grunt": "^1.0.3",
-    "grunt-electron-installer": "^2.1.0",
-    "highlight.js": "^9.3.0",
+    "electron-winstaller": "^2.7.0",
     "jquery": "^3.3.1",
     "moment": "^2.22.2",
     "nedb": "^1.8.0",
     "popper.js": "^1.14.4",
-    "xlsx": "^0.12.13"
+    "xlsx": "^0.14.0"
   },
-  "standard": {
-    "env": {
-      "mocha": true
-    }
-  },
-  "build": {
-    "appId": "com.cyd.contract",
-    "dmg": {
-      "contents": [
-        {
-          "x": 110,
-          "y": 150
-        },
-        {
-          "x": 240,
-          "y": 150,
-          "type": "link",
-          "path": "/Applications"
-        }
-      ]
-    },
-    "win": {
-      "target": "NSIS"
-    }
+  "devDependencies": {
+    "@angular-devkit/build-angular": "0.6.3",
+    "@angular/cli": "6.1.2",
+    "@angular/common": "6.1.2",
+    "@angular/compiler": "6.1.2",
+    "@angular/compiler-cli": "6.1.2",
+    "@angular/core": "6.1.2",
+    "@angular/forms": "6.1.2",
+    "@angular/http": "6.1.2",
+    "@angular/language-service": "6.1.2",
+    "@angular/platform-browser": "6.1.2",
+    "@angular/platform-browser-dynamic": "6.1.2",
+    "@angular/router": "6.1.2",
+    "@ngx-translate/core": "10.0.1",
+    "@ngx-translate/http-loader": "3.0.1",
+    "@types/jasmine": "2.8.7",
+    "@types/jasminewd2": "2.0.3",
+    "@types/node": "8.9.4",
+    "codelyzer": "4.2.1",
+    "core-js": "2.5.6",
+    "electron": "2.0.7",
+    "electron-builder": "20.28.1",
+    "electron-reload": "1.2.2",
+    "jasmine-core": "3.1.0",
+    "jasmine-spec-reporter": "4.2.1",
+    "karma": "^3.0.0",
+    "karma-chrome-launcher": "2.2.0",
+    "karma-coverage-istanbul-reporter": "2.0.0",
+    "karma-jasmine": "1.1.2",
+    "karma-jasmine-html-reporter": "1.1.0",
+    "npm-run-all": "4.1.3",
+    "npx": "10.2.0",
+    "protractor": "^5.4.1",
+    "rxjs": "6.2.2",
+    "ts-node": "6.0.3",
+    "tslint": "5.10.0",
+    "typescript": "2.7.2",
+    "wait-on": "2.1.0",
+    "webdriver-manager": "12.0.6",
+    "zone.js": "0.8.26"
   }
 }

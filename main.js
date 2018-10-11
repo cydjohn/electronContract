@@ -1,119 +1,74 @@
-const path = require('path')
-const glob = require('glob')
-const {app, BrowserWindow,remote} = require('electron')
-const autoUpdater = require('./auto-updater')
-
-const debug = /--debug/.test(process.argv[2])
-
-var Datastore = require('nedb')
-var userData = app.getAppPath('userData');
-
-var dbLocation = ''
-if(process.platform === "win32") {
-    dbLocation = 'D://db/contract.db';
-}
-else {
-  dbLocation = userData+'/dist/contract.db';
-}
-db = new Datastore({ filename: dbLocation });
-
-
-
-if (process.mas) app.setName('合同管理系统')
-
-let mainWindow = null
-
-function initialize () {
-  const shouldQuit = makeSingleInstance()
-  if (shouldQuit) return app.quit()
-
-
-  loadDemos()
-
-  function createWindow () {
-    const windowOptions = {
-      width: 1300,
-      minWidth: 680,
-      height: 840,
-      title: app.getName()
-    }
-    // console.log(process.platform)
-
-    if (process.platform === 'linux') {
-      windowOptions.icon = path.join(__dirname, '/assets/app-icon/png/512.png')
-    }
-
-    mainWindow = new BrowserWindow(windowOptions)
-    mainWindow.loadURL(path.join('file://', __dirname, '/index.html'))
-    
-    // Launch fullscreen with DevTools open, usage: npm run debug
-    if (debug) {
-      mainWindow.webContents.openDevTools()
-      mainWindow.maximize()
-      require('devtron').install()
-    }
-
-    mainWindow.on('closed', () => {
-      mainWindow = null
-    })
-  }
-
-  app.on('ready', () => {
-    createWindow()
-    autoUpdater.initialize()
-  })
-
-  app.on('window-all-closed', () => {
-    if (process.platform !== 'darwin') {
-      app.quit()
-    }
-  })
-
-  app.on('activate', () => {
-    if (mainWindow === null) {
-      createWindow()
-    }
-  })
-}
-
-
-// Make this app a single instance app.
-//
-// The main window will be restored and focused instead of a second window
-// opened when a person attempts to launch a second instance.
-//
-// Returns true if the current version of the app should quit instead of
-// launching.
-function makeSingleInstance () {
-  if (process.mas) return false
-
-  return app.makeSingleInstance(() => {
-    if (mainWindow) {
-      if (mainWindow.isMinimized()) mainWindow.restore()
-      mainWindow.focus()
-    }
-  })
-}
-
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+var electron_1 = require("electron");
+var path = require("path");
+var url = require("url");
+var glob = require("glob");
+var win, serve;
+var args = process.argv.slice(1);
+serve = args.some(function (val) { return val === '--serve'; });
 // Require each JS file in the main-process dir
-function loadDemos () {
-  const files = glob.sync(path.join(__dirname, 'main-process/**/*.js'))
-  files.forEach((file) => { require(file) })
-  autoUpdater.updateMenu()
+function loadDemos() {
+    var files = glob.sync(path.join(__dirname, 'main-process/*.js'));
+    files.forEach(function (file) { require(file); });
+    // autoUpdater.updateMenu()
 }
-
-// Handle Squirrel on Windows startup events
-switch (process.argv[1]) {
-  case '--squirrel-install':
-    autoUpdater.createShortcut(() => { app.quit() })
-    break
-  case '--squirrel-uninstall':
-    autoUpdater.removeShortcut(() => { app.quit() })
-    break
-  case '--squirrel-obsolete':
-  case '--squirrel-updated':
-    app.quit()
-    break
-  default:
-    initialize()
+function createWindow() {
+    loadDemos();
+    var electronScreen = electron_1.screen;
+    var size = electronScreen.getPrimaryDisplay().workAreaSize;
+    // Create the browser window.
+    win = new electron_1.BrowserWindow({
+        x: 0,
+        y: 0,
+        width: size.width,
+        height: size.height
+    });
+    if (serve) {
+        require('electron-reload')(__dirname, {
+            electron: require(__dirname + "/node_modules/electron")
+        });
+        win.loadURL('http://localhost:4200');
+    }
+    else {
+        win.loadURL(url.format({
+            pathname: path.join(__dirname, 'dist/index.html'),
+            protocol: 'file:',
+            slashes: true
+        }));
+    }
+    win.webContents.openDevTools();
+    // Emitted when the window is closed.
+    win.on('closed', function () {
+        // Dereference the window object, usually you would store window
+        // in an array if your app supports multi windows, this is the time
+        // when you should delete the corresponding element.
+        win = null;
+    });
 }
+try {
+    // This method will be called when Electron has finished
+    // initialization and is ready to create browser windows.
+    // Some APIs can only be used after this event occurs.
+    electron_1.app.on('ready', createWindow);
+    // Quit when all windows are closed.
+    electron_1.app.on('window-all-closed', function () {
+        // On OS X it is common for applications and their menu bar
+        // to stay active until the user quits explicitly with Cmd + Q
+        if (process.platform !== 'darwin') {
+            electron_1.app.quit();
+        }
+    });
+    electron_1.app.on('activate', function () {
+        // On OS X it's common to re-create a window in the app when the
+        // dock icon is clicked and there are no other windows open.
+        if (win === null) {
+            createWindow();
+        }
+    });
+}
+catch (e) {
+    // Catch Error
+    // throw e;
+}
+//# sourceMappingURL=main.js.map
