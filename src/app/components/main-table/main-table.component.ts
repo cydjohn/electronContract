@@ -59,10 +59,8 @@ export class MainTableComponent implements OnInit {
     });
   }
 
-  calculateSum() {
-    // for (let d in this.tableData) {
-    //   this.amountSum += this.tableData[d].stageSum;
-    // }
+  getSum() {
+    return this.tableData.map(t => t.stageSum).reduce((acc, value) => acc + value, 0);
   }
 
   applyFilter(filterValue: string) {
