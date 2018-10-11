@@ -32,7 +32,7 @@ export class NewContractComponent implements OnInit {
 
 
   newStageData: Stage = {
-    amount: 0,
+    amount: null,
     time: ""
   }
 
@@ -60,12 +60,40 @@ export class NewContractComponent implements OnInit {
   }
 
   addNewContract() {
-    this.electronService.ipcRenderer.send('getMsg', this.contract);
-    this.printPreView();
-    console.log(this.contract.contractNumber);
+    if (this.contract.contractNumber.length == 0) {
+      this.alertText = "合同号不能为空";
+    }
+    else if (this.contract.firstParty.length == 0) {
+      this.alertText = "甲方不能为空";
+    }
+    else if (this.contract.secondParty.length == 0) {
+      this.alertText = "乙方不能为空";
+    }
+    else if (this.contract.startTime.length == 0) {
+      this.alertText = "开始时间不能为空";
+    }
+    else if (this.contract.carType.length == 0) {
+      this.alertText = "车辆型号不能为空";
+    }
+    else if (this.contract.quantity == 0) {
+      this.alertText = "车辆数量不能为空";
+    }
+    else if (this.contract.stageSum == 0) {
+      this.alertText = "合同总金额不能为空";
+    }
+    else if (this.contract.stages.length == 0) {
+      this.alertText = "请录入至少一期";
+    }
+    else if (this.contract.stageSum != this.contract.amountSum) {
+      this.alertText = "总金额不一致，请检查输入";
+    }
+    else {
+      this.printPreView();
+    }
   }
 
   printPreView() {
+    this.electronService.ipcRenderer.send('getMsg', this.contract);
     this.electronService.ipcRenderer.send('pass-print-value', [this.contract, ""]);
     const modalPath = path.join('file://', __dirname, '../../../../../../../../src/app/window/newContractPrintPreview.html');
     let win = new this.electronService.remote.BrowserWindow({ width: 800, height: 1000 });

@@ -39,6 +39,13 @@ export class MainTableComponent implements OnInit {
       this.dataSource = new MatTableDataSource(this.tableData);
       this.dataSource.sort = this.sort;
     });
+    this.electronService.ipcRenderer.on('delete-contract-number', (event, arg) => {
+      this.tableData = this.tableData.filter(function (item) {
+        return item.contractNumber !== arg
+      })
+      this.dataSource = new MatTableDataSource(this.tableData);
+      this.dataSource.sort = this.sort;
+    })
   }
 
   showDetail(rowData) {
