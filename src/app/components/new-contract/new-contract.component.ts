@@ -42,11 +42,15 @@ export class NewContractComponent implements OnInit {
       this.contract.stages.splice(row_n, 1);
     }
     else {
-      if (newStageData.time.year) {
-        this.contract.stages.push({ amount: newStageData.amount, time: newStageData.time.year + '-' + newStageData.time.month + '-' + newStageData.time.day });
-      }
-      else {
-        this.contract.stages.push(...newStageData);
+      if (newStageData.amount) {
+        if (newStageData.time.year) {
+          this.contract.stages.push({ amount: newStageData.amount, time: newStageData.time.year + '-' + newStageData.time.month + '-' + newStageData.time.day });
+          this.clearNewStage();
+        }
+        else {
+          this.contract.stages.push(...newStageData);
+          this.clearNewStage();
+        }
       }
     }
     this.calculateStageSum();
@@ -89,6 +93,7 @@ export class NewContractComponent implements OnInit {
     }
     else {
       this.printPreView();
+      this.clearForm();
     }
   }
 
@@ -101,5 +106,28 @@ export class NewContractComponent implements OnInit {
     win.loadURL(modalPath);
     win.webContents.openDevTools();
     win.show()
+  }
+
+  clearForm() {
+    this.alertText = ""
+    this.contract = {
+      contractNumber: "",
+      firstParty: "",
+      secondParty: "",
+      startTime: "",
+      carType: "",
+      quantity: null,
+      stageSum: null,
+      amountSum: null,
+      stages: []
+    }
+    this.clearNewStage();
+  }
+
+  clearNewStage() {
+    this.newStageData = {
+      amount: null,
+      time: ""
+    }
   }
 }
