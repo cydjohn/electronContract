@@ -1,8 +1,8 @@
 {
   "name": "electroncontract",
-  "productName": "合同管理系统",
-  "version": "0.0.5",
-  "description": "运输公司合同管理",
+  "productName": "contract",
+  "version": "0.0.8",
+  "description": "contract",
   "private": true,
   "main": "main.js",
   "scripts": {
