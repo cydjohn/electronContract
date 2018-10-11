@@ -29,6 +29,7 @@
     "ng:serve": "ng serve",
     "ng:serve:web": "npm run postinstall:web && ng serve -o",
     "electron:serve-tsc": "tsc -p tsconfig-serve.json",
+    "package:win": "electron-packager . --overwrite --platform=win32 --arch=ia32 --out=out --icon=assets/app-icon/win/app.ico",
     "electron:serve": "wait-on http-get://localhost:4200/ && npm run electron:serve-tsc && electron . --serve",
     "electron:local": "npm run build:prod && electron .",
     "electron:linux": "npm run build:prod && npx electron-builder build --linux",
