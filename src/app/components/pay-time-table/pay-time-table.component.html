@@ -16,7 +16,7 @@
   <div>
     <div class="mb-0 pay-time-table-container">
 
-      <table mat-table [dataSource]="dataSource" matSort class="table table-striped table-hover" id="pay-time-table">
+      <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8" id="pay-time-table">
         <ng-container matColumnDef="index">
           <th mat-header-cell *matHeaderCellDef mat-sort-header> 序号 </th>
           <td mat-cell *matCellDef="let element; let i = index;">{{i+1}}</td>
@@ -59,7 +59,7 @@
 
         <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;let i = index;"></tr>
-        <tr mat-footer-row *matFooterRowDef="displayedColumns"></tr>
+        <tr mat-footer-row *matFooterRowDef="displayedColumns; sticky: true"></tr>
       </table>
     </div>
     <div class="row col-lg-7">
