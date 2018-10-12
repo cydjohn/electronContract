@@ -12,8 +12,7 @@
 
   <!-- <button onclick="addRow()" class="btn btn-primary pull-left btn-sm">新增</button> -->
   <div>
-    <div style="height:600px">
-
+    <div class="mb-0 finished-table-container">
       <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8" id="finished-table">
         <ng-container matColumnDef="index">
           <th mat-header-cell *matHeaderCellDef mat-sort-header> 序号 </th>
@@ -45,13 +44,11 @@
         <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;let i = index;"></tr>
       </table>
-
-      <div class="row col-lg-7">
-        <div class="input-group col-lg-3">
-          <button (click)="exportExcel()" class="btn btn-dark">导出Excel</button>
-        </div>
+    </div>
+    <div class="row col-lg-7">
+      <div class="input-group col-lg-3">
+        <button (click)="exportExcel()" class="btn btn-dark">导出Excel</button>
       </div>
-
     </div>
   </div>
 </div>
