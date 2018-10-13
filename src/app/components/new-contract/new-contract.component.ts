@@ -23,7 +23,7 @@ export class NewContractComponent implements OnInit {
     secondParty: "",
     startTime: "",
     carType: "",
-    quantity: null,
+    carQuantity: null,
     stageSum: null,
     amountSum: null,
     stages: []
@@ -78,7 +78,7 @@ export class NewContractComponent implements OnInit {
     else if (this.contract.carType.length == 0) {
       this.alertText = "车辆型号不能为空";
     }
-    else if (this.contract.quantity == 0) {
+    else if (this.contract.carQuantity == 0) {
       this.alertText = "车辆数量不能为空";
     }
     else if (this.contract.stageSum == 0) {
@@ -115,7 +115,7 @@ export class NewContractComponent implements OnInit {
       secondParty: "",
       startTime: "",
       carType: "",
-      quantity: null,
+      carQuantity: null,
       stageSum: null,
       amountSum: null,
       stages: []

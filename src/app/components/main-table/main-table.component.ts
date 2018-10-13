@@ -16,7 +16,7 @@ export class MainTableComponent implements OnInit {
 
   amountSum = 0
   tableData: Contract[] = []
-  displayedColumns: string[] = ['index', 'contractNumber', 'firstParty', 'secondParty', 'startTime', 'carType', 'quantity', 'stageSum'];
+  displayedColumns: string[] = ['index', 'contractNumber', 'firstParty', 'secondParty', 'startTime', 'carType', 'carQuantity', 'stageSum'];
   dataSource = new MatTableDataSource();
   @ViewChild(MatSort) sort: MatSort;
 
@@ -29,7 +29,7 @@ export class MainTableComponent implements OnInit {
     this.electronService.ipcRenderer.send('request-all-data');
     this.electronService.ipcRenderer.on('get-all-data', (event, arg) => {
       this.tableData = arg;
-      //temp
+      console.log(this.tableData);
       this.dataSource = new MatTableDataSource(this.tableData);
       this.dataSource.sort = this.sort;
     });
@@ -60,7 +60,7 @@ export class MainTableComponent implements OnInit {
   }
 
   getSum() {
-    return this.tableData.map(t => t.stageSum).reduce((acc, value) => acc + value, 0);
+    return this.tableData.map(t => t.stageSum).reduce((acc, value) => parseFloat(acc.toString()) + parseFloat(value.toString()), 0);
   }
 
   applyFilter(filterValue: string) {

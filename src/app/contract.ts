@@ -5,7 +5,7 @@ export class Contract {
     secondParty : string;
     startTime : string;
     carType : string;
-    quantity : number;
+    carQuantity : number;
     stageSum : number;
     amountSum : number;
     stages : Array<Stage>
