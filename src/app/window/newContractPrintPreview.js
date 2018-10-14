@@ -8,6 +8,7 @@ const { BrowserWindow } = require('electron').remote
 ipcRenderer.send('request-temp-data')
 const confirmSign = document.getElementById('confirm-sign')
 ipcRenderer.on('get-temp-data', (event, arg) => {
+  console.log(arg);
   loadData(arg)
 })
 
