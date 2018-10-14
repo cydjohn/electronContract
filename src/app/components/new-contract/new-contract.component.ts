@@ -99,11 +99,13 @@ export class NewContractComponent implements OnInit {
   printPreView() {
     this.electronService.ipcRenderer.send('getMsg', this.contract);
     this.electronService.ipcRenderer.send('pass-print-value', [this.contract, ""]);
-    const modalPath = path.join('file://', __dirname, '../../../../../../../../src/app/window/newContractPrintPreview.html');
+    // const modalPath = path.join('file://', __dirname, '../../../../../../../../src/app/window/newContractPrintPreview.html');
+    const modalPath = path.join('file://', this.electronService.remote.app.getAppPath(), '/src/app/window/newContractPrintPreview.html');
+
     let win = new this.electronService.remote.BrowserWindow({ width: 800, height: 1000 });
     win.on('close', () => { win = null });
     win.loadURL(modalPath);
-    //win.webContents.openDevTools();
+    // win.webContents.openDevTools();
     win.show()
   }
 
