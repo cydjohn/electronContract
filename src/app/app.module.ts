@@ -2,7 +2,7 @@ import 'zone.js/dist/zone-mix';
 import 'reflect-metadata';
 import '../polyfills';
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, LOCALE_ID } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 import { HttpClientModule, HttpClient } from '@angular/common/http';
@@ -23,7 +23,7 @@ import { MainTableComponent } from './components/main-table/main-table.component
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { DataSource } from '@angular/cdk/table';
-import { MatButtonModule, MatCheckboxModule, MatTableModule, MatInputModule } from '@angular/material';
+import { MatButtonModule, MatCheckboxModule, MatTableModule, MatInputModule, MAT_DATE_LOCALE } from '@angular/material';
 import { FinishedTableComponent } from './components/finished-table/finished-table.component';
 import { NewContractComponent } from './components/new-contract/new-contract.component';
 import { PayTimeTableComponent } from './components/pay-time-table/pay-time-table.component';

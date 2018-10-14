@@ -28,7 +28,7 @@ function loadData(contract) {
   secondParty.value = contract.secondParty;
   startTime.value = contract.startTime;
   carType.value = contract.carType;
-  carQuantity.value = contract.quantity;
+  carQuantity.value = contract.carQuantity;
   // stageSum.value = toAccountingBookkeepingFormat(contract.stageSum);
   stageSum.value = toAccountingBookkeepingFormat(contract.stageSum);
   loadStages(contract.stages);
