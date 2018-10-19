@@ -14,7 +14,6 @@ export class ContractDetailComponent implements OnInit {
   constructor(private electronService: ElectronService) { }
 
   ngOnInit() {
-    console.log(this.contract);
   }
 
   alertText = ""

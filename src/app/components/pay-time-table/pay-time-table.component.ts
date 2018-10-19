@@ -3,7 +3,13 @@ import { ElectronService } from '../../providers/electron.service';
 import { MatTableDataSource, MatSort } from '@angular/material';
 import { Contract } from '../../contract';
 import * as XLSX from 'xlsx';
-
+export interface payTimeTbaleData {
+  contractNumber: string;
+  firstParty: string;
+  secondParty: string;
+  amount: string;
+  time: string;
+}
 @Component({
   selector: 'app-pay-time-table',
   templateUrl: './pay-time-table.component.html',
@@ -14,7 +20,9 @@ export class PayTimeTableComponent implements OnInit {
   amountSum = 0
   tableData: Contract[] = []
   displayedColumns: string[] = ['index', 'contractNumber', 'firstParty', "secondParty", 'amount', 'time'];
-  dataSource = new MatTableDataSource(this.tableData);
+  
+  tempData:payTimeTbaleData[] = []
+  dataSource = new MatTableDataSource(this.tempData);
   @ViewChild(MatSort) sort: MatSort;
 
   constructor(private electronService: ElectronService) { }
@@ -52,7 +60,6 @@ export class PayTimeTableComponent implements OnInit {
       title: '导出付款时间表',
       defaultPath: '~/付款时间表.xlsx'
     }, function (result) {
-      console.log(result)
       /* html表格转excel */
       var wb = XLSX.utils.table_to_book(document.getElementById('pay-time-table'));
       /* 生成文件，导出D盘 */
@@ -64,6 +71,6 @@ export class PayTimeTableComponent implements OnInit {
   }
 
   getSum() {
-    return this.payTimeTableConvert(this.tableData).map(t => t.amount).reduce((acc, value) => parseFloat(acc) + parseFloat(value), 0);
+    return this.dataSource.filteredData.map(t => t.amount).reduce((acc, value) => parseFloat(acc.toString()) + parseFloat(value.toString()), 0);
   }
 }

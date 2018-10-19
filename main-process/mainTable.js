@@ -22,7 +22,6 @@ var tempData = {}
 var printDate = ""
 
 ipcMain.on('getMsg', (event, arg) => {
-    console.log("afasdfhadfhakhsdfk");
     db.insert(arg, function (err, newDoc) {   // Callback is optional
         var arr = BrowserWindow.getAllWindows();
         for (var i = 0; i < arr.length; i++) {

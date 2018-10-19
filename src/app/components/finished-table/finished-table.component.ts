@@ -71,7 +71,6 @@ export class FinishedTableComponent implements OnInit {
       title: '导出已完成表',
       defaultPath: '~/已完成表.xlsx'
     }, function (result) {
-      console.log(result)
       /* html表格转excel */
       var wb = XLSX.utils.table_to_book(document.getElementById('finished-table'));
       /* 生成文件，导出D盘 */

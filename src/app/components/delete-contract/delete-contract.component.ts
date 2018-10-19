@@ -13,7 +13,6 @@ export class DeleteContractComponent implements OnInit {
 
   ngOnInit() {
     this.electronService.ipcRenderer.on('delete-info', (event, numRemoved) => {
-      console.log(numRemoved)
       if (numRemoved == 1) {
         alert("删除成功！合同号：" + this.contractNumber);
         this.activeModal.close();

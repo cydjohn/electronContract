@@ -96,8 +96,8 @@
   },
   "build": {
     "appId": "cyd.electronContract.app",
-    "directories":{
-      "output":"release"
+    "directories": {
+      "output": "release"
     },
     "win": {
       "target": "NSIS",

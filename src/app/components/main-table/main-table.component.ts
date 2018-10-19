@@ -17,7 +17,7 @@ export class MainTableComponent implements OnInit {
   amountSum = 0
   tableData: Contract[] = []
   displayedColumns: string[] = ['index', 'contractNumber', 'firstParty', 'secondParty', 'startTime', 'carType', 'carQuantity', 'stageSum'];
-  dataSource = new MatTableDataSource();
+  dataSource = new MatTableDataSource(this.tableData);
   @ViewChild(MatSort) sort: MatSort;
 
   constructor(private modalService: NgbModal,
@@ -29,7 +29,6 @@ export class MainTableComponent implements OnInit {
     this.electronService.ipcRenderer.send('request-all-data');
     this.electronService.ipcRenderer.on('get-all-data', (event, arg) => {
       this.tableData = arg;
-      console.log(this.tableData);
       this.dataSource = new MatTableDataSource(this.tableData);
       this.dataSource.sort = this.sort;
     });
@@ -60,7 +59,7 @@ export class MainTableComponent implements OnInit {
   }
 
   getSum() {
-    return this.tableData.map(t => t.stageSum).reduce((acc, value) => parseFloat(acc.toString()) + parseFloat(value.toString()), 0);
+    return this.dataSource.filteredData.map(t => t.stageSum).reduce((acc, value) => parseFloat(acc.toString()) + parseFloat(value.toString()), 0);
   }
 
   applyFilter(filterValue: string) {
@@ -72,7 +71,6 @@ export class MainTableComponent implements OnInit {
       title: '导出总表',
       defaultPath: '~/总表.xlsx'
     }, function (result) {
-      console.log(result)
       /* html表格转excel */
       var wb = XLSX.utils.table_to_book(document.getElementById('main-table'));
       /* 生成文件，导出D盘 */

@@ -66,7 +66,6 @@ export class ProcessingTableComponent implements OnInit {
       title: '导出进行中表',
       defaultPath: '~/进行中表.xlsx'
     }, function (result) {
-      console.log(result)
       /* html表格转excel */
       var wb = XLSX.utils.table_to_book(document.getElementById('processing-table'));
       /* 生成文件，导出D盘 */
