@@ -8,6 +8,7 @@ const { BrowserWindow } = require('electron').remote
 ipcRenderer.send('request-temp-data')
 const confirmSign = document.getElementById('confirm-sign')
 ipcRenderer.on('get-temp-data', (event, arg) => {
+  console.log(arg);
   loadData(arg)
 })
 
@@ -28,7 +29,7 @@ function loadData(contract) {
   secondParty.value = contract.secondParty;
   startTime.value = contract.startTime;
   carType.value = contract.carType;
-  carQuantity.value = contract.quantity;
+  carQuantity.value = contract.carQuantity;
   // stageSum.value = toAccountingBookkeepingFormat(contract.stageSum);
   stageSum.value = toAccountingBookkeepingFormat(contract.stageSum);
   loadStages(contract.stages);

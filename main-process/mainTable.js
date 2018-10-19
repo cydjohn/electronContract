@@ -8,10 +8,10 @@ var userData = app.getAppPath('userData');
 
 var dbLocation = ''
 if (process.platform === "win32") {
-    dbLocation = 'D://db/persons.db';
+    dbLocation = 'D://db/contract.db';
 }
 else {
-    dbLocation = userData + '/dist/persons.db';
+    dbLocation = userData + '/dist/contract.db';
 }
 
 db = new Datastore({ filename: dbLocation, autoload: true });
