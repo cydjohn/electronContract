@@ -24,7 +24,7 @@ export class NewContractComponent implements OnInit {
     startTime: "",
     carType: "",
     carQuantity: null,
-    stageSum: null,
+    stageSum: Number(),
     amountSum: null,
     stages: []
   }
@@ -60,6 +60,7 @@ export class NewContractComponent implements OnInit {
     for (let i in this.contract.stages) {
       this.contract.stageSum += Number(this.contract.stages[i].amount);
     }
+    this.contract.stageSum = Number(this.contract.stageSum.toFixed(2));
   }
 
   addNewContract() {
