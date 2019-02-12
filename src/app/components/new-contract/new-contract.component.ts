@@ -42,9 +42,11 @@ export class NewContractComponent implements OnInit {
     }
     else {
       if (newStageData.amount) {
-        if (newStageData.time.year) {
-          this.contract.stages.push({ amount: newStageData.amount, time: newStageData.time.year + '-' + newStageData.time.month + '-' + newStageData.time.day });
+        if (newStageData.time) {
+          // this.contract.stages.push({ amount: newStageData.amount, time: newStageData.time.year + '-' + newStageData.time.month + '-' + newStageData.time.day });
+          this.contract.stages.push(newStageData);
           this.clearNewStage();
+
         }
         else {
           this.contract.stages.push(...newStageData);

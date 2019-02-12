@@ -79,7 +79,8 @@
             </td>
             <td class="">
               <div class="input-group">
-                <input type="date" class="form-control" placeholder="yyyy-mm-dd" name="dp" [(ngModel)]="newStageData.time" ngbDatepicker #d="ngbDatepicker" required>
+                <input type="date" class="form-control" name="newStageTime" [(ngModel)]="newStageData.time" required>
+                <!-- <input type="date" class="form-control" [(ngModel)]="contract.startTime" required name="startTime"> -->
                 <!-- <div class="input-group-append">
                   <button class="btn btn-default btn-sm" (click)="d.toggle()" type="button"><span class="glyphicon glyphicon-calendar"></span></button>
                 </div> -->
