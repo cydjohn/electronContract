@@ -16,7 +16,7 @@ resultPromise = electronInstaller.createWindowsInstaller({
   appDirectory: './release/win-unpacked',
   outputDirectory: './windows32',
   authors: 'cyd',
-  exe: 'angular-electron.exe',
+  exe: '合同管理系统.exe',
   noMsi: true,
   setupExe: 'ElectronContractSetup.exe',
   setupIcon: path.join('assets', 'app-icon', 'win', 'app.ico'),
