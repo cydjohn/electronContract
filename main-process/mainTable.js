@@ -9,6 +9,7 @@ var userData = app.getAppPath('userData');
 var dbLocation = ''
 if (process.platform === "win32") {
     dbLocation = 'D://db/contract.db';
+    // dbLocation = 'C://db/contract.db';
 }
 else {
     dbLocation = userData + '/dist/contract.db';
